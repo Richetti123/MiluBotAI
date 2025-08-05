@@ -94,11 +94,11 @@ const saveChatData = (data) => {
 };
 
 const categoryMetadata = {
-    "Perfiles Individuales": { emoji: "👤", title: "PERFILES INDIVIDUALES ", description: "Perfiles de streaming exclusivos para ti." },
-    "Cuentas Completas": { emoji: "✅", title: "CUENTAS COMPLETAS", description: "Cuentas con acceso total para compartir." },
-    "Streaming Musica": { emoji: "🎶", title: "STREAMING MÚSICA", description: "Planes premium para tus plataformas de música." },
-    "Cuentas Canva": { emoji: "🎨", title: "CUENTAS CANVA", description: "Accede a plantillas y herramientas premium." },
-    "Extras": { emoji: "👽", title: "EXTRAS", description: "Otros servicios y suscripciones." }
+    "Perfiles Individuales": "👤",
+    "Cuentas Completas": "✅",
+    "Streaming Musica": "🎶",
+    "Cuentas Canva": "🎨",
+    "Extras": "👽"
 };
 
 const serviceEmojis = {
@@ -216,9 +216,9 @@ const sendWelcomeMessage = async (m, conn) => {
         const sections = [{
             title: "✨ Servicios Disponibles ✨",
             rows: categories.map(category => {
-                const metadata = categoryMetadata[category] || { emoji: "✨", title: category, description: "Haz clic para ver los servicios." };
+                const metadataemoji = categoryMetadata[metadata.title] || '✨';
                 return {
-                    title: `${metadata.emoji} ${metadata.title}`,
+                    title: `${metadataemoji} ${metadata.title}`,
                     description: metadata.description,
                     rowId: `category:${category}` 
                 };
@@ -634,9 +634,9 @@ export async function handler(m, conn, store) {
                     const sections = [{
                         title: "✨ Servicios Disponibles ✨",
                         rows: categories.map(category => {
-                            const metadata = categoryMetadata[category] || { emoji: "✨", title: category, description: "Haz clic para ver los servicios." };
+                            const metadataemoji = categoryMetadata[metadata.title] || '✨';
                             return {
-                                title: `${metadata.emoji} ${metadata.title}`,
+                                title: `${metadataemoji} ${metadata.title}`,
                                 description: metadata.description,
                                 rowId: `category:${category}`
                             };
@@ -691,9 +691,9 @@ export async function handler(m, conn, store) {
                         const sections = [{
                             title: "✨ Servicios Disponibles ✨",
                             rows: categories.map(category => {
-                                const metadata = categoryMetadata[category] || { emoji: "✨", title: category, description: "Haz clic para ver los servicios." };
+                                const metadataemoji = categoryMetadata[metadata.title] || '✨';
                                 return {
-                                    title: `${metadata.emoji} ${metadata.title}`,
+                                    title: `${metadataemoji} ${metadata.title}`,
                                     description: metadata.description,
                                     rowId: `category:${category}`
                                 };
@@ -719,9 +719,9 @@ export async function handler(m, conn, store) {
                     const sections = [{
                         title: "✨ Servicios Disponibles ✨",
                         rows: categories.map(category => {
-                            const metadata = categoryMetadata[category] || { emoji: "✨", title: category, description: "Haz clic para ver los servicios." };
+                            const metadataemoji = categoryMetadata[metadata.title] || '✨';
                             return {
-                                title: `${metadata.emoji} ${metadata.title}`,
+                                title: `${metadataemoji} ${metadata.title}`,
                                 description: metadata.description,
                                 rowId: `category:${category}`
                             };
