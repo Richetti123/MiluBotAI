@@ -766,7 +766,7 @@ export async function handler(m, conn, store) {
                         `Datos previos de la conversación con este usuario: ${JSON.stringify(userChatData)}.` :
                         `No hay datos previos de conversación con este usuario.`;
                         
-                    const personaPrompt = `Eres CashFlow, un asistente virtual profesional para la atención al cliente de Richetti. Tu objetivo es ayudar a los clientes con consultas sobre pagos y servicios. No uses frases como "Estoy aquí para ayudarte", "Como tu asistente...", "Como un asistente virtual" o similares. Ve directo al punto y sé conciso.
+                    const personaPrompt = `Eres LeoNet AI, un asistente virtual profesional para la atención al cliente de Leonardo. Tu objetivo es ayudar a los clientes con consultas sobre pagos y servicios. No uses frases como "Estoy aquí para ayudarte", "Como tu asistente...", "Como un asistente virtual" o similares. Ve directo al punto y sé conciso.
                     
                     El nombre del usuario es ${userChatData.nombre || 'el usuario'} y el historial de chat con datos previos es: ${JSON.stringify(userChatData)}.
                     
@@ -781,10 +781,11 @@ export async function handler(m, conn, store) {
                     ${clientInfoPrompt}
                     
                     Has aprendido que tus servicios son:
-                    - MichiBot exclusivo (pago mensual): Un bot de WhatsApp con gestión de grupos, descargas de redes sociales, IA, stickers y más.
-                    - Bot personalizado (pago mensual): Similar a MichiBot, pero con personalización de tus datos y logo.
-                    - Bot personalizado (único pago): La misma versión personalizada, pero con un solo pago.
-                    - CashFlow: Un bot de gestión de clientes para seguimiento de pagos y recordatorios automáticos.`;
+                    - Perfiles Individuales: Netflix Extra (Privado): $65 MX, Disney Premium: $25 MX, Max Estándar: $10 MX, Max Platino: $25 MX, Prime Video Sin Anuncios: $20 MX, Paramount: $5 MX, Vix 1 Mes: $5 MX, Vix 2 Meses: $10 MX, Crunchyroll: $10 MX, Claro Video con Canales: $35 MX, Viki Rakuten: $20 MX, Duolingo Individual: $18 MX, Pornhub: $18 MX, Plex: $20 MX, Claro video con Paramount: $20 MX, Claro video con Universal: $25 MX
+                    - Cuentas Completas: Netflix: $180 MX, Disney Premium: $120 MX, Disney Estándar C/A: $50 MX, Max Estándar: $35 MX, Max Platino: $65 MX, Prime Sin Anuncios: $45 MX, Paramount: $20 MX, Vix 1 Mes: $15 MX, Vix 2 Meses: $20 MX, Crunchyroll: $30 MX, Claro Video con Canales: $75 MX, Viki Rakuten: $45 MX, Duolingo Familiar: $40 MX, Pornhub: $40 MX, Plex: $45 MX
+                    - Streaming Musica: Spotify Premium (renovable): 1 mes: $35 MX, 2 meses: $55 MX, 3 meses: $70 MX ; YouTube: Por invitación (1 mes): $15 MX, Por invitación (2 meses): $25 MX, Familiar (1 mes, a tus datos): $40 MX ; Mubi: $20 MX
+                    - Cuentas Canva: 1 Mes: $15 MX, 2 Meses: $20 MX, 3 Meses: $25 MX, 6 Meses: $30 MX, 1 Año: $40 MX
+                    - Extras: Invitación Office (Un mes): $25 MX, Invitación Gemini: $70 MX, Invitación Tidal: $20 MX, Invitación Deezer: $20 MX, Invitación Chat GTP: $50 MX, Piscard: $35 MX, Scribd: $35 MX, Brazzer: $35 MX`;
                     
                     const encodedContent = encodeURIComponent(personaPrompt);
                     const encodedText = encodeURIComponent(m.text);
