@@ -73,8 +73,8 @@ const loadConfigBot = () => {
         mensajeBienvenida: "¡Hola {user}! Soy tu bot asistente de pagos. ¿En qué puedo ayudarte hoy?",
         mensajeDespedida: "¡Hasta pronto! Esperamos verte de nuevo.",
         services: {},
-        mensajeDespedidaInactividad: "Hola, parece que la conversación terminó. Soy tu asistente LeoNet AI. ¿Necesitas algo más? Puedes reactivar la conversación enviando un nuevo mensaje o tocando el botón.",
-        chatGreeting: "Hola soy LeoNet AI, un asistente virtual. ¿Podrías brindarme tu nombre y decirme cuál es el motivo de tu consulta?"
+        mensajeDespedidaInactividad: "Hola, parece que la conversación terminó. Soy tu asistente PayBalance. ¿Necesitas algo más? Puedes reactivar la conversación enviando un nuevo mensaje o tocando el botón.",
+        chatGreeting: "Hola soy PayBalance, un asistente virtual. ¿Podrías brindarme tu nombre y decirme cuál es el motivo de tu consulta?"
     };
 };
 
@@ -147,7 +147,7 @@ const sendWelcomeMessage = async (m, conn) => {
     let welcomeMessage = '';
 
     if (!userChatData.nombre) {
-        welcomeMessage = "¡Hola! soy LeoNet AI, un asistente virtual y estoy aqui para atenderte. Por favor indicame tu nombre para brindarte los servicios disponibles.";
+        welcomeMessage = "¡Hola! soy PayBalance, un asistente virtual y estoy aqui para atenderte. Por favor indicame tu nombre para brindarte los servicios disponibles.";
         await m.reply(welcomeMessage);
         
         await new Promise((resolve, reject) => {
@@ -166,7 +166,7 @@ const sendWelcomeMessage = async (m, conn) => {
         const sections = [{
             title: "✨ Servicios Disponibles ✨",
             rows: categories.map(category => {
-                let buttonTitle = category; // Nombre por defecto
+                let buttonTitle = category;
                 let buttonDescription = "Haz clic para ver los servicios.";
                 
                 switch (category) {
@@ -195,7 +195,7 @@ const sendWelcomeMessage = async (m, conn) => {
                 return {
                     title: buttonTitle,
                     description: buttonDescription,
-                    rowId: `category:${category}` // ¡No cambies esto! Es crucial para que el bot funcione.
+                    rowId: `category:${category}`
                 };
             })
         }];
@@ -651,7 +651,7 @@ export async function handler(m, conn, store) {
                     const sections = [{
                         title: "✨ Servicios Disponibles ✨",
                         rows: categories.map(category => {
-                            let buttonTitle = category; // Nombre por defecto
+                            let buttonTitle = category;
                             let buttonDescription = "Haz clic para ver los servicios.";
         
                             switch (category) {
@@ -680,7 +680,7 @@ export async function handler(m, conn, store) {
                             return {
                                 title: buttonTitle,
                                 description: buttonDescription,
-                                rowId: `category:${category}` // ¡No cambies esto! Es crucial para que el bot funcione.
+                                rowId: `category:${category}`
                             };
                         })
                     }];
@@ -733,7 +733,7 @@ export async function handler(m, conn, store) {
                         const sections = [{
                             title: "✨ Servicios Disponibles ✨",
                             rows: categories.map(category => {
-                                let buttonTitle = category; // Nombre por defecto
+                                let buttonTitle = category;
                                 let buttonDescription = "Haz clic para ver los servicios.";
             
                                 switch (category) {
@@ -762,7 +762,7 @@ export async function handler(m, conn, store) {
                                 return {
                                     title: buttonTitle,
                                     description: buttonDescription,
-                                    rowId: `category:${category}` // ¡No cambies esto! Es crucial para que el bot funcione.
+                                    rowId: `category:${category}`
                                 };
                             })
                         }];
