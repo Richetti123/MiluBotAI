@@ -93,24 +93,6 @@ const saveChatData = (data) => {
     fs.writeFileSync(chatDataPath, JSON.stringify(data, null, 2), 'utf8');
 };
 
-const countryPaymentMethods = {
-    'méxico': `\n\nPara pagar en México, usa:\nCLABE: 706969168872764411\nNombre: Gaston Juarez\nBanco: Arcus Fi\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
-    'perú': `\n\nPara pagar en Perú, usa:\nNombre: Marcelo Gonzales R.\nYape: 967699188\nPlin: 955095498\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
-    'mexico': `\n\nPara pagar en México, usa:\nCLABE: 706969168872764411\nNombre: Gaston Juarez\nBanco: Arcus Fi\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
-    'peru': `\n\nPara pagar en Perú, usa:\nNombre: Marcelo Gonzales R.\nYape: 967699188\nPlin: 955095498\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
-    'chile': `\n\nPara pagar en Chile, usa:\nNombre: BARINIA VALESKA ZENTENO MERINO\nRUT: 17053067-5\nBANCO ELEGIR: TEMPO\nTipo de cuenta: Cuenta Vista\nNumero de cuenta: 111117053067\nCorreo: estraxer2002@gmail.com\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
-    'argentina': `\n\nPara pagar en Argentina, usa:\nNombre: Gaston Juarez\nCBU: 4530000800011127480736\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
-    'bolivia': ``,
-    'españa': ``,
-    'italia': ``,
-    'paypal': `\n\nPara pagar desde cualquier parte del mundo, usa paypal:\nNombre: Marcelo Gonzales R.\nCorreo: jairg6218@gmail.com\nEnlace: https://paypal.me/richetti123\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
-    'estados unidos': `\n\nPara pagar en Estados Unidos, usa:\nNombre: Marcelo Gonzales R.\nCorreo: jairg6218@gmail.com\nEnlace: https://paypal.me/richetti123\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
-    'puerto rico': ``,
-    'panamá': ``,
-    'uruguay': ``,
-    'colombia': ``
-};
-
 const handleInactivity = async (m, conn, userId) => {
     try {
         const currentConfigData = loadConfigBot();
@@ -238,42 +220,6 @@ const sendPaymentOptions = async (m, conn) => {
 export async function handler(m, conn, store) {
     if (!m) return;
     if (m.key.fromMe) return;
-
-    // Eliminamos el reseteo global del estado del chat para evitar que se pierda el nombre del usuario
-    // if (!hasResetOnStartup) {
-    //     const allUsers = await new Promise((resolve, reject) => {
-    //         global.db.data.users.find({}, (err, docs) => {
-    //             if (err) return reject(err);
-    //             resolve(docs);
-    //         });
-    //     });
-    //     if (allUsers.length > 0) {
-    //         await new Promise((resolve, reject) => {
-    //             global.db.data.users.update({}, { $set: { chatState: 'initial' } }, { multi: true }, (err, numReplaced) => {
-    //                 if (err) return reject(err);
-    //                 resolve();
-    //             });
-    //         });
-    //     }
-    //     hasResetOnStartup = true;
-    //     lastResetTime = Date.now();
-    // } else if (Date.now() - lastResetTime > RESET_INTERVAL_MS) {
-    //     const allUsers = await new Promise((resolve, reject) => {
-    //         global.db.data.users.find({}, (err, docs) => {
-    //             if (err) return reject(err);
-    //             resolve(docs);
-    //         });
-    //     });
-    //     if (allUsers.length > 0) {
-    //         await new Promise((resolve, reject) => {
-    //             global.db.data.users.update({}, { $set: { chatState: 'initial' } }, { multi: true }, (err, numReplaced) => {
-    //                 if (err) return reject(err);
-    //                 resolve();
-    //             });
-    //         });
-    //     }
-    //     lastResetTime = Date.now();
-    // }
     
     const isGroup = m.key.remoteJid?.endsWith('@g.us');
     
@@ -677,19 +623,25 @@ export async function handler(m, conn, store) {
                     return;
                 }
 
-                const paises = Object.keys(countryPaymentMethods);
-                const paisEncontrado = paises.find(p => messageTextLower.includes(p));
+                // Lógica de métodos de pago actualizada
+                const paymentKeywords = ['pago', 'pagar', 'metodo de pago', 'método de pago', 'como pago', 'donde pago', 'transferencia', 'oxxo', 'cuenta bancaria'];
+                const isPaymentIntent = paymentKeywords.some(keyword => messageTextLower.includes(keyword));
+                
+                if (isPaymentIntent) {
+                    const paymentInfo = `*TRANSFERENCIAS Y DEPÓSITOS OXXO*
+\n*NÚMERO DE TARJETA* 💳
+*4741742940228292*
+\n*BANCO* 🏦
+*Banco Regional de Monterrey, S.A (BANREGIO)*
+\n*CONCEPTO* ☠️
+*PAGO* 📄
+\n*IMPORTANTE* ⚠️
+*FAVOR DE MANDAR FOTO DEL COMPROBANTE* ✅
+\n*ADVERTENCIA* ⚠️
+*SIEMPRE PREGUNTAR MÉTODOS DE PAGO* 📄
+\nNO ME HAGO RESPONSABLE SI MANDEN A OTRA BANCA QUE NO ES 😐`;
 
-                if (paisEncontrado) {
-                    const metodoPago = countryPaymentMethods[paisEncontrado];
-                    if (metodoPago && metodoPago.length > 0) {
-                        await m.reply(`¡Claro! Aquí tienes el método de pago para ${paisEncontrado}:` + metodoPago);
-                    } else {
-                        const noMethodMessage = `Lo siento, aún no tenemos un método de pago configurado para ${paisEncontrado}. Un moderador se pondrá en contacto contigo lo antes posible para ayudarte.`;
-                        await m.reply(noMethodMessage);
-                        const ownerNotificationMessage = `El usuario ${m.pushName} (+${m.sender ? m.sender.split('@')[0] : 'N/A'}) ha preguntado por un método de pago en ${paisEncontrado}, pero no está configurado.`;
-                        await notificarOwnerHandler(m, { conn, text: ownerNotificationMessage, command: 'notificarowner', usedPrefix: m.prefix });
-                    }
+                    await m.reply(paymentInfo);
                     return;
                 }
 
@@ -730,14 +682,6 @@ export async function handler(m, conn, store) {
                         return;
                     }
                 }
-
-                const paymentKeywords = ['realizar un pago', 'quiero pagar', 'comprobante', 'pagar', 'pago'];
-                const isPaymentIntent = paymentKeywords.some(keyword => messageTextLower.includes(keyword));
-                if (isPaymentIntent) {
-                    const paymentMessage = `¡Claro! Para procesar tu pago, por favor envía la foto o documento del comprobante junto con el texto:\n\n*"Aquí está mi comprobante de pago"* 📸`;
-                    await m.reply(paymentMessage);
-                    return;
-                }
                 
                 const ownerKeywords = ['creador', 'dueño', 'owner', 'administrador', 'admin', 'soporte', 'contactar', 'richetti'];
                 const isOwnerContactIntent = ownerKeywords.some(keyword => messageTextLower.includes(keyword));
@@ -750,12 +694,18 @@ export async function handler(m, conn, store) {
                 try {
                     const paymentsData = JSON.parse(fs.readFileSync(paymentsFilePath, 'utf8'));
                     const paymentMethods = {
-                        '🇲🇽': `\n\nPara pagar en México, usa:\nCLABE: 706969168872764411\nNombre: Gaston Juarez\nBanco: Arcus Fi`,
-                        '🇵🇪': `\n\nPara pagar en Perú, usa:\nNombre: Marcelo Gonzales R.\nYape: 967699188\nPlin: 955095498`,
-                        '🇨🇱': `\n\nPara pagar en Chile, usa:\nNombre: BARINIA VALESKA ZENTENO MERINO\nRUT: 17053067-5\nBANCO ELEGIR: TEMPO\nTipo de cuenta: Cuenta Vista\nNumero de cuenta: 111117053067\nCorreo: estraxer2002@gmail.com`,
-                        '🇺🇸': `\n\nPara pagar en Estados Unidos, usa:\nNombre: Marcelo Gonzales R.\nCorreo: jairg6218@gmail.com\nEnlace: https://paypal.me/richetti123`,
-                        'Paypal': `\n\nPara pagar desde cualquier parte del mundo, usa paypal:\nNombre: Marcelo Gonzales R.\nCorreo: jairg6218@gmail.com\nEnlace: https://paypal.me/richetti123`,
-                        '🇦🇷': `\n\nPara pagar en Argentina, usa:\nNombre: Gaston Juarez\nCBU: 4530000800011127480736`
+                        '🇲🇽': `\n\nPara pagar en México, usa:\n*TRANSFERENCIAS Y DEPÓSITOS OXXO*
+\n*NÚMERO DE TARJETA* 💳
+*4741742940228292*
+\n*BANCO* 🏦
+*Banco Regional de Monterrey, S.A (BANREGIO)*
+\n*CONCEPTO* ☠️
+*PAGO* 📄
+\n*IMPORTANTE* ⚠️
+*FAVOR DE MANDAR FOTO DEL COMPROBANTE* ✅
+\n*ADVERTENCIA* ⚠️
+*SIEMPRE PREGUNTAR MÉTODOS DE PAGO* 📄
+\nNO ME HAGO RESPONSABLE SI MANDEN A OTRA BANCA QUE NO ES 😐`
                     };
                     const methodsList = Object.values(paymentMethods).join('\n\n');
                     const formattedSender = normalizarNumero(`+${m.sender.split('@')[0]}`);
