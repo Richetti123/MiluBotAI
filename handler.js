@@ -254,6 +254,17 @@ export async function handler(m, conn, store) {
     const actionText = m.fromMe ? 'Mensaje Enviado' : (commandForLog ? `Comando: ${commandForLog}` : 'Mensaje');
     const messageType = Object.keys(m.message || {})[0] || 'desconocido';
 
+    console.log(
+        chalk.hex('#FF8C00')(`╭━━━━━━━━━━━━━━𖡼`) + '\n' +
+        chalk.white(`┃ ❖ Bot: ${chalk.cyan(botIdentifier)} ~ ${chalk.cyan(conn.user?.name || 'Bot')}`) + '\n' +
+        chalk.white(`┃ ❖ Horario: ${chalk.greenBright(new Date().toLocaleTimeString())}`) + '\n' +
+        chalk.white(`┃ ❖ Acción: ${chalk.yellow(actionText)}`) + '\n' +
+        chalk.white(`┃ ❖ Usuario: ${chalk.blueBright(senderNumber)} ~ ${chalk.blueBright(senderName)}`) + '\n' +
+        chalk.white(`┃ ❖ ${groupLine}`) + '\n' +
+        chalk.white(`┃ ❖ Tipo de mensaje: [${m.fromMe ? 'Enviado' : 'Recibido'}] ${chalk.red(messageType)}`) + '\n' +
+        chalk.hex('#FF8C00')(`╰━━━━━━━━━━━━━━𖡼`) + '\n' +
+        chalk.white(`${rawText.trim() || ' (Sin texto legible) '}`)
+    );
     try {
         if (m.key.id.startsWith('BAE5') && m.key.id.length === 16) return;
         if (m.key.remoteJid === 'status@broadcast') return;
