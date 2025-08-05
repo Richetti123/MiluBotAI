@@ -882,11 +882,20 @@ export async function handler(m, conn, store) {
                     }
                 }
 
-                const paymentKeywords = ['realizar un pago', 'quiero pagar', 'comprobante', 'pagar', 'pago', 'transferencia', 'oxxo', 'metodo de pago'];
-                const isPaymentIntent = paymentKeywords.some(keyword => messageTextLower.includes(keyword));
-                if (isPaymentIntent) {
-                    const paymentMessage = `TRANSFERENCIAS Y DEPÓSITOS OXXO\n\n- NUMERO DE TARJETA: 4741742940228292\n\nBANCO: Banco Regional de Monterrey, S.A (BANREGIO)\n\nCONCEPTO: PAGO\n\nIMPORTANTE: FAVOR DE MANDAR FOTO DEL COMPROBANTE\n\nADVERTENCIA: SIEMPRE PREGUNTAR MÉTODOS DE PAGO, NO ME HAGO RESPONSABLE SI MANDAN A OTRA BANCA QUE NO ES.`;
-
+                const paymentMethodKeywords = ['oxxo', 'transferencia', 'transferir', 'metodo', 'banco'];
+                const isPaymentMethodIntent = paymentMethodKeywords.some(keyword => messageTextLower.includes(keyword));
+                
+                if (isPaymentMethodIntent) {
+                    const paymentMessage = `TRANSFERENCIAS Y DEPÓSITOS OXXO\n\n- NUMERO DE TARJETA: 4741742940228292\n\nBANCO: Banco Regional de Monterrey, S.A (BANREGIO)\nCONCEPTO: PAGO\n\nIMPORTANTE: FAVOR DE MANDAR FOTO DEL COMPROBANTE\nADVERTENCIA: SIEMPRE PREGUNTAR MÉTODOS DE PAGO, NO ME HAGO RESPONSABLE SI MANDAN A OTRA BANCA QUE NO ES.\n\n`;
+                    await m.reply(paymentMessage);
+                    return;
+                }
+                
+                const paymentProofKeywords = ['realizar un pago', 'quiero pagar', 'comprobante', 'pagar', 'pago'];
+                const isPaymentProofIntent = paymentProofKeywords.some(keyword => messageTextLower.includes(keyword));
+                
+                if (isPaymentProofIntent) {
+                    const paymentMessage = `✅ Si ya ha realizado su pago, por favor enviar foto o documento de su pago con el siguiente texto:\n\n"Aquí está mi comprobante de pago" 📸`;
                     await m.reply(paymentMessage);
                     return;
                 }
