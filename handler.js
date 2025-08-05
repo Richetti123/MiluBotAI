@@ -93,6 +93,24 @@ const saveChatData = (data) => {
     fs.writeFileSync(chatDataPath, JSON.stringify(data, null, 2), 'utf8');
 };
 
+const countryPaymentMethods = {
+    'méxico': `\n\nPara pagar en México, usa:\nCLABE: 706969168872764411\nNombre: Gaston Juarez\nBanco: Arcus Fi\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
+    'perú': `\n\nPara pagar en Perú, usa:\nNombre: Marcelo Gonzales R.\nYape: 967699188\nPlin: 955095498\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
+    'mexico': `\n\nPara pagar en México, usa:\nCLABE: 706969168872764411\nNombre: Gaston Juarez\nBanco: Arcus Fi\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
+    'peru': `\n\nPara pagar en Perú, usa:\nNombre: Marcelo Gonzales R.\nYape: 967699188\nPlin: 955095498\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
+    'chile': `\n\nPara pagar en Chile, usa:\nNombre: BARINIA VALESKA ZENTENO MERINO\nRUT: 17053067-5\nBANCO ELEGIR: TEMPO\nTipo de cuenta: Cuenta Vista\nNumero de cuenta: 111117053067\nCorreo: estraxer2002@gmail.com\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
+    'argentina': `\n\nPara pagar en Argentina, usa:\nNombre: Gaston Juarez\nCBU: 4530000800011127480736\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
+    'bolivia': ``,
+    'españa': ``,
+    'italia': ``,
+    'paypal': `\n\nPara pagar desde cualquier parte del mundo, usa paypal:\nNombre: Marcelo Gonzales R.\nCorreo: jairg6218@gmail.com\nEnlace: https://paypal.me/richetti123\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
+    'estados unidos': `\n\nPara pagar en Estados Unidos, usa:\nNombre: Marcelo Gonzales R.\nCorreo: jairg6218@gmail.com\nEnlace: https://paypal.me/richetti123\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
+    'puerto rico': ``,
+    'panamá': ``,
+    'uruguay': ``,
+    'colombia': ``
+};
+
 const handleInactivity = async (m, conn, userId) => {
     try {
         const currentConfigData = loadConfigBot();
@@ -220,6 +238,42 @@ const sendPaymentOptions = async (m, conn) => {
 export async function handler(m, conn, store) {
     if (!m) return;
     if (m.key.fromMe) return;
+
+    // Eliminamos el reseteo global del estado del chat para evitar que se pierda el nombre del usuario
+    // if (!hasResetOnStartup) {
+    //     const allUsers = await new Promise((resolve, reject) => {
+    //         global.db.data.users.find({}, (err, docs) => {
+    //             if (err) return reject(err);
+    //             resolve(docs);
+    //         });
+    //     });
+    //     if (allUsers.length > 0) {
+    //         await new Promise((resolve, reject) => {
+    //             global.db.data.users.update({}, { $set: { chatState: 'initial' } }, { multi: true }, (err, numReplaced) => {
+    //                 if (err) return reject(err);
+    //                 resolve();
+    //             });
+    //         });
+    //     }
+    //     hasResetOnStartup = true;
+    //     lastResetTime = Date.now();
+    // } else if (Date.now() - lastResetTime > RESET_INTERVAL_MS) {
+    //     const allUsers = await new Promise((resolve, reject) => {
+    //         global.db.data.users.find({}, (err, docs) => {
+    //             if (err) return reject(err);
+    //             resolve(docs);
+    //         });
+    //     });
+    //     if (allUsers.length > 0) {
+    //         await new Promise((resolve, reject) => {
+    //             global.db.data.users.update({}, { $set: { chatState: 'initial' } }, { multi: true }, (err, numReplaced) => {
+    //                 if (err) return reject(err);
+    //                 resolve();
+    //             });
+    //         });
+    //     }
+    //     lastResetTime = Date.now();
+    // }
     
     const isGroup = m.key.remoteJid?.endsWith('@g.us');
     
@@ -570,31 +624,22 @@ export async function handler(m, conn, store) {
                     }
 
                     if (name) {
-                         const formattedSenderForSave = normalizarNumero(`+${m.sender.split('@')[0]}`);
-                         userChatData.nombre = name.charAt(0).toUpperCase() + name.slice(1);
-    
-                         chatData[formattedSenderForSave] = userChatData;
-                         saveChatData(chatData);
+                        // Se corrige el bug: se utiliza formattedSender para guardar,
+                        // para que coincida con la clave utilizada al cargar.
+                        const formattedSenderForSave = normalizarNumero(`+${m.sender.split('@')[0]}`);
+                        userChatData.nombre = name.charAt(0).toUpperCase() + name.slice(1);
+                        
+                        chatData[formattedSenderForSave] = userChatData;
+                        saveChatData(chatData);
 
-                        try {
-                            await new Promise((resolve, reject) => {
-                                global.db.data.users.update({ id: m.sender }, { $set: { chatState: 'active', nombre: userChatData.nombre } }, { upsert: true }, (err) => {
-                                    if (err) {
-                                        return reject(err);
-                                    } 
-                                    resolve();
-                                });
+                        await new Promise((resolve, reject) => {
+                            global.db.data.users.update({ id: m.sender }, { $set: { chatState: 'active', nombre: userChatData.nombre } }, { upsert: true }, (err) => {
+                                if (err) {
+                                    return reject(err);
+                                }
+                                resolve();
                             });
-                        } catch (e) {
-                            console.error('Error al actualizar la base de datos:', e);
-                            // Opcional: enviar un mensaje al usuario si la base de datos falla
-                            // await m.reply('Hubo un problema al guardar tu nombre. Por favor, intenta de nuevo.');
-                            return;
-                        }
-    
-                         await sendMainMenu(m, conn, userChatData);
-                        return;
-                    }
+                        });
                         
                         const faqsList = Object.values(currentConfigData.faqs || {});
                         const sections = [{
@@ -627,65 +672,24 @@ export async function handler(m, conn, store) {
                     return;
                 }
                 
-                const faqs = currentConfigData.services || {};
-                const mainCategories = Object.keys(faqs);
-                
-                // Manejar la selección de categorías principales
-                if (mainCategories.includes(m.text)) {
-                    const category = m.text;
-                    const subServices = faqs[category];
-                    const sections = [{
-                        title: `🛒 ${category}`,
-                        rows: subServices.map((service) => ({
-                            title: service.pregunta,
-                            rowId: service.id,
-                            description: `Toca para saber más sobre: ${service.pregunta}`
-                        }))
-                    }];
-
-                    const listMessage = {
-                        text: `Has seleccionado la categoría *${category}*. Aquí tienes los servicios disponibles.`,
-                        footer: 'Toca el botón para ver más detalles.',
-                        title: `📚 *Servicios disponibles*`,
-                        buttonText: 'Ver Servicios',
-                        sections
-                    };
-                    await conn.sendMessage(m.chat, listMessage, { quoted: m });
-                    return;
-                }
-                
-                // Manejar la selección de un servicio específico
-                let serviceFound = null;
-                for (const category of mainCategories) {
-                    serviceFound = faqs[category].find(service => service.id === m.text);
-                    if (serviceFound) break;
-                }
-                
-                if (serviceFound) {
-                    const replyText = `*${serviceFound.pregunta}*\n\n${serviceFound.descripcion}\n\n*💰 Precio:* ${serviceFound.precio}\n\nSi estás interesado en adquirir este producto, tenemos métodos de pago de OXXO y transferencia. Por favor, dime por dónde realizarás la compra.`;
-                    await m.reply(replyText);
+                const faqHandled = await getfaqHandler(m, { conn, text: m.text, command: 'getfaq', usedPrefix: m.prefix });
+                if (faqHandled) {
                     return;
                 }
 
-                // Lógica de métodos de pago actualizada
-                const paymentKeywords = ['pago', 'pagar', 'metodo de pago', 'método de pago', 'como pago', 'donde pago', 'transferencia', 'oxxo', 'cuenta bancaria'];
-                const isPaymentIntent = paymentKeywords.some(keyword => messageTextLower.includes(keyword));
-                
-                if (isPaymentIntent) {
-                    const paymentInfo = `*TRANSFERENCIAS Y DEPÓSITOS OXXO*
-                                        \n*NÚMERO DE TARJETA* 💳
-                                        *4741742940228292*
-                                        \n*BANCO* 🏦
-                                        *Banco Regional de Monterrey, S.A (BANREGIO)*
-                                        \n*CONCEPTO* ☠️
-                                        *PAGO* 📄
-\n*IMPORTANTE* ⚠️
-*FAVOR DE MANDAR FOTO DEL COMPROBANTE* ✅
-\n*ADVERTENCIA* ⚠️
-*SIEMPRE PREGUNTAR MÉTODOS DE PAGO* 📄
-\nNO ME HAGO RESPONSABLE SI MANDEN A OTRA BANCA QUE NO ES 😐`;
+                const paises = Object.keys(countryPaymentMethods);
+                const paisEncontrado = paises.find(p => messageTextLower.includes(p));
 
-                    await m.reply(paymentInfo);
+                if (paisEncontrado) {
+                    const metodoPago = countryPaymentMethods[paisEncontrado];
+                    if (metodoPago && metodoPago.length > 0) {
+                        await m.reply(`¡Claro! Aquí tienes el método de pago para ${paisEncontrado}:` + metodoPago);
+                    } else {
+                        const noMethodMessage = `Lo siento, aún no tenemos un método de pago configurado para ${paisEncontrado}. Un moderador se pondrá en contacto contigo lo antes posible para ayudarte.`;
+                        await m.reply(noMethodMessage);
+                        const ownerNotificationMessage = `El usuario ${m.pushName} (+${m.sender ? m.sender.split('@')[0] : 'N/A'}) ha preguntado por un método de pago en ${paisEncontrado}, pero no está configurado.`;
+                        await notificarOwnerHandler(m, { conn, text: ownerNotificationMessage, command: 'notificarowner', usedPrefix: m.prefix });
+                    }
                     return;
                 }
 
@@ -726,6 +730,14 @@ export async function handler(m, conn, store) {
                         return;
                     }
                 }
+
+                const paymentKeywords = ['realizar un pago', 'quiero pagar', 'comprobante', 'pagar', 'pago'];
+                const isPaymentIntent = paymentKeywords.some(keyword => messageTextLower.includes(keyword));
+                if (isPaymentIntent) {
+                    const paymentMessage = `¡Claro! Para procesar tu pago, por favor envía la foto o documento del comprobante junto con el texto:\n\n*"Aquí está mi comprobante de pago"* 📸`;
+                    await m.reply(paymentMessage);
+                    return;
+                }
                 
                 const ownerKeywords = ['creador', 'dueño', 'owner', 'administrador', 'admin', 'soporte', 'contactar', 'richetti'];
                 const isOwnerContactIntent = ownerKeywords.some(keyword => messageTextLower.includes(keyword));
@@ -738,18 +750,12 @@ export async function handler(m, conn, store) {
                 try {
                     const paymentsData = JSON.parse(fs.readFileSync(paymentsFilePath, 'utf8'));
                     const paymentMethods = {
-                        '🇲🇽': `\n\nPara pagar en México, usa:\n*TRANSFERENCIAS Y DEPÓSITOS OXXO*
-                                \n*NÚMERO DE TARJETA* 💳
-                                *4741742940228292*
-                                \n*BANCO* 🏦
-                                *Banco Regional de Monterrey, S.A (BANREGIO)*
-                                \n*CONCEPTO* ☠️
-                                *PAGO* 📄
-                                \n*IMPORTANTE* ⚠️
-                                *FAVOR DE MANDAR FOTO DEL COMPROBANTE* ✅
-                                \n*ADVERTENCIA* ⚠️
-                                *SIEMPRE PREGUNTAR MÉTODOS DE PAGO* 📄
-                                \nNO ME HAGO RESPONSABLE SI MANDEN A OTRA BANCA QUE NO ES 😐`
+                        '🇲🇽': `\n\nPara pagar en México, usa:\nCLABE: 706969168872764411\nNombre: Gaston Juarez\nBanco: Arcus Fi`,
+                        '🇵🇪': `\n\nPara pagar en Perú, usa:\nNombre: Marcelo Gonzales R.\nYape: 967699188\nPlin: 955095498`,
+                        '🇨🇱': `\n\nPara pagar en Chile, usa:\nNombre: BARINIA VALESKA ZENTENO MERINO\nRUT: 17053067-5\nBANCO ELEGIR: TEMPO\nTipo de cuenta: Cuenta Vista\nNumero de cuenta: 111117053067\nCorreo: estraxer2002@gmail.com`,
+                        '🇺🇸': `\n\nPara pagar en Estados Unidos, usa:\nNombre: Marcelo Gonzales R.\nCorreo: jairg6218@gmail.com\nEnlace: https://paypal.me/richetti123`,
+                        'Paypal': `\n\nPara pagar desde cualquier parte del mundo, usa paypal:\nNombre: Marcelo Gonzales R.\nCorreo: jairg6218@gmail.com\nEnlace: https://paypal.me/richetti123`,
+                        '🇦🇷': `\n\nPara pagar en Argentina, usa:\nNombre: Gaston Juarez\nCBU: 4530000800011127480736`
                     };
                     const methodsList = Object.values(paymentMethods).join('\n\n');
                     const formattedSender = normalizarNumero(`+${m.sender.split('@')[0]}`);
