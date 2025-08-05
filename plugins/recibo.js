@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const ADMIN_NUMBER_CONFIRMATION = '5217771303481@s.whatsapp.net'; // Asegúrate de que este número es el correcto para notificaciones al admin.
+const ADMIN_NUMBER_CONFIRMATION = '5219541111246@s.whatsapp.net'; // Asegúrate de que este número es el correcto para notificaciones al admin.
 
 export async function handler(m, { conn, text, command, usedPrefix }) {
     // Expresión regular para el formato: "Nombre Número Monto Bandera"
