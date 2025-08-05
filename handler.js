@@ -571,8 +571,6 @@ export async function handler(m, conn, store) {
                         m.reply('❌ Comando no reconocido. Escribe .ayuda para ver la lista de comandos.');
                         break;
                 }
-            } else {
-                m.reply('❌ Lo siento, los comandos no pueden ser usados en grupos.');
             }
             return;
         }
