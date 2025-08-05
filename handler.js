@@ -73,8 +73,8 @@ const loadConfigBot = () => {
         mensajeBienvenida: "¡Hola {user}! Soy tu bot asistente de pagos. ¿En qué puedo ayudarte hoy?",
         mensajeDespedida: "¡Hasta pronto! Esperamos verte de nuevo.",
         services: {},
-        mensajeDespedidaInactividad: "Hola, parece que la conversación terminó. Soy tu asistente PayBalance. ¿Necesitas algo más? Puedes reactivar la conversación enviando un nuevo mensaje o tocando el botón.",
-        chatGreeting: "Hola soy PayBalance, un asistente virtual. ¿Podrías brindarme tu nombre y decirme cuál es el motivo de tu consulta?"
+        mensajeDespedidaInactividad: "Hola, parece que la conversación terminó. Soy tu asistente LeoNet AI. ¿Necesitas algo más? Puedes reactivar la conversación enviando un nuevo mensaje o tocando el botón.",
+        chatGreeting: "Hola soy LeoNet AI, un asistente virtual. ¿Podrías brindarme tu nombre y decirme cuál es el motivo de tu consulta?"
     };
 };
 
@@ -147,7 +147,7 @@ const sendWelcomeMessage = async (m, conn) => {
     let welcomeMessage = '';
 
     if (!userChatData.nombre) {
-        welcomeMessage = "¡Hola! soy PayBalance, un asistente virtual y estoy aqui para atenderte. Por favor indicame tu nombre para brindarte los servicios disponibles.";
+        welcomeMessage = "¡Hola! soy LeoNet AI, un asistente virtual y estoy aqui para atenderte. Por favor indicame tu nombre para brindarte los servicios disponibles.";
         await m.reply(welcomeMessage);
         
         await new Promise((resolve, reject) => {
@@ -164,11 +164,40 @@ const sendWelcomeMessage = async (m, conn) => {
         
         const categories = Object.keys(currentConfigData.services);
         const sections = [{
-            title: "Selecciona una categoría",
-            rows: categories.map(category => ({
-                title: category,
-                rowId: `category:${category}`
-            }))
+            title: "✨ Servicios Disponibles ✨",
+            rows: categories.map(category => {
+                let buttonTitle = category; // Nombre por defecto
+                let buttonDescription = "Haz clic para ver los servicios.";
+                
+                switch (category) {
+                    case "Perfiles Individuales":
+                        buttonTitle = "👤 PERFILES INDIVIDUALES ";
+                        buttonDescription = "Perfiles de streaming exclusivos para ti.";
+                    break;
+                    case "Cuentas Completas":
+                        buttonTitle = "✅ CUENTAS COMPLETAS";
+                        buttonDescription = "Cuentas con acceso total para compartir.";
+                    break;
+                    case "Streaming Musica":
+                        buttonTitle = "🎶 STREAMING MÚSICA";
+                        buttonDescription = "Planes premium para tus plataformas de música.";
+                        break;
+                    case "Cuentas Canva":
+                        buttonTitle = "🎨 CUENTAS CANVA";
+                        buttonDescription = "Accede a plantillas y herramientas premium.";
+                        break;
+                    case "Extras":
+                        buttonTitle = "👽 EXTRAS";
+                        buttonDescription = "Otros servicios y suscripciones.";
+                        break;
+                }
+                
+                return {
+                    title: buttonTitle,
+                    description: buttonDescription,
+                    rowId: `category:${category}` // ¡No cambies esto! Es crucial para que el bot funcione.
+                };
+            })
         }];
         
         const listMessage = {
@@ -706,16 +735,16 @@ export async function handler(m, conn, store) {
                             rows: categories.map(category => {
                                 let buttonTitle = category; // Nombre por defecto
                                 let buttonDescription = "Haz clic para ver los servicios.";
-        
+            
                                 switch (category) {
                                     case "Perfiles Individuales":
                                         buttonTitle = "👤 PERFILES INDIVIDUALES ";
                                         buttonDescription = "Perfiles de streaming exclusivos para ti.";
-                                        break;
+                                    break;
                                     case "Cuentas Completas":
                                         buttonTitle = "✅ CUENTAS COMPLETAS";
                                         buttonDescription = "Cuentas con acceso total para compartir.";
-                                        break;
+                                    break;
                                     case "Streaming Musica":
                                         buttonTitle = "🎶 STREAMING MÚSICA";
                                         buttonDescription = "Planes premium para tus plataformas de música.";
@@ -729,7 +758,7 @@ export async function handler(m, conn, store) {
                                         buttonDescription = "Otros servicios y suscripciones.";
                                         break;
                                 }
-        
+            
                                 return {
                                     title: buttonTitle,
                                     description: buttonDescription,
@@ -755,11 +784,40 @@ export async function handler(m, conn, store) {
                 if (command === '!menu' || command === 'ayuda' || command === 'servicios') {
                     const categories = Object.keys(currentConfigData.services);
                     const sections = [{
-                        title: "Selecciona una categoría",
-                        rows: categories.map(category => ({
-                            title: category,
-                            rowId: `category:${category}`
-                        }))
+                        title: "✨ Servicios Disponibles ✨",
+                        rows: categories.map(category => {
+                            let buttonTitle = category;
+                            let buttonDescription = "Haz clic para ver los servicios.";
+        
+                            switch (category) {
+                                case "Perfiles Individuales":
+                                    buttonTitle = "👤 PERFILES INDIVIDUALES ";
+                                    buttonDescription = "Perfiles de streaming exclusivos para ti.";
+                                break;
+                                case "Cuentas Completas":
+                                    buttonTitle = "✅ CUENTAS COMPLETAS";
+                                    buttonDescription = "Cuentas con acceso total para compartir.";
+                                break;
+                                case "Streaming Musica":
+                                    buttonTitle = "🎶 STREAMING MÚSICA";
+                                    buttonDescription = "Planes premium para tus plataformas de música.";
+                                    break;
+                                case "Cuentas Canva":
+                                    buttonTitle = "🎨 CUENTAS CANVA";
+                                    buttonDescription = "Accede a plantillas y herramientas premium.";
+                                    break;
+                                case "Extras":
+                                    buttonTitle = "👽 EXTRAS";
+                                    buttonDescription = "Otros servicios y suscripciones.";
+                                    break;
+                            }
+        
+                            return {
+                                title: buttonTitle,
+                                description: buttonDescription,
+                                rowId: `category:${category}`
+                            };
+                        })
                     }];
                     
                     const listMessage = {
