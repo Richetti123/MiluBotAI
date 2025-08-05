@@ -609,7 +609,7 @@ export async function handler(m, conn, store) {
                         return;
                     }
                 }
-            } else if (chatState === 'active') {
+            }} else if (chatState === 'active') {
                 const goodbyeKeywords = ['adios', 'chao', 'chau', 'bye', 'nos vemos', 'hasta luego', 'me despido', 'adiòs', 'adiós'];
                 const isGoodbye = goodbyeKeywords.some(keyword => messageTextLower.includes(keyword));
 
@@ -618,8 +618,43 @@ export async function handler(m, conn, store) {
                     return;
                 }
                 
-                const faqHandled = await getfaqHandler(m, { conn, text: m.text, command: 'getfaq', usedPrefix: m.prefix });
-                if (faqHandled) {
+                const faqs = currentConfigData.services || {};
+                const mainCategories = Object.keys(faqs);
+                
+                // Manejar la selección de categorías principales
+                if (mainCategories.includes(m.text)) {
+                    const category = m.text;
+                    const subServices = faqs[category];
+                    const sections = [{
+                        title: `🛒 ${category}`,
+                        rows: subServices.map((service) => ({
+                            title: service.pregunta,
+                            rowId: service.id,
+                            description: `Toca para saber más sobre: ${service.pregunta}`
+                        }))
+                    }];
+
+                    const listMessage = {
+                        text: `Has seleccionado la categoría *${category}*. Aquí tienes los servicios disponibles.`,
+                        footer: 'Toca el botón para ver más detalles.',
+                        title: `📚 *Servicios disponibles*`,
+                        buttonText: 'Ver Servicios',
+                        sections
+                    };
+                    await conn.sendMessage(m.chat, listMessage, { quoted: m });
+                    return;
+                }
+                
+                // Manejar la selección de un servicio específico
+                let serviceFound = null;
+                for (const category of mainCategories) {
+                    serviceFound = faqs[category].find(service => service.id === m.text);
+                    if (serviceFound) break;
+                }
+                
+                if (serviceFound) {
+                    const replyText = `*${serviceFound.pregunta}*\n\n${serviceFound.descripcion}\n\n*💰 Precio:* ${serviceFound.precio}\n\nSi estás interesado en adquirir este producto, tenemos métodos de pago de OXXO y transferencia. Por favor, dime por dónde realizarás la compra.`;
+                    await m.reply(replyText);
                     return;
                 }
 
