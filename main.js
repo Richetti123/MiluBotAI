@@ -306,7 +306,7 @@ async function startBot() {
     if (!methodCodeQR && !methodCode && !existsSync('./sessions/creds.json')) {
         do {
             opcion = await question(chalk.white(
-                `CashFlow listo para conectarse escoge el metodo de vinculacion\n` +
+                `LeoNet AI listo para conectarse escoge el metodo de vinculacion\n` +
                 `1. Codigo QR\n` +
                 `2. Codigo de 8 digitos\n---> `
             ));
