@@ -215,6 +215,48 @@ const sendPaymentOptions = async (m, conn) => {
     });
 };
 
+const serviceEmojis = {
+    "Netflix Extra (Privado)": "🎬",
+    "Disney Premium": "🌟",
+    "Max Estándar": "📽️",
+    "Max Platino": "💎",
+    "Prime Video Sin Anuncios": "📦",
+    "Paramount": "🎥",
+    "Vix 1 Mes": "📅",
+    "Vix 2 Meses": "🗓️",
+    "Crunchyroll": "🍜",
+    "Claro Video con Canales": "📺",
+    "Viki Rakuten": "🎭",
+    "Duolingo Individual": "📚",
+    "Pornhub": "🔞",
+    "Plex": "📂",
+    "Claro video con Paramount": "🎩",
+    "Claro video con Universal": "♻️",
+    "Netflix": "🍿",
+    "Disney Estándar C/A": "📢",
+    "Prime Sin Anuncios": "📦✨",
+    "Spotify Premium 1 Mes (Renovable)": "🎶",
+    "Spotify Premium 2 Meses (Renovable)": "🎵",
+    "Spotify Premium 3 Meses (Renovable)": "🎤",
+    "YouTube por Invitación (Un Mes)": "📺",
+    "YouTube por Invitación (Dos Meses)": "🎤",
+    "YouTube Familiar Un Mes (A Tus Datos)": "👨‍👩‍👧‍👦",
+    "Mubi": "🎧",
+    "1 Mes": "🎨",
+    "2 Meses": "🖌️",
+    "3 Meses": "🎉",
+    "6 Meses": "📅",
+    "1 Año": "🎁",
+    "Invitación Office (Un mes)": "📄",
+    "Invitación Gemini": "👾",
+    "Invitación Tidal": "💿",
+    "Invitación Deezer": "🎙️",
+    "Invitación Chat GTP": "📼",
+    "Piscard": "🖌️",
+    "Scribd": "✍️",
+    "Brazzer": "🔞"
+};
+
 export async function handler(m, conn, store) {
     if (!m) return;
     if (m.key.fromMe) return;
@@ -536,17 +578,20 @@ export async function handler(m, conn, store) {
 
                 if (categoryServices && categoryServices.length > 0) {
                     const sections = [{
-                        title: categoryName,
-                        rows: categoryServices.map(service => ({
-                            title: service.pregunta,
-                            description: `${service.precio}`,
-                            rowId: `!getfaq ${service.id}`
-                        }))
+                        title: `Catálogo de ${categoryName}`,
+                        rows: categoryServices.map(service => {
+                            const emoji = serviceEmojis[service.pregunta] || '⭐';
+                            return {
+                                title: `${emoji} ${service.pregunta}`,
+                                description: `💰 Costo: ${service.precio}`,
+                                rowId: `!getfaq ${service.id}`
+                            };
+                        })
                     }];
                     
                     const listMessage = {
                         text: `Aquí están todos los servicios en la categoría de *${categoryName}*.`,
-                        title: `Catálogo de ${categoryName}`,
+                        title: "✨ Nuestros Servicios",
                         buttonText: "Seleccionar Servicio",
                         sections
                     };
