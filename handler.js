@@ -570,22 +570,31 @@ export async function handler(m, conn, store) {
                     }
 
                     if (name) {
-                        // Se corrige el bug: se utiliza formattedSender para guardar,
-                        // para que coincida con la clave utilizada al cargar.
-                        const formattedSenderForSave = normalizarNumero(`+${m.sender.split('@')[0]}`);
-                        userChatData.nombre = name.charAt(0).toUpperCase() + name.slice(1);
-                        
-                        chatData[formattedSenderForSave] = userChatData;
-                        saveChatData(chatData);
+                         const formattedSenderForSave = normalizarNumero(`+${m.sender.split('@')[0]}`);
+                         userChatData.nombre = name.charAt(0).toUpperCase() + name.slice(1);
+    
+                         chatData[formattedSenderForSave] = userChatData;
+                         saveChatData(chatData);
 
-                        await new Promise((resolve, reject) => {
-                            global.db.data.users.update({ id: m.sender }, { $set: { chatState: 'active', nombre: userChatData.nombre } }, { upsert: true }, (err) => {
-                                if (err) {
-                                    return reject(err);
-                                }
-                                resolve();
+                        try {
+                            await new Promise((resolve, reject) => {
+                                global.db.data.users.update({ id: m.sender }, { $set: { chatState: 'active', nombre: userChatData.nombre } }, { upsert: true }, (err) => {
+                                    if (err) {
+                                        return reject(err);
+                                    } 
+                                    resolve();
+                                });
                             });
-                        });
+                        } catch (e) {
+                            console.error('Error al actualizar la base de datos:', e);
+                            // Opcional: enviar un mensaje al usuario si la base de datos falla
+                            // await m.reply('Hubo un problema al guardar tu nombre. Por favor, intenta de nuevo.');
+                            return;
+                        }
+    
+                         await sendMainMenu(m, conn, userChatData);
+                        return;
+                    }
                         
                         const faqsList = Object.values(currentConfigData.faqs || {});
                         const sections = [{
@@ -609,7 +618,7 @@ export async function handler(m, conn, store) {
                         return;
                     }
                 }
-            }} else if (chatState === 'active') {
+            } else if (chatState === 'active') {
                 const goodbyeKeywords = ['adios', 'chao', 'chau', 'bye', 'nos vemos', 'hasta luego', 'me despido', 'adiòs', 'adiós'];
                 const isGoodbye = goodbyeKeywords.some(keyword => messageTextLower.includes(keyword));
 
@@ -664,12 +673,12 @@ export async function handler(m, conn, store) {
                 
                 if (isPaymentIntent) {
                     const paymentInfo = `*TRANSFERENCIAS Y DEPÓSITOS OXXO*
-\n*NÚMERO DE TARJETA* 💳
-*4741742940228292*
-\n*BANCO* 🏦
-*Banco Regional de Monterrey, S.A (BANREGIO)*
-\n*CONCEPTO* ☠️
-*PAGO* 📄
+                                        \n*NÚMERO DE TARJETA* 💳
+                                        *4741742940228292*
+                                        \n*BANCO* 🏦
+                                        *Banco Regional de Monterrey, S.A (BANREGIO)*
+                                        \n*CONCEPTO* ☠️
+                                        *PAGO* 📄
 \n*IMPORTANTE* ⚠️
 *FAVOR DE MANDAR FOTO DEL COMPROBANTE* ✅
 \n*ADVERTENCIA* ⚠️
@@ -730,17 +739,17 @@ export async function handler(m, conn, store) {
                     const paymentsData = JSON.parse(fs.readFileSync(paymentsFilePath, 'utf8'));
                     const paymentMethods = {
                         '🇲🇽': `\n\nPara pagar en México, usa:\n*TRANSFERENCIAS Y DEPÓSITOS OXXO*
-\n*NÚMERO DE TARJETA* 💳
-*4741742940228292*
-\n*BANCO* 🏦
-*Banco Regional de Monterrey, S.A (BANREGIO)*
-\n*CONCEPTO* ☠️
-*PAGO* 📄
-\n*IMPORTANTE* ⚠️
-*FAVOR DE MANDAR FOTO DEL COMPROBANTE* ✅
-\n*ADVERTENCIA* ⚠️
-*SIEMPRE PREGUNTAR MÉTODOS DE PAGO* 📄
-\nNO ME HAGO RESPONSABLE SI MANDEN A OTRA BANCA QUE NO ES 😐`
+                                \n*NÚMERO DE TARJETA* 💳
+                                *4741742940228292*
+                                \n*BANCO* 🏦
+                                *Banco Regional de Monterrey, S.A (BANREGIO)*
+                                \n*CONCEPTO* ☠️
+                                *PAGO* 📄
+                                \n*IMPORTANTE* ⚠️
+                                *FAVOR DE MANDAR FOTO DEL COMPROBANTE* ✅
+                                \n*ADVERTENCIA* ⚠️
+                                *SIEMPRE PREGUNTAR MÉTODOS DE PAGO* 📄
+                                \nNO ME HAGO RESPONSABLE SI MANDEN A OTRA BANCA QUE NO ES 😐`
                     };
                     const methodsList = Object.values(paymentMethods).join('\n\n');
                     const formattedSender = normalizarNumero(`+${m.sender.split('@')[0]}`);
