@@ -34,6 +34,7 @@ import { handler as comprobantePagoHandler } from './plugins/comprobantepago.js'
 import { handler as updateHandler } from './plugins/update.js';
 import { handler as subirComprobanteHandler } from './plugins/subircomprobante.js';
 import { handler as consultaHandler } from './plugins/consulta.js';
+import { handleListButtonResponse } from './lib/listbuttons.js';
 
 const normalizarNumero = (numero) => {
     if (!numero) return numero;
@@ -72,7 +73,7 @@ const loadConfigBot = () => {
         modoPagoActivo: false,
         mensajeBienvenida: "¡Hola {user}! Soy tu bot asistente de pagos. ¿En qué puedo ayudarte hoy?",
         mensajeDespedida: "¡Hasta pronto! Esperamos verte de nuevo.",
-        faqs: {},
+        services: {},
         mensajeDespedidaInactividad: "Hola, parece que la conversación terminó. Soy tu asistente PayBalance. ¿Necesitas algo más? Puedes reactivar la conversación enviando un nuevo mensaje o tocando el botón.",
         chatGreeting: "Hola soy PayBalance, un asistente virtual. ¿Podrías brindarme tu nombre y decirme cuál es el motivo de tu consulta?"
     };
@@ -91,24 +92,6 @@ const loadChatData = () => {
 
 const saveChatData = (data) => {
     fs.writeFileSync(chatDataPath, JSON.stringify(data, null, 2), 'utf8');
-};
-
-const countryPaymentMethods = {
-    'méxico': `\n\nPara pagar en México, usa:\nCLABE: 706969168872764411\nNombre: Gaston Juarez\nBanco: Arcus Fi\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
-    'perú': `\n\nPara pagar en Perú, usa:\nNombre: Marcelo Gonzales R.\nYape: 967699188\nPlin: 955095498\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
-    'mexico': `\n\nPara pagar en México, usa:\nCLABE: 706969168872764411\nNombre: Gaston Juarez\nBanco: Arcus Fi\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
-    'peru': `\n\nPara pagar en Perú, usa:\nNombre: Marcelo Gonzales R.\nYape: 967699188\nPlin: 955095498\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
-    'chile': `\n\nPara pagar en Chile, usa:\nNombre: BARINIA VALESKA ZENTENO MERINO\nRUT: 17053067-5\nBANCO ELEGIR: TEMPO\nTipo de cuenta: Cuenta Vista\nNumero de cuenta: 111117053067\nCorreo: estraxer2002@gmail.com\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
-    'argentina': `\n\nPara pagar en Argentina, usa:\nNombre: Gaston Juarez\nCBU: 4530000800011127480736\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
-    'bolivia': ``,
-    'españa': ``,
-    'italia': ``,
-    'paypal': `\n\nPara pagar desde cualquier parte del mundo, usa paypal:\nNombre: Marcelo Gonzales R.\nCorreo: jairg6218@gmail.com\nEnlace: https://paypal.me/richetti123\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
-    'estados unidos': `\n\nPara pagar en Estados Unidos, usa:\nNombre: Marcelo Gonzales R.\nCorreo: jairg6218@gmail.com\nEnlace: https://paypal.me/richetti123\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
-    'puerto rico': ``,
-    'panamá': ``,
-    'uruguay': ``,
-    'colombia': ``
 };
 
 const handleInactivity = async (m, conn, userId) => {
@@ -181,21 +164,21 @@ const sendWelcomeMessage = async (m, conn) => {
         
     } else {
         welcomeMessage = `¡Hola ${userChatData.nombre}! ¿En qué puedo ayudarte hoy?`;
-        const faqsList = Object.values(currentConfigData.faqs || {});
+        
+        const categories = Object.keys(currentConfigData.services);
         const sections = [{
-            title: '⭐ Nuestros Servicios',
-            rows: faqsList.map((faq) => ({
-                title: faq.pregunta,
-                rowId: `${faq.pregunta}`,
-                description: `Toca para saber más sobre: ${faq.pregunta}`
+            title: "Selecciona una categoría",
+            rows: categories.map(category => ({
+                title: category,
+                rowId: `category:${category}`
             }))
         }];
-
+        
         const listMessage = {
             text: welcomeMessage,
             footer: 'Toca el botón para ver nuestros servicios.',
             title: '📚 *Bienvenido/a*',
-            buttonText: 'Ver Servicios',
+            buttonText: 'Ver Catálogo',
             sections
         };
         await conn.sendMessage(m.chat, listMessage, { quoted: m });
@@ -239,42 +222,6 @@ export async function handler(m, conn, store) {
     if (!m) return;
     if (m.key.fromMe) return;
 
-    // Eliminamos el reseteo global del estado del chat para evitar que se pierda el nombre del usuario
-    // if (!hasResetOnStartup) {
-    //     const allUsers = await new Promise((resolve, reject) => {
-    //         global.db.data.users.find({}, (err, docs) => {
-    //             if (err) return reject(err);
-    //             resolve(docs);
-    //         });
-    //     });
-    //     if (allUsers.length > 0) {
-    //         await new Promise((resolve, reject) => {
-    //             global.db.data.users.update({}, { $set: { chatState: 'initial' } }, { multi: true }, (err, numReplaced) => {
-    //                 if (err) return reject(err);
-    //                 resolve();
-    //             });
-    //         });
-    //     }
-    //     hasResetOnStartup = true;
-    //     lastResetTime = Date.now();
-    // } else if (Date.now() - lastResetTime > RESET_INTERVAL_MS) {
-    //     const allUsers = await new Promise((resolve, reject) => {
-    //         global.db.data.users.find({}, (err, docs) => {
-    //             if (err) return reject(err);
-    //             resolve(docs);
-    //         });
-    //     });
-    //     if (allUsers.length > 0) {
-    //         await new Promise((resolve, reject) => {
-    //             global.db.data.users.update({}, { $set: { chatState: 'initial' } }, { multi: true }, (err, numReplaced) => {
-    //                 if (err) return reject(err);
-    //                 resolve();
-    //             });
-    //         });
-    //     }
-    //     lastResetTime = Date.now();
-    // }
-    
     const isGroup = m.key.remoteJid?.endsWith('@g.us');
     
     const botJid = conn?.user?.id || conn?.user?.jid || '';
@@ -373,6 +320,10 @@ export async function handler(m, conn, store) {
                 
                 if (m.text === '.reactivate_chat') {
                     await sendWelcomeMessage(m, conn);
+                    return;
+                }
+
+                if (await handleListButtonResponse(m, conn)) {
                     return;
                 }
                 
@@ -550,7 +501,7 @@ export async function handler(m, conn, store) {
 
         if (!m.isGroup) {
             const currentConfigData = loadConfigBot();
-            const faqs = currentConfigData.faqs || {};
+            const services = currentConfigData.services || {};
             const chatData = loadChatData();
             const formattedSender = normalizarNumero(`+${m.sender.split('@')[0]}`);
             const userChatData = chatData[formattedSender] || {};
@@ -570,6 +521,37 @@ export async function handler(m, conn, store) {
             if (isPaymentProof(messageTextLower) && (m.message?.imageMessage || m.message?.documentMessage)) {
                 return;
             }
+
+            // Manejar respuestas de botones de lista de categorías
+            const selectedRowId = m.message?.listResponseMessage?.singleSelectReply?.selectedRowId;
+            if (selectedRowId && selectedRowId.startsWith('category:')) {
+                const categoryName = selectedRowId.replace('category:', '').trim();
+                const categoryServices = services[categoryName];
+
+                if (categoryServices && categoryServices.length > 0) {
+                    const sections = [{
+                        title: categoryName,
+                        rows: categoryServices.map(service => ({
+                            title: service.pregunta,
+                            description: `${service.precio}`,
+                            rowId: `!getfaq ${service.id}`
+                        }))
+                    }];
+                    
+                    const listMessage = {
+                        text: `Aquí están todos los servicios en la categoría de *${categoryName}*.`,
+                        title: `Catálogo de ${categoryName}`,
+                        buttonText: "Seleccionar Servicio",
+                        sections
+                    };
+                    
+                    await conn.sendMessage(m.chat, listMessage, { quoted: m });
+                } else {
+                    await m.reply(`❌ No hay servicios disponibles en la categoría de *${categoryName}*.`);
+                }
+                return;
+            }
+            
             if (chatState === 'initial') {
                 const chatData = loadChatData();
                 const formattedSender = normalizarNumero(`+${m.sender.split('@')[0]}`);
@@ -585,13 +567,12 @@ export async function handler(m, conn, store) {
                         });
                     });
                     
-                    const faqsList = Object.values(currentConfigData.faqs || {});
+                    const categories = Object.keys(currentConfigData.services);
                     const sections = [{
-                        title: '⭐ Nuestros Servicios',
-                        rows: faqsList.map((faq) => ({
-                            title: faq.pregunta,
-                            rowId: `${faq.pregunta}`,
-                            description: `Toca para saber más sobre: ${faq.pregunta}`
+                        title: "Selecciona una categoría",
+                        rows: categories.map(category => ({
+                            title: category,
+                            rowId: `category:${category}`
                         }))
                     }];
 
@@ -599,7 +580,7 @@ export async function handler(m, conn, store) {
                         text: `¡Hola ${userChatData.nombre}! ¿En qué puedo ayudarte hoy?`,
                         footer: 'Toca el botón para ver nuestros servicios.',
                         title: '📚 *Bienvenido/a*',
-                        buttonText: 'Ver Servicios',
+                        buttonText: 'Ver Catálogo',
                         sections
                     };
                     await conn.sendMessage(m.chat, listMessage, { quoted: m });
@@ -624,8 +605,6 @@ export async function handler(m, conn, store) {
                     }
 
                     if (name) {
-                        // Se corrige el bug: se utiliza formattedSender para guardar,
-                        // para que coincida con la clave utilizada al cargar.
                         const formattedSenderForSave = normalizarNumero(`+${m.sender.split('@')[0]}`);
                         userChatData.nombre = name.charAt(0).toUpperCase() + name.slice(1);
                         
@@ -641,13 +620,12 @@ export async function handler(m, conn, store) {
                             });
                         });
                         
-                        const faqsList = Object.values(currentConfigData.faqs || {});
+                        const categories = Object.keys(currentConfigData.services);
                         const sections = [{
-                            title: '⭐ Nuestros Servicios',
-                            rows: faqsList.map((faq) => ({
-                                title: faq.pregunta,
-                                rowId: `${faq.pregunta}`,
-                                description: `Toca para saber más sobre: ${faq.pregunta}`
+                            title: "Selecciona una categoría",
+                            rows: categories.map(category => ({
+                                title: category,
+                                rowId: `category:${category}`
                             }))
                         }];
 
@@ -655,7 +633,7 @@ export async function handler(m, conn, store) {
                             text: `¡Hola ${userChatData.nombre}! ¿En qué puedo ayudarte hoy?`,
                             footer: 'Toca el botón para ver nuestros servicios.',
                             title: '📚 *Bienvenido/a*',
-                            buttonText: 'Ver Servicios',
+                            buttonText: 'Ver Catálogo',
                             sections
                         };
                         await conn.sendMessage(m.chat, listMessage, { quoted: m });
@@ -664,6 +642,30 @@ export async function handler(m, conn, store) {
                     }
                 }
             } else if (chatState === 'active') {
+
+                // Comandos para mostrar el menú principal
+                const command = text ? text.toLowerCase().trim() : '';
+                if (command === '!menu' || command === 'ayuda' || command === 'servicios') {
+                    const categories = Object.keys(currentConfigData.services);
+                    const sections = [{
+                        title: "Selecciona una categoría",
+                        rows: categories.map(category => ({
+                            title: category,
+                            rowId: `category:${category}`
+                        }))
+                    }];
+                    
+                    const listMessage = {
+                        text: currentConfigData.chatGreeting.replace('{user}', m.pushName || ''),
+                        title: "Menú Principal",
+                        buttonText: "Ver Catálogo",
+                        sections
+                    };
+                    
+                    await conn.sendMessage(m.chat, listMessage, { quoted: m });
+                    return;
+                }
+
                 const goodbyeKeywords = ['adios', 'chao', 'chau', 'bye', 'nos vemos', 'hasta luego', 'me despido', 'adiòs', 'adiós'];
                 const isGoodbye = goodbyeKeywords.some(keyword => messageTextLower.includes(keyword));
 
@@ -672,25 +674,10 @@ export async function handler(m, conn, store) {
                     return;
                 }
                 
-                const faqHandled = await getfaqHandler(m, { conn, text: m.text, command: 'getfaq', usedPrefix: m.prefix });
-                if (faqHandled) {
-                    return;
-                }
-
-                const paises = Object.keys(countryPaymentMethods);
-                const paisEncontrado = paises.find(p => messageTextLower.includes(p));
-
-                if (paisEncontrado) {
-                    const metodoPago = countryPaymentMethods[paisEncontrado];
-                    if (metodoPago && metodoPago.length > 0) {
-                        await m.reply(`¡Claro! Aquí tienes el método de pago para ${paisEncontrado}:` + metodoPago);
-                    } else {
-                        const noMethodMessage = `Lo siento, aún no tenemos un método de pago configurado para ${paisEncontrado}. Un moderador se pondrá en contacto contigo lo antes posible para ayudarte.`;
-                        await m.reply(noMethodMessage);
-                        const ownerNotificationMessage = `El usuario ${m.pushName} (+${m.sender ? m.sender.split('@')[0] : 'N/A'}) ha preguntado por un método de pago en ${paisEncontrado}, pero no está configurado.`;
-                        await notificarOwnerHandler(m, { conn, text: ownerNotificationMessage, command: 'notificarowner', usedPrefix: m.prefix });
-                    }
-                    return;
+                // Ya no se busca por texto, sino por el ID del botón de la lista
+                if (m.text.startsWith('!getfaq')) {
+                     await getfaqHandler(m, { conn, text: m.text.replace('!getfaq ', ''), command: 'getfaq', usedPrefix: m.prefix });
+                     return;
                 }
 
                 const paymentsData = JSON.parse(fs.readFileSync(paymentsFilePath, 'utf8'));
@@ -731,10 +718,11 @@ export async function handler(m, conn, store) {
                     }
                 }
 
-                const paymentKeywords = ['realizar un pago', 'quiero pagar', 'comprobante', 'pagar', 'pago'];
+                const paymentKeywords = ['realizar un pago', 'quiero pagar', 'comprobante', 'pagar', 'pago', 'transferencia', 'oxxo', 'metodo de pago'];
                 const isPaymentIntent = paymentKeywords.some(keyword => messageTextLower.includes(keyword));
                 if (isPaymentIntent) {
-                    const paymentMessage = `¡Claro! Para procesar tu pago, por favor envía la foto o documento del comprobante junto con el texto:\n\n*"Aquí está mi comprobante de pago"* 📸`;
+                    const paymentMessage = `TRANSFERENCIAS Y DEPÓSITOS OXXO\n\n- NUMERO DE TARJETA: 4741742940228292\n\nBANCO: Banco Regional de Monterrey, S.A (BANREGIO)\n\nCONCEPTO: PAGO\n\nIMPORTANTE: FAVOR DE MANDAR FOTO DEL COMPROBANTE\n\nADVERTENCIA: SIEMPRE PREGUNTAR MÉTODOS DE PAGO, NO ME HAGO RESPONSABLE SI MANDAN A OTRA BANCA QUE NO ES.`;
+
                     await m.reply(paymentMessage);
                     return;
                 }
@@ -749,15 +737,6 @@ export async function handler(m, conn, store) {
                 
                 try {
                     const paymentsData = JSON.parse(fs.readFileSync(paymentsFilePath, 'utf8'));
-                    const paymentMethods = {
-                        '🇲🇽': `\n\nPara pagar en México, usa:\nCLABE: 706969168872764411\nNombre: Gaston Juarez\nBanco: Arcus Fi`,
-                        '🇵🇪': `\n\nPara pagar en Perú, usa:\nNombre: Marcelo Gonzales R.\nYape: 967699188\nPlin: 955095498`,
-                        '🇨🇱': `\n\nPara pagar en Chile, usa:\nNombre: BARINIA VALESKA ZENTENO MERINO\nRUT: 17053067-5\nBANCO ELEGIR: TEMPO\nTipo de cuenta: Cuenta Vista\nNumero de cuenta: 111117053067\nCorreo: estraxer2002@gmail.com`,
-                        '🇺🇸': `\n\nPara pagar en Estados Unidos, usa:\nNombre: Marcelo Gonzales R.\nCorreo: jairg6218@gmail.com\nEnlace: https://paypal.me/richetti123`,
-                        'Paypal': `\n\nPara pagar desde cualquier parte del mundo, usa paypal:\nNombre: Marcelo Gonzales R.\nCorreo: jairg6218@gmail.com\nEnlace: https://paypal.me/richetti123`,
-                        '🇦🇷': `\n\nPara pagar en Argentina, usa:\nNombre: Gaston Juarez\nCBU: 4530000800011127480736`
-                    };
-                    const methodsList = Object.values(paymentMethods).join('\n\n');
                     const formattedSender = normalizarNumero(`+${m.sender.split('@')[0]}`);
                     const clientInfoPrompt = !!paymentsData[formattedSender] ?
                         `El usuario es un cliente existente con los siguientes detalles: Nombre: ${paymentsData[formattedSender].nombre}, Día de pago: ${paymentsData[formattedSender].diaPago}, Monto: ${paymentsData[formattedSender].monto}, Bandera: ${paymentsData[formattedSender].bandera}. Su estado es ${paymentsData[formattedSender].suspendido ? 'suspendido' : 'activo'}.` :
@@ -765,6 +744,8 @@ export async function handler(m, conn, store) {
                     const historicalChatPrompt = Object.keys(userChatData).length > 0 ?
                         `Datos previos de la conversación con este usuario: ${JSON.stringify(userChatData)}.` :
                         `No hay datos previos de conversación con este usuario.`;
+                    
+                    const paymentMethods = `TRANSFERENCIAS Y DEPÓSITOS OXXO\n\n- NUMERO DE TARJETA: 4741742940228292\n\nBANCO: Banco Regional de Monterrey, S.A (BANREGIO)\n\nCONCEPTO: PAGO\n\nIMPORTANTE: FAVOR DE MANDAR FOTO DEL COMPROBANTE\n\nADVERTENCIA: SIEMPRE PREGUNTAR MÉTODOS DE PAGO, NO ME HAGO RESPONSABLE SI MANDAN A OTRA BANCA QUE NO ES.`;
                         
                     const personaPrompt = `Eres LeoNet AI, un asistente virtual profesional para la atención al cliente de Leonardo. Tu objetivo es ayudar a los clientes con consultas sobre pagos y servicios. No uses frases como "Estoy aquí para ayudarte", "Como tu asistente...", "Como un asistente virtual" o similares. Ve directo al punto y sé conciso.
                     
@@ -772,8 +753,7 @@ export async function handler(m, conn, store) {
                     
                     Instrucciones:
                     - Responde de forma concisa, útil y profesional.
-                    - Si te preguntan por métodos de pago, usa esta lista: ${methodsList}
-                    - Si el usuario pregunta por un método de pago específico o por su fecha de corte, informa que debe consultar con el proveedor de servicio.
+                    - Si te preguntan por métodos de pago, proporciona la siguiente información: ${paymentMethods}.
                     - No proporciones información personal ni financiera sensible.
                     - No inventes precios. Si te preguntan por el precio de un servicio, informa que revisen la lista de servicios.
                     - Eres capaz de identificar a los clientes. Aquí hay información del usuario:
