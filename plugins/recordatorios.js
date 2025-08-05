@@ -3,7 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { sendAutomaticPaymentRemindersLogic } from '../lib/recordatorio.js';
 
-const ADMIN_NUMBER_CONFIRMATION = '5217771303481@s.whatsapp.net';
+const ADMIN_NUMBER_CONFIRMATION = '5219541111246@s.whatsapp.net';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
