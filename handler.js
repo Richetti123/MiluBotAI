@@ -702,11 +702,40 @@ export async function handler(m, conn, store) {
                         
                         const categories = Object.keys(currentConfigData.services);
                         const sections = [{
-                            title: "Selecciona una categoría",
-                            rows: categories.map(category => ({
-                                title: category,
-                                rowId: `category:${category}`
-                            }))
+                            title: "✨ Servicios Disponibles ✨",
+                            rows: categories.map(category => {
+                                let buttonTitle = category; // Nombre por defecto
+                                let buttonDescription = "Haz clic para ver los servicios.";
+        
+                                switch (category) {
+                                    case "Perfiles Individuales":
+                                        buttonTitle = "👤 PERFILES INDIVIDUALES ";
+                                        buttonDescription = "Perfiles de streaming exclusivos para ti.";
+                                        break;
+                                    case "Cuentas Completas":
+                                        buttonTitle = "✅ CUENTAS COMPLETAS";
+                                        buttonDescription = "Cuentas con acceso total para compartir.";
+                                        break;
+                                    case "Streaming Musica":
+                                        buttonTitle = "🎶 STREAMING MÚSICA";
+                                        buttonDescription = "Planes premium para tus plataformas de música.";
+                                        break;
+                                    case "Cuentas Canva":
+                                        buttonTitle = "🎨 CUENTAS CANVA";
+                                        buttonDescription = "Accede a plantillas y herramientas premium.";
+                                        break;
+                                    case "Extras":
+                                        buttonTitle = "👽 EXTRAS";
+                                        buttonDescription = "Otros servicios y suscripciones.";
+                                        break;
+                                }
+        
+                                return {
+                                    title: buttonTitle,
+                                    description: buttonDescription,
+                                    rowId: `category:${category}` // ¡No cambies esto! Es crucial para que el bot funcione.
+                                };
+                            })
                         }];
 
                         const listMessage = {
