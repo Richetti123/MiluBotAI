@@ -47,7 +47,7 @@ const normalizarNumero = (numero) => {
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const BOT_OWNER_NUMBER = '5219541111246';
+const BOT_OWNER_NUMBER = '5217771303481';
 const INACTIVITY_TIMEOUT_MS = 20 * 60 * 1000;
 const RESET_INTERVAL_MS = 12 * 60 * 60 * 1000;
 
@@ -91,6 +91,56 @@ const loadChatData = () => {
 
 const saveChatData = (data) => {
     fs.writeFileSync(chatDataPath, JSON.stringify(data, null, 2), 'utf8');
+};
+
+const categoryMetadata = {
+    "Perfiles Individuales": { emoji: "👤", title: "PERFILES INDIVIDUALES ", description: "Perfiles de streaming exclusivos para ti." },
+    "Cuentas Completas": { emoji: "✅", title: "CUENTAS COMPLETAS", description: "Cuentas con acceso total para compartir." },
+    "Streaming Musica": { emoji: "🎶", title: "STREAMING MÚSICA", description: "Planes premium para tus plataformas de música." },
+    "Cuentas Canva": { emoji: "🎨", title: "CUENTAS CANVA", description: "Accede a plantillas y herramientas premium." },
+    "Extras": { emoji: "👽", title: "EXTRAS", description: "Otros servicios y suscripciones." }
+};
+
+const serviceEmojis = {
+    "Netflix Extra (Privado)": "🎬",
+    "Disney Premium": "🌟",
+    "Max Estándar": "📽️",
+    "Max Platino": "💎",
+    "Prime Video Sin Anuncios": "📦",
+    "Paramount": "🎥",
+    "Vix 1 Mes": "📅",
+    "Vix 2 Meses": "🗓️",
+    "Crunchyroll": "🍜",
+    "Claro Video con Canales": "📺",
+    "Viki Rakuten": "🎭",
+    "Duolingo Individual": "📚",
+    "Pornhub": "🔞",
+    "Plex": "📂",
+    "Claro video con Paramount": "🎩",
+    "Claro video con Universal": "♻️",
+    "Netflix": "🍿",
+    "Disney Estándar C/A": "📢",
+    "Prime Sin Anuncios": "📦✨",
+    "Spotify Premium 1 Mes (Renovable)": "🎶",
+    "Spotify Premium 2 Meses (Renovable)": "🎵",
+    "Spotify Premium 3 Meses (Renovable)": "🎤",
+    "YouTube por Invitación (Un Mes)": "📺",
+    "YouTube por Invitación (Dos Meses)": "🎤",
+    "YouTube Familiar Un Mes (A Tus Datos)": "👨‍👩‍👧‍👦",
+    "Mubi": "🎧",
+    "1 Mes": "🎨",
+    "2 Meses": "🖌️",
+    "3 Meses": "🎉",
+    "6 Meses": "📅",
+    "1 Año": "🎁",
+    "Invitación Office (Un mes)": "📄",
+    "Invitación Gemini": "👾",
+    "Invitación Tidal": "💿",
+    "Invitación Deezer": "🎙️",
+    "Invitación Chat GTP": "📼",
+    "Piscard": "🖌️",
+    "Scribd": "✍️",
+    "Brazzer": "🔞"
 };
 
 const handleInactivity = async (m, conn, userId) => {
@@ -147,7 +197,7 @@ const sendWelcomeMessage = async (m, conn) => {
     let welcomeMessage = '';
 
     if (!userChatData.nombre) {
-        welcomeMessage = "¡Hola! soy PayBalance, un asistente virtual y estoy aqui para atenderte. Por favor indicame tu nombre para brindarte los servicios disponibles.";
+        welcomeMessage = "¡Hola! soy LeoNet AI, un asistente virtual y estoy aqui para atenderte. Por favor indicame tu nombre para brindarte los servicios disponibles.";
         await m.reply(welcomeMessage);
         
         await new Promise((resolve, reject) => {
@@ -166,36 +216,11 @@ const sendWelcomeMessage = async (m, conn) => {
         const sections = [{
             title: "✨ Servicios Disponibles ✨",
             rows: categories.map(category => {
-                let buttonTitle = category;
-                let buttonDescription = "Haz clic para ver los servicios.";
-                
-                switch (category) {
-                    case "Perfiles Individuales":
-                        buttonTitle = "👤 PERFILES INDIVIDUALES ";
-                        buttonDescription = "Perfiles de streaming exclusivos para ti.";
-                    break;
-                    case "Cuentas Completas":
-                        buttonTitle = "✅ CUENTAS COMPLETAS";
-                        buttonDescription = "Cuentas con acceso total para compartir.";
-                    break;
-                    case "Streaming Musica":
-                        buttonTitle = "🎶 STREAMING MÚSICA";
-                        buttonDescription = "Planes premium para tus plataformas de música.";
-                        break;
-                    case "Cuentas Canva":
-                        buttonTitle = "🎨 CUENTAS CANVA";
-                        buttonDescription = "Accede a plantillas y herramientas premium.";
-                        break;
-                    case "Extras":
-                        buttonTitle = "👽 EXTRAS";
-                        buttonDescription = "Otros servicios y suscripciones.";
-                        break;
-                }
-                
+                const metadata = categoryMetadata[category] || { emoji: "✨", title: category, description: "Haz clic para ver los servicios." };
                 return {
-                    title: buttonTitle,
-                    description: buttonDescription,
-                    rowId: `category:${category}`
+                    title: `${metadata.emoji} ${metadata.title}`,
+                    description: metadata.description,
+                    rowId: `category:${category}` 
                 };
             })
         }];
@@ -242,48 +267,6 @@ const sendPaymentOptions = async (m, conn) => {
             resolve();
         });
     });
-};
-
-const serviceEmojis = {
-    "Netflix Extra (Privado)": "🎬",
-    "Disney Premium": "🌟",
-    "Max Estándar": "📽️",
-    "Max Platino": "💎",
-    "Prime Video Sin Anuncios": "📦",
-    "Paramount": "🎥",
-    "Vix 1 Mes": "📅",
-    "Vix 2 Meses": "🗓️",
-    "Crunchyroll": "🍜",
-    "Claro Video con Canales": "📺",
-    "Viki Rakuten": "🎭",
-    "Duolingo Individual": "📚",
-    "Pornhub": "🔞",
-    "Plex": "📂",
-    "Claro video con Paramount": "🎩",
-    "Claro video con Universal": "♻️",
-    "Netflix": "🍿",
-    "Disney Estándar C/A": "📢",
-    "Prime Sin Anuncios": "📦✨",
-    "Spotify Premium 1 Mes (Renovable)": "🎶",
-    "Spotify Premium 2 Meses (Renovable)": "🎵",
-    "Spotify Premium 3 Meses (Renovable)": "🎤",
-    "YouTube por Invitación (Un Mes)": "📺",
-    "YouTube por Invitación (Dos Meses)": "🎤",
-    "YouTube Familiar Un Mes (A Tus Datos)": "👨‍👩‍👧‍👦",
-    "Mubi": "🎧",
-    "1 Mes": "🎨",
-    "2 Meses": "🖌️",
-    "3 Meses": "🎉",
-    "6 Meses": "📅",
-    "1 Año": "🎁",
-    "Invitación Office (Un mes)": "📄",
-    "Invitación Gemini": "👾",
-    "Invitación Tidal": "💿",
-    "Invitación Deezer": "🎙️",
-    "Invitación Chat GTP": "📼",
-    "Piscard": "🖌️",
-    "Scribd": "✍️",
-    "Brazzer": "🔞"
 };
 
 export async function handler(m, conn, store) {
@@ -651,35 +634,10 @@ export async function handler(m, conn, store) {
                     const sections = [{
                         title: "✨ Servicios Disponibles ✨",
                         rows: categories.map(category => {
-                            let buttonTitle = category;
-                            let buttonDescription = "Haz clic para ver los servicios.";
-        
-                            switch (category) {
-                                case "Perfiles Individuales":
-                                    buttonTitle = "👤 PERFILES INDIVIDUALES ";
-                                    buttonDescription = "Perfiles de streaming exclusivos para ti.";
-                                break;
-                                case "Cuentas Completas":
-                                    buttonTitle = "✅ CUENTAS COMPLETAS";
-                                    buttonDescription = "Cuentas con acceso total para compartir.";
-                                break;
-                                case "Streaming Musica":
-                                    buttonTitle = "🎶 STREAMING MÚSICA";
-                                    buttonDescription = "Planes premium para tus plataformas de música.";
-                                    break;
-                                case "Cuentas Canva":
-                                    buttonTitle = "🎨 CUENTAS CANVA";
-                                    buttonDescription = "Accede a plantillas y herramientas premium.";
-                                    break;
-                                case "Extras":
-                                    buttonTitle = "👽 EXTRAS";
-                                    buttonDescription = "Otros servicios y suscripciones.";
-                                    break;
-                            }
-        
+                            const metadata = categoryMetadata[category] || { emoji: "✨", title: category, description: "Haz clic para ver los servicios." };
                             return {
-                                title: buttonTitle,
-                                description: buttonDescription,
+                                title: `${metadata.emoji} ${metadata.title}`,
+                                description: metadata.description,
                                 rowId: `category:${category}`
                             };
                         })
@@ -733,35 +691,10 @@ export async function handler(m, conn, store) {
                         const sections = [{
                             title: "✨ Servicios Disponibles ✨",
                             rows: categories.map(category => {
-                                let buttonTitle = category;
-                                let buttonDescription = "Haz clic para ver los servicios.";
-            
-                                switch (category) {
-                                    case "Perfiles Individuales":
-                                        buttonTitle = "👤 PERFILES INDIVIDUALES ";
-                                        buttonDescription = "Perfiles de streaming exclusivos para ti.";
-                                    break;
-                                    case "Cuentas Completas":
-                                        buttonTitle = "✅ CUENTAS COMPLETAS";
-                                        buttonDescription = "Cuentas con acceso total para compartir.";
-                                    break;
-                                    case "Streaming Musica":
-                                        buttonTitle = "🎶 STREAMING MÚSICA";
-                                        buttonDescription = "Planes premium para tus plataformas de música.";
-                                        break;
-                                    case "Cuentas Canva":
-                                        buttonTitle = "🎨 CUENTAS CANVA";
-                                        buttonDescription = "Accede a plantillas y herramientas premium.";
-                                        break;
-                                    case "Extras":
-                                        buttonTitle = "👽 EXTRAS";
-                                        buttonDescription = "Otros servicios y suscripciones.";
-                                        break;
-                                }
-            
+                                const metadata = categoryMetadata[category] || { emoji: "✨", title: category, description: "Haz clic para ver los servicios." };
                                 return {
-                                    title: buttonTitle,
-                                    description: buttonDescription,
+                                    title: `${metadata.emoji} ${metadata.title}`,
+                                    description: metadata.description,
                                     rowId: `category:${category}`
                                 };
                             })
@@ -786,35 +719,10 @@ export async function handler(m, conn, store) {
                     const sections = [{
                         title: "✨ Servicios Disponibles ✨",
                         rows: categories.map(category => {
-                            let buttonTitle = category;
-                            let buttonDescription = "Haz clic para ver los servicios.";
-        
-                            switch (category) {
-                                case "Perfiles Individuales":
-                                    buttonTitle = "👤 PERFILES INDIVIDUALES ";
-                                    buttonDescription = "Perfiles de streaming exclusivos para ti.";
-                                break;
-                                case "Cuentas Completas":
-                                    buttonTitle = "✅ CUENTAS COMPLETAS";
-                                    buttonDescription = "Cuentas con acceso total para compartir.";
-                                break;
-                                case "Streaming Musica":
-                                    buttonTitle = "🎶 STREAMING MÚSICA";
-                                    buttonDescription = "Planes premium para tus plataformas de música.";
-                                    break;
-                                case "Cuentas Canva":
-                                    buttonTitle = "🎨 CUENTAS CANVA";
-                                    buttonDescription = "Accede a plantillas y herramientas premium.";
-                                    break;
-                                case "Extras":
-                                    buttonTitle = "👽 EXTRAS";
-                                    buttonDescription = "Otros servicios y suscripciones.";
-                                    break;
-                            }
-        
+                            const metadata = categoryMetadata[category] || { emoji: "✨", title: category, description: "Haz clic para ver los servicios." };
                             return {
-                                title: buttonTitle,
-                                description: buttonDescription,
+                                title: `${metadata.emoji} ${metadata.title}`,
+                                description: metadata.description,
                                 rowId: `category:${category}`
                             };
                         })
