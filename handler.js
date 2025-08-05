@@ -301,33 +301,47 @@ export async function handler(m, conn, store) {
             }
 
             if (buttonReplyHandled) {
-                if (m.text === '1' || m.text.toLowerCase() === 'he realizado el pago') {
-                    await conn.sendMessage(m.chat, {
-                        text: `✅ *Si ya ha realizado su pago, por favor enviar foto o documento de su pago con el siguiente texto:*\n\n*"Aquí está mi comprobante de pago"* 📸`
-                    });
-                    if (m.sender) {
-                        await new Promise((resolve, reject) => {
-                            global.db.data.users.update({ id: m.sender }, { $set: { chatState: 'awaitingPaymentProof' } }, {}, (err) => {
-                                if (err) {
-                                    return reject(err);
-                                }
-                                resolve();
-                            });
+                try {
+                    // Lógica para botones de la primera lista
+                    if (m.text === '1' || m.text.toLowerCase() === 'he realizado el pago') {
+                        await conn.sendMessage(m.chat, {
+                            text: `✅ *Si ya ha realizado su pago, por favor enviar foto o documento de su pago con el siguiente texto:*\n\n*"Aquí está mi comprobante de pago"* 📸`
                         });
+                        if (m.sender) {
+                            await new Promise((resolve, reject) => {
+                                global.db.data.users.update({ id: m.sender }, { $set: { chatState: 'awaitingPaymentProof' } }, {}, (err) => {
+                                    if (err) {
+                                        return reject(err);
+                                    }
+                                    resolve();
+                                });
+                            });
+                        }
+                        return;
                     }
-                    return;
-                }
-                
-                if (m.text === '.reactivate_chat') {
-                    await sendWelcomeMessage(m, conn);
-                    return;
-                }
+                    
+                    if (m.text === '.reactivate_chat') {
+                        await sendWelcomeMessage(m, conn);
+                        return;
+                    }
 
-                if (await handleListButtonResponse(m, conn)) {
-                    return;
-                }
-                
-                if (await handlePaymentProofButton(m, conn) || await manejarRespuestaPago(m, conn)) {
+                    // Lógica para botones de lista (FAQs)
+                    if (m.text.startsWith('!getfaq')) {
+                        if (await handleListButtonResponse(m, conn)) {
+                            return;
+                        }
+                    }
+
+                    // Lógica para el botón de la segunda lista (comprobantes, etc.)
+                    if (m.text.startsWith('assign_')) {
+                        if (await handlePaymentProofButton(m, conn) || await manejarRespuestaPago(m, conn)) {
+                            return;
+                        }
+                    }
+
+                } catch (e) {
+                    console.error('Error al manejar un botón:', e);
+                    m.reply('Lo siento, ha ocurrido un error al procesar la acción del botón. Por favor, inténtalo de nuevo.');
                     return;
                 }
             }
@@ -349,7 +363,7 @@ export async function handler(m, conn, store) {
             try {
                 if (fs.existsSync(paymentsFilePath)) {
                     const clientsData = JSON.parse(fs.readFileSync(paymentsFilePath, 'utf8'));
-                    const formattedNumber = `+${m.sender.split('@')[0]}`;
+                    const formattedNumber = normalizarNumero(`+${m.sender.split('@')[0]}`);
                     clientInfo = clientsData[formattedNumber];
                 }
             } catch (e) {
