@@ -3,7 +3,7 @@
   "mensajeBienvenida": "¡Hola {user}! Soy PayBalance, un asistente virtual. ¿En qué puedo ayudarte hoy?",
   "mensajeDespedida": "¡Hasta pronto! Esperamos verte de nuevo.",
   "services": {
-    "PERFILES STREAMING": [
+    "👤 PERFILES STREAMING": [
       {
         "id": "netflix_extra",
         "pregunta": "Netflix Extra (Privado)",
@@ -101,7 +101,7 @@
         "descripcion": "Claro Video + Universal te ofrece el catálogo completo de Claro Video más las producciones de Universal+. Accede a series, películas y programas exclusivos de Universal en una sola suscripción. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
       }
     ],
-    "CUENTAS COMPLETAS": [
+    "✅ CUENTAS COMPLETAS": [
       {
         "id": "netflix",
         "pregunta": "Netflix",
@@ -193,7 +193,7 @@
         "descripcion": "Una cuenta completa de Plex Pass que te permite organizar tu propia biblioteca y disfrutar de TV en vivo con DVR, saltar anuncios y descargar contenido en todos tus dispositivos. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
       }
     ],
-    "STREAMING MÚSICA": [
+    "🎶 STREAMING MÚSICA": [
       {
         "id": "spotify_1",
         "pregunta": "Spotify Premium 1 Mes (Renovable)",
@@ -237,7 +237,7 @@
         "descripcion": "MUBI es un servicio de streaming de cine de autor, clásico y contemporáneo de todo el mundo. Cada día se añade una nueva película y se puede ver sin conexión. Es ideal para amantes del cine de calidad. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
       }
     ],
-    "CUENTAS CANVA": [
+    "🎨 CUENTAS CANVA": [
       {
         "id": "canva_1",
         "pregunta": "1 Mes",
@@ -269,7 +269,7 @@
         "descripcion": "Canva Pro te permite crear diseños profesionales con herramientas avanzadas como el kit de marca, el redimensionamiento mágico y el eliminador de fondos. Disfruta de millones de plantillas y fotos de stock. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
       }
     ],
-    "EXTRAS": [
+    "👽 EXTRAS": [
       {
         "id": "office_1",
         "pregunta": "Invitación Office (Un mes)",
