@@ -446,7 +446,7 @@ export async function handler(m, conn, store) {
         }
 
         if (m.isCmd) {
-            if (m.isGroup) {
+            if (!m.isGroup) {
                 const commandText = m.text.slice(m.text.startsWith(m.prefix) ? m.prefix.length + m.command.length : m.command.length).trim();
                 switch (m.command) {
                     case 'registrarpago':
@@ -572,7 +572,7 @@ export async function handler(m, conn, store) {
                         break;
                 }
             } else {
-                m.reply('❌ Lo siento, los comandos solo pueden ser usados en grupos.');
+                m.reply('❌ Lo siento, los comandos no pueden ser usados en grupos.');
             }
             return;
         }
