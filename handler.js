@@ -129,7 +129,6 @@ const handleInactivity = async (m, conn, userId) => {
         delete inactivityTimers[userId];
         
     } catch (e) {
-        console.error('Error al enviar mensaje de inactividad:', e);
     }
 };
 
@@ -137,7 +136,6 @@ const handleGoodbye = async (m, conn, userId) => {
     try {
         await handleInactivity(m, conn, userId);
     } catch (e) {
-        console.error('Error al manejar la despedida:', e);
     }
 };
 
@@ -218,9 +216,6 @@ const sendPaymentOptions = async (m, conn) => {
 };
 
 export async function handler(m, conn, store) {
-    // LOG: Se recibió un mensaje
-    console.log(chalk.yellow(`[📥] Mensaje recibido de ${m.sender}`));
-
     if (!m) return;
     if (m.key.fromMe) return;
 
@@ -259,25 +254,11 @@ export async function handler(m, conn, store) {
     const actionText = m.fromMe ? 'Mensaje Enviado' : (commandForLog ? `Comando: ${commandForLog}` : 'Mensaje');
     const messageType = Object.keys(m.message || {})[0] || 'desconocido';
 
-    console.log(
-        chalk.hex('#FF8C00')(`╭━━━━━━━━━━━━━━𖡼`) + '\n' +
-        chalk.white(`┃ ❖ Bot: ${chalk.cyan(botIdentifier)} ~ ${chalk.cyan(conn.user?.name || 'Bot')}`) + '\n' +
-        chalk.white(`┃ ❖ Horario: ${chalk.greenBright(new Date().toLocaleTimeString())}`) + '\n' +
-        chalk.white(`┃ ❖ Acción: ${chalk.yellow(actionText)}`) + '\n' +
-        chalk.white(`┃ ❖ Usuario: ${chalk.blueBright(senderNumber)} ~ ${chalk.blueBright(senderName)}`) + '\n' +
-        chalk.white(`┃ ❖ ${groupLine}`) + '\n' +
-        chalk.white(`┃ ❖ Tipo de mensaje: [${m.fromMe ? 'Enviado' : 'Recibido'}] ${chalk.red(messageType)}`) + '\n' +
-        chalk.hex('#FF8C00')(`╰━━━━━━━━━━━━━━𖡼`) + '\n' +
-        chalk.white(`${rawText.trim() || ' (Sin texto legible) '}`)
-    );
-
     try {
         if (m.key.id.startsWith('BAE5') && m.key.id.length === 16) return;
         if (m.key.remoteJid === 'status@broadcast') return;
 
         m = smsg(conn, m);
-        // LOG: Mensaje smsg procesado
-        console.log(chalk.green('[✅] Mensaje procesado por smsg.'));
 
         const ownerJid = `${BOT_OWNER_NUMBER}@s.whatsapp.net`;
         m.isOwner = m.isGroup ? m.key.participant === ownerJid : m.sender === ownerJid;
@@ -298,26 +279,17 @@ export async function handler(m, conn, store) {
             if (m.message.buttonsResponseMessage && m.message.buttonsResponseMessage.selectedButtonId) {
                 m.text = m.message.buttonsResponseMessage.selectedButtonId;
                 buttonReplyHandled = true;
-                // LOG: Se detectó una respuesta de botón simple
-                console.log(chalk.blue(`[💬] Detectada respuesta de botón simple. ID: ${m.text}`));
             } else if (m.message.templateButtonReplyMessage && m.message.templateButtonReplyMessage.selectedId) {
                 m.text = m.message.templateButtonReplyMessage.selectedId;
                 buttonReplyHandled = true;
-                // LOG: Se detectó una respuesta de botón de plantilla
-                console.log(chalk.blue(`[💬] Detectada respuesta de botón de plantilla. ID: ${m.text}`));
             } else if (m.message.listResponseMessage && m.message.listResponseMessage.singleSelectReply) {
                 m.text = m.message.listResponseMessage.singleSelectReply.selectedRowId;
                 buttonReplyHandled = true;
-                // LOG: Se detectó una respuesta de botón de lista
-                console.log(chalk.blue(`[💬] Detectada respuesta de botón de lista. ID: ${m.text}`));
             }
 
             if (buttonReplyHandled) {
                 try {
-                    // Lógica para botones de la primera lista
                     if (m.text === '1' || m.text.toLowerCase() === 'he realizado el pago') {
-                        // LOG: Manejando botón 'He realizado el pago'
-                        console.log(chalk.green('[✔️] Manejando la respuesta del botón "He realizado el pago".'));
                         await conn.sendMessage(m.chat, {
                             text: `✅ *Si ya ha realizado su pago, por favor enviar foto o documento de su pago con el siguiente texto:*\n\n*"Aquí está mi comprobante de pago"* 📸`
                         });
@@ -335,48 +307,30 @@ export async function handler(m, conn, store) {
                     }
                     
                     if (m.text === '.reactivate_chat') {
-                        // LOG: Manejando botón 'Reactivar Chat'
-                        console.log(chalk.green('[✔️] Manejando la respuesta del botón ".reactivate_chat".'));
                         await sendWelcomeMessage(m, conn);
                         return;
                     }
 
-                    // Lógica para botones de lista (FAQs)
                     if (m.text.startsWith('!getfaq')) {
-                        // LOG: Llamando a handleListButtonResponse para un botón de FAQ
-                        console.log(chalk.blue('[🔍] Llamando a handleListButtonResponse...'));
                         if (await handleListButtonResponse(m, conn)) {
-                            console.log(chalk.green('[✔️] Botón de FAQ manejado.'));
                             return;
                         }
                     }
 
-                    // Lógica para el botón de la segunda lista (comprobantes, etc.)
                     if (m.text.startsWith('assign_')) {
-                        // LOG: Llamando a las funciones de manejo de comprobantes
-                        console.log(chalk.blue('[🔍] Llamando a handlePaymentProofButton o manejarRespuestaPago...'));
                         if (await handlePaymentProofButton(m, conn) || await manejarRespuestaPago(m, conn)) {
-                            console.log(chalk.green('[✔️] Botón de comprobante/pago manejado.'));
                             return;
                         }
                     }
-                    // LOG: Ninguna lógica de botón predefinida coincidió
-                    console.log(chalk.gray('[⚠️] Ninguna lógica de botón predefinida coincidió.'));
 
                 } catch (e) {
-                    // LOG: Error específico al manejar un botón
-                    console.error(chalk.red(`[❌] Error al manejar un botón: ${e.message}`));
-                    console.error(chalk.red('Stack Trace:', e.stack)); // Log del stack trace del error
                     m.reply('Lo siento, ha ocurrido un error al procesar la acción del botón. Por favor, inténtalo de nuevo.');
                     return;
                 }
             }
         }
         
-        // Manejar las fotos con el mensaje específico
         if (m.message?.imageMessage && !m.message?.imageMessage?.caption) {
-            // LOG: Imagen recibida sin texto
-            console.log(chalk.gray('[🖼️] Imagen recibida sin texto, enviando instrucción.'));
             await m.reply("Si estas intentando mandar un comprobante de pago por favor envialo junto con el texto \"Aquí esta mi comprobante de pago\"");
             return;
         }
@@ -385,8 +339,6 @@ export async function handler(m, conn, store) {
         const esDocumentoConComprobante = m.message?.documentMessage?.caption && isPaymentProof(m.message.documentMessage.caption);
         
         if (esImagenConComprobante || esDocumentoConComprobante) {
-            // LOG: Comprobante de pago detectado
-            console.log(chalk.green('[✔️] Comprobante de pago detectado (imagen o documento).'));
             const paymentsFilePath = path.join(__dirname, 'src', 'pagos.json');
             let clientInfo = null;
 
@@ -402,7 +354,6 @@ export async function handler(m, conn, store) {
             
             const handledMedia = await handleIncomingMedia(m, conn, clientInfo);
             if (handledMedia) {
-                console.log(chalk.green('[✔️] Medios manejados por handleIncomingMedia.'));
                 return;
             }
         }
@@ -413,8 +364,6 @@ export async function handler(m, conn, store) {
         }
 
         if (m.isCmd) {
-            // LOG: Mensaje es un comando
-            console.log(chalk.yellow(`[⚙️] Comando detectado: ${m.command}`));
             if (m.isGroup) {
                 const commandText = m.text.slice(m.text.startsWith(m.prefix) ? m.prefix.length + m.command.length : m.command.length).trim();
                 switch (m.command) {
@@ -547,8 +496,6 @@ export async function handler(m, conn, store) {
         }
 
         if (!m.isGroup) {
-            // LOG: Mensaje en chat privado
-            console.log(chalk.yellow('[👤] Mensaje en chat privado.'));
             const currentConfigData = loadConfigBot();
             const services = currentConfigData.services || {};
             const chatData = loadChatData();
@@ -566,18 +513,13 @@ export async function handler(m, conn, store) {
             });
 
             const chatState = user?.chatState || 'initial';
-            // LOG: Estado del chat del usuario
-            console.log(chalk.magenta(`[🔍] Estado del chat del usuario ${m.sender}: ${chatState}`));
             
             if (isPaymentProof(messageTextLower) && (m.message?.imageMessage || m.message?.documentMessage)) {
                 return;
             }
 
-            // Manejar respuestas de botones de lista de categorías
             const selectedRowId = m.message?.listResponseMessage?.singleSelectReply?.selectedRowId;
             if (selectedRowId && selectedRowId.startsWith('category:')) {
-                // LOG: Botón de categoría de servicio detectado
-                console.log(chalk.green(`[✔️] Botón de categoría detectado: ${selectedRowId}`));
                 const categoryName = selectedRowId.replace('category:', '').trim();
                 const categoryServices = services[categoryName];
 
@@ -606,8 +548,6 @@ export async function handler(m, conn, store) {
             }
             
             if (chatState === 'initial') {
-                // LOG: Estado inicial del chat
-                console.log(chalk.blue('[➡️] Estado del chat: initial.'));
                 const chatData = loadChatData();
                 const formattedSender = normalizarNumero(`+${m.sender.split('@')[0]}`);
                 const userChatData = chatData[formattedSender] || {};
@@ -646,8 +586,6 @@ export async function handler(m, conn, store) {
                     return;
                 }
             } else if (chatState === 'awaitingName') {
-                // LOG: Estado esperando nombre
-                console.log(chalk.blue('[➡️] Estado del chat: awaitingName.'));
                 if (messageTextLower.length > 0) {
                     let name = '';
                     const soyMatch = messageTextLower.match(/^(?:soy|me llamo)\s+(.*?)(?:\s+y|\s+quiero|$)/);
@@ -699,14 +637,8 @@ export async function handler(m, conn, store) {
                     }
                 }
             } else if (chatState === 'active') {
-                // LOG: Estado activo del chat
-                console.log(chalk.blue('[➡️] Estado del chat: active.'));
-
-                // Comandos para mostrar el menú principal
                 const command = m.text ? m.text.toLowerCase().trim() : '';
                 if (command === '!menu' || command === 'ayuda' || command === 'servicios') {
-                    // LOG: Usuario pidió el menú principal
-                    console.log(chalk.green('[✔️] El usuario solicitó el menú principal.'));
                     const categories = Object.keys(currentConfigData.services);
                     const sections = [{
                         title: "Selecciona una categoría",
@@ -731,13 +663,10 @@ export async function handler(m, conn, store) {
                 const isGoodbye = goodbyeKeywords.some(keyword => messageTextLower.includes(keyword));
 
                 if (isGoodbye) {
-                    // LOG: El usuario se despidió
-                    console.log(chalk.green('[✔️] El usuario se despidió.'));
                     await handleGoodbye(m, conn, m.sender);
                     return;
                 }
                 
-                // Ya no se busca por texto, sino por el ID del botón de la lista
                 if (m.text.startsWith('!getfaq')) {
                      await getfaqHandler(m, { conn, text: m.text.replace('!getfaq ', ''), command: 'getfaq', usedPrefix: m.prefix });
                      return;
@@ -751,8 +680,6 @@ export async function handler(m, conn, store) {
                 const isPaymentInfoIntent = paymentInfoKeywords.some(keyword => messageTextLower.includes(keyword));
                 
                 if (isPaymentInfoIntent) {
-                    // LOG: El usuario preguntó por información de pago
-                    console.log(chalk.green('[✔️] El usuario preguntó por información de pago.'));
                     if (clientInfo) {
                         let replyText = `¡Hola, ${clientInfo.nombre}! Aquí está la información que tengo sobre tu cuenta:\n\n`;
                         
@@ -786,8 +713,6 @@ export async function handler(m, conn, store) {
                 const paymentKeywords = ['realizar un pago', 'quiero pagar', 'comprobante', 'pagar', 'pago', 'transferencia', 'oxxo', 'metodo de pago'];
                 const isPaymentIntent = paymentKeywords.some(keyword => messageTextLower.includes(keyword));
                 if (isPaymentIntent) {
-                    // LOG: El usuario quiere pagar
-                    console.log(chalk.green('[✔️] El usuario quiere pagar.'));
                     const paymentMessage = `TRANSFERENCIAS Y DEPÓSITOS OXXO\n\n- NUMERO DE TARJETA: 4741742940228292\n\nBANCO: Banco Regional de Monterrey, S.A (BANREGIO)\n\nCONCEPTO: PAGO\n\nIMPORTANTE: FAVOR DE MANDAR FOTO DEL COMPROBANTE\n\nADVERTENCIA: SIEMPRE PREGUNTAR MÉTODOS DE PAGO, NO ME HAGO RESPONSABLE SI MANDAN A OTRA BANCA QUE NO ES.`;
 
                     await m.reply(paymentMessage);
@@ -798,15 +723,11 @@ export async function handler(m, conn, store) {
                 const isOwnerContactIntent = ownerKeywords.some(keyword => messageTextLower.includes(keyword));
 
                 if (isOwnerContactIntent) {
-                    // LOG: El usuario quiere contactar al dueño
-                    console.log(chalk.green('[✔️] El usuario quiere contactar al dueño.'));
                     await notificarOwnerHandler(m, { conn });
                     return;
                 }
                 
                 try {
-                    // LOG: Procesando con IA genérica
-                    console.log(chalk.magenta('[🤖] El mensaje no coincidió con ninguna lógica, usando IA genérica.'));
                     const paymentsData = JSON.parse(fs.readFileSync(paymentsFilePath, 'utf8'));
                     const formattedSender = normalizarNumero(`+${m.sender.split('@')[0]}`);
                     const clientInfoPrompt = !!paymentsData[formattedSender] ?
@@ -820,7 +741,7 @@ export async function handler(m, conn, store) {
                         
                     const personaPrompt = `Eres LeoNet AI, un asistente virtual profesional para la atención al cliente de Leonardo. Tu objetivo es ayudar a los clientes con consultas sobre pagos y servicios. No uses frases como "Estoy aquí para ayudarte", "Como tu asistente...", "Como un asistente virtual" o similares. Ve directo al punto y sé conciso.
                     
-                    El nombre del usuario es ${userChatData.nombre || 'el usuario'} y el historial de chat con datos previos es: ${JSON.JSON.stringify(userChatData)}.
+                    El nombre del usuario es ${userChatData.nombre || 'el usuario'} y el historial de chat con datos previos es: ${JSON.stringify(userChatData)}.
                     
                     Instrucciones:
                     - Responde de forma concisa, útil y profesional.
@@ -865,9 +786,6 @@ export async function handler(m, conn, store) {
             }
         }
     } catch (e) {
-        // LOG: Error en el bloque catch principal
-        console.error(chalk.red(`[❌] Error en el handler principal: ${e.message}`));
-        console.error(chalk.red('Stack Trace completo:', e.stack));
         m.reply('Lo siento, ha ocurrido un error al procesar tu solicitud.');
     }
 }
@@ -875,6 +793,5 @@ export async function handler(m, conn, store) {
 let file = fileURLToPath(import.meta.url);
 watchFile(file, () => {
     unwatchFile(file);
-    console.log(chalk.redBright("Se actualizó 'handler.js', recargando..."));
     import(`${file}?update=${Date.now()}`);
 });
