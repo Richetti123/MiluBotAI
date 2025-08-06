@@ -93,6 +93,14 @@ const saveChatData = (data) => {
     fs.writeFileSync(chatDataPath, JSON.stringify(data, null, 2), 'utf8');
 };
 
+const countryPaymentMethods = {
+    'méxico': `\n\nTRANSFERENCIAS Y DEPÓSITOS OXXO\n\n- NUMERO DE TARJETA: 4741742940228292\n\nBANCO: Banco Regional de Monterrey, S.A (BANREGIO)\n\nCONCEPTO: PAGO\n\nIMPORTANTE: FAVOR DE MANDAR FOTO DEL COMPROBANTE\n\nADVERTENCIA: SIEMPRE PREGUNTAR MÉTODOS DE PAGO, NO ME HAGO RESPONSABLE SI MANDAN A OTRA BANCA QUE NO ES.\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
+    'mexico': `\n\nTRANSFERENCIAS Y DEPÓSITOS OXXO\n\n- NUMERO DE TARJETA: 4741742940228292\n\nBANCO: Banco Regional de Monterrey, S.A (BANREGIO)\n\nCONCEPTO: PAGO\n\nIMPORTANTE: FAVOR DE MANDAR FOTO DEL COMPROBANTE\n\nADVERTENCIA: SIEMPRE PREGUNTAR MÉTODOS DE PAGO, NO ME HAGO RESPONSABLE SI MANDAN A OTRA BANCA QUE NO ES.\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago`,
+    'oxxo': `\n\nTRANSFERENCIAS Y DEPÓSITOS OXXO\n\n- NUMERO DE TARJETA: 4741742940228292\n\nBANCO: Banco Regional de Monterrey, S.A (BANREGIO)\n\nCONCEPTO: PAGO\n\nIMPORTANTE: FAVOR DE MANDAR FOTO DEL COMPROBANTE\n\nADVERTENCIA: SIEMPRE PREGUNTAR MÉTODOS DE PAGO, NO ME HAGO RESPONSABLE SI MANDAN A OTRA BANCA QUE NO ES.\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago`,
+    'transferencia': `\n\nTRANSFERENCIAS Y DEPÓSITOS OXXO\n\n- NUMERO DE TARJETA: 4741742940228292\n\nBANCO: Banco Regional de Monterrey, S.A (BANREGIO)\n\nCONCEPTO: PAGO\n\nIMPORTANTE: FAVOR DE MANDAR FOTO DEL COMPROBANTE\n\nADVERTENCIA: SIEMPRE PREGUNTAR MÉTODOS DE PAGO, NO ME HAGO RESPONSABLE SI MANDAN A OTRA BANCA QUE NO ES.\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago`,
+    'tarjeta': `\n\nTRANSFERENCIAS Y DEPÓSITOS OXXO\n\n- NUMERO DE TARJETA: 4741742940228292\n\nBANCO: Banco Regional de Monterrey, S.A (BANREGIO)\n\nCONCEPTO: PAGO\n\nIMPORTANTE: FAVOR DE MANDAR FOTO DEL COMPROBANTE\n\nADVERTENCIA: SIEMPRE PREGUNTAR MÉTODOS DE PAGO, NO ME HAGO RESPONSABLE SI MANDAN A OTRA BANCA QUE NO ES.\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago`
+};
+
 const handleInactivity = async (m, conn, userId) => {
     try {
         const currentConfigData = loadConfigBot();
@@ -412,7 +420,7 @@ export async function handler(m, conn, store) {
             }
         }
         
-        if (m.message?.imageMessage && !m.message?.imageMessage?.caption) {
+        if (!m.isGroup && m.message?.imageMessage && !m.message?.imageMessage?.caption) {
             await m.reply("Si estas intentando mandar un comprobante de pago por favor envialo junto con el texto \"Aquí esta mi comprobante de pago\"");
             return;
         }
@@ -842,6 +850,22 @@ export async function handler(m, conn, store) {
                      return;
                 }
 
+                const paises = Object.keys(countryPaymentMethods);
+                const paisEncontrado = paises.find(p => messageTextLower.includes(p));
+
+                if (paisEncontrado) {
+                    const metodoPago = countryPaymentMethods[paisEncontrado];
+                    if (metodoPago && metodoPago.length > 0) {
+                        await m.reply(`¡Claro! Aquí tienes el método de pago para ${paisEncontrado}:` + metodoPago);
+                    } else {
+                        const noMethodMessage = `Lo siento, aún no tenemos un método de pago configurado para ${paisEncontrado}. Un moderador se pondrá en contacto contigo lo antes posible para ayudarte.`;
+                        await m.reply(noMethodMessage);
+                        const ownerNotificationMessage = `El usuario ${m.pushName} (+${m.sender ? m.sender.split('@')[0] : 'N/A'}) ha preguntado por un método de pago en ${paisEncontrado}, pero no está configurado.`;
+                        await notificarOwnerHandler(m, { conn, text: ownerNotificationMessage, command: 'notificarowner', usedPrefix: m.prefix });
+                    }
+                    return;
+                }
+
                 const paymentsData = JSON.parse(fs.readFileSync(paymentsFilePath, 'utf8'));
                 const formattedSender = normalizarNumero(`+${m.sender.split('@')[0]}`);
                 const clientInfo = paymentsData[formattedSender];
@@ -879,15 +903,6 @@ export async function handler(m, conn, store) {
                         return;
                     }
                 }
-
-                const paymentMethodKeywords = ['oxxo', 'transferencia', 'transferir', 'metodo', 'banco'];
-                const isPaymentMethodIntent = paymentMethodKeywords.some(keyword => messageTextLower.includes(keyword));
-                
-                if (isPaymentMethodIntent) {
-                    const paymentMessage = `TRANSFERENCIAS Y DEPÓSITOS OXXO\n\n- NUMERO DE TARJETA: 4741742940228292\n\nBANCO: Banco Regional de Monterrey, S.A (BANREGIO)\nCONCEPTO: PAGO\n\nIMPORTANTE: FAVOR DE MANDAR FOTO DEL COMPROBANTE\nADVERTENCIA: SIEMPRE PREGUNTAR MÉTODOS DE PAGO, NO ME HAGO RESPONSABLE SI MANDAN A OTRA BANCA QUE NO ES.\n\n`;
-                    await m.reply(paymentMessage);
-                    return;
-                }
                 
                 const paymentProofKeywords = ['realizar un pago', 'quiero pagar', 'comprobante', 'pagar', 'pago'];
                 const isPaymentProofIntent = paymentProofKeywords.some(keyword => messageTextLower.includes(keyword));
@@ -916,7 +931,13 @@ export async function handler(m, conn, store) {
                         `Datos previos de la conversación con este usuario: ${JSON.stringify(userChatData)}.` :
                         `No hay datos previos de conversación con este usuario.`;
                     
-                    const paymentMethods = `TRANSFERENCIAS Y DEPÓSITOS OXXO\n\n- NUMERO DE TARJETA: 4741742940228292\n\nBANCO: Banco Regional de Monterrey, S.A (BANREGIO)\n\nCONCEPTO: PAGO\n\nIMPORTANTE: FAVOR DE MANDAR FOTO DEL COMPROBANTE\n\nADVERTENCIA: SIEMPRE PREGUNTAR MÉTODOS DE PAGO, NO ME HAGO RESPONSABLE SI MANDAN A OTRA BANCA QUE NO ES.`;
+                   const paymentMethods = {
+                        'oxxo': `\n\nTRANSFERENCIAS Y DEPÓSITOS OXXO\n\n- NUMERO DE TARJETA: 4741742940228292\n\nBANCO: Banco Regional de Monterrey, S.A (BANREGIO)\n\nCONCEPTO: PAGO\n\nIMPORTANTE: FAVOR DE MANDAR FOTO DEL COMPROBANTE\n\nADVERTENCIA: SIEMPRE PREGUNTAR MÉTODOS DE PAGO, NO ME HAGO RESPONSABLE SI MANDAN A OTRA BANCA QUE NO ES.\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago`,
+                        'transferencia': `\n\nTRANSFERENCIAS Y DEPÓSITOS OXXO\n\n- NUMERO DE TARJETA: 4741742940228292\n\nBANCO: Banco Regional de Monterrey, S.A (BANREGIO)\n\nCONCEPTO: PAGO\n\nIMPORTANTE: FAVOR DE MANDAR FOTO DEL COMPROBANTE\n\nADVERTENCIA: SIEMPRE PREGUNTAR MÉTODOS DE PAGO, NO ME HAGO RESPONSABLE SI MANDAN A OTRA BANCA QUE NO ES.\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago`,
+                        'tarjeta': `\n\nTRANSFERENCIAS Y DEPÓSITOS OXXO\n\n- NUMERO DE TARJETA: 4741742940228292\n\nBANCO: Banco Regional de Monterrey, S.A (BANREGIO)\n\nCONCEPTO: PAGO\n\nIMPORTANTE: FAVOR DE MANDAR FOTO DEL COMPROBANTE\n\nADVERTENCIA: SIEMPRE PREGUNTAR MÉTODOS DE PAGO, NO ME HAGO RESPONSABLE SI MANDAN A OTRA BANCA QUE NO ES.\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago`,
+                        'mexico': `\n\nTRANSFERENCIAS Y DEPÓSITOS OXXO\n\n- NUMERO DE TARJETA: 4741742940228292\n\nBANCO: Banco Regional de Monterrey, S.A (BANREGIO)\n\nCONCEPTO: PAGO\n\nIMPORTANTE: FAVOR DE MANDAR FOTO DEL COMPROBANTE\n\nADVERTENCIA: SIEMPRE PREGUNTAR MÉTODOS DE PAGO, NO ME HAGO RESPONSABLE SI MANDAN A OTRA BANCA QUE NO ES.\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago`,
+                        'méxico': `\n\nTRANSFERENCIAS Y DEPÓSITOS OXXO\n\n- NUMERO DE TARJETA: 4741742940228292\n\nBANCO: Banco Regional de Monterrey, S.A (BANREGIO)\n\nCONCEPTO: PAGO\n\nIMPORTANTE: FAVOR DE MANDAR FOTO DEL COMPROBANTE\n\nADVERTENCIA: SIEMPRE PREGUNTAR MÉTODOS DE PAGO, NO ME HAGO RESPONSABLE SI MANDAN A OTRA BANCA QUE NO ES.\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago`,
+                    };
                         
                     const personaPrompt = `Eres LeoNet AI, un asistente virtual profesional para la atención al cliente de Leonardo. Tu objetivo es ayudar a los clientes con consultas sobre pagos y servicios. No uses frases como "Estoy aquí para ayudarte", "Como tu asistente...", "Como un asistente virtual" o similares. Ve directo al punto y sé conciso.
                     
