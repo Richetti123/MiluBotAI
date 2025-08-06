@@ -48,7 +48,7 @@ const normalizarNumero = (numero) => {
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const BOT_OWNER_NUMBER = '5219541111246';
+const BOT_OWNER_NUMBER = '5217731161701';
 const INACTIVITY_TIMEOUT_MS = 20 * 60 * 1000;
 const RESET_INTERVAL_MS = 12 * 60 * 60 * 1000;
 
