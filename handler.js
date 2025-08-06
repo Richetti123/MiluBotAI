@@ -613,11 +613,10 @@ export async function handler(m, conn, store) {
                         title: `Catálogo de ${categoryName}`,
                         rows: categoryServices.map(service => {
                             const emoji = serviceEmojis[service.pregunta] || '⭐';
-                            // Añadir stock a la descripción
                             const stockInfo = service.stock !== undefined ? ` | Stock: ${service.stock}` : '';
                             return {
                                 title: `${emoji} ${service.pregunta}`,
-                                description: `💰 Precio: ${service.precio}${stockInfo}`, // Aquí se añadió el stock
+                                description: `💰 Precio: ${service.precio} | 🔢 Stock: ${stockInfo}`, 
                                 rowId: `!getfaq ${service.id}`
                             };
                         })
