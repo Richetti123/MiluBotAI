@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-const BOT_OWNER_JID = '5219541111246@s.whatsapp.net';
+const BOT_OWNER_JID = '5217731161701@s.whatsapp.net';
 const chatDataPath = path.join(path.resolve(), 'src', 'chat_data.json');
 
 const loadChatData = () => {
