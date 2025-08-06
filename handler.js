@@ -34,6 +34,7 @@ import { handler as comprobantePagoHandler } from './plugins/comprobantepago.js'
 import { handler as updateHandler } from './plugins/update.js';
 import { handler as subirComprobanteHandler } from './plugins/subircomprobante.js';
 import { handleListButtonResponse } from './lib/listbuttons.js';
+import { handler as editarstockHandler } from './plugins/editarstock.js';
 
 const normalizarNumero = (numero) => {
     if (!numero) return numero;
@@ -91,14 +92,6 @@ const loadChatData = () => {
 
 const saveChatData = (data) => {
     fs.writeFileSync(chatDataPath, JSON.stringify(data, null, 2), 'utf8');
-};
-
-const countryPaymentMethods = {
-    'méxico': `\n\nPara pagar desde México usa:\n\n*NUMERO DE TARJETA*: 4741742940228292\n*NOMBRE*: Gloria Maria\n*BANCO*: Banco Regional de Monterrey\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
-    'mexico': `\n\nPara pagar desde Mexico usa:\n\n*NUMERO DE TARJETA*: 4741742940228292\n*NOMBRE*: Gloria Maria\n*BANCO*: Banco Regional de Monterrey\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
-    'oxxo': `\n\nPara pagar desde oxxo usa:\n\n*NUMERO DE TARJETA*: 4741742940228292\n*NOMBRE*: Gloria Maria\n*BANCO*: Banco Regional de Monterrey\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
-    'transferencia': `\n\nPara pagar con transferencia usa:\n\n*NUMERO DE TARJETA*: 4741742940228292\n*NOMBRE*: Gloria Maria\n*BANCO*: Banco Regional de Monterrey\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
-    'tarjeta': `\n\nPara pagar con tarjeta usa:\n\n*NUMERO DE TARJETA*: 4741742940228292\n*NOMBRE*: Gloria Maria\n*BANCO*: Banco Regional de Monterrey\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`
 };
 
 const handleInactivity = async (m, conn, userId) => {
@@ -298,41 +291,6 @@ export async function handler(m, conn, store) {
     if (!m) return;
     if (m.key.fromMe) return;
 
-     if (!hasResetOnStartup) {
-         const allUsers = await new Promise((resolve, reject) => {
-             global.db.data.users.find({}, (err, docs) => {
-                if (err) return reject(err);
-                 resolve(docs);
-             });
-         });
-         if (allUsers.length > 0) {
-             await new Promise((resolve, reject) => {
-                 global.db.data.users.update({}, { $set: { chatState: 'initial' } }, { multi: true }, (err, numReplaced) => {
-                     if (err) return reject(err);
-                     resolve();
-                 });
-             });
-         }
-         hasResetOnStartup = true;
-         lastResetTime = Date.now();
-     } else if (Date.now() - lastResetTime > RESET_INTERVAL_MS) {
-         const allUsers = await new Promise((resolve, reject) => {
-             global.db.data.users.find({}, (err, docs) => {
-                 if (err) return reject(err);
-                 resolve(docs);
-             });
-         });
-         if (allUsers.length > 0) {
-             await new Promise((resolve, reject) => {
-                 global.db.data.users.update({}, { $set: { chatState: 'initial' } }, { multi: true }, (err, numReplaced) => {
-                     if (err) return reject(err);
-                     resolve();
-                 });
-             });
-         }
-         lastResetTime = Date.now();
-     }
-
     const isGroup = m.key.remoteJid?.endsWith('@g.us');
     
     const botJid = conn?.user?.id || conn?.user?.jid || '';
@@ -455,7 +413,7 @@ export async function handler(m, conn, store) {
             }
         }
         
-        if (!m.isGroup && m.message?.imageMessage && !m.message?.imageMessage?.caption) {
+        if (m.message?.imageMessage && !m.message?.imageMessage?.caption) {
             await m.reply("Si estas intentando mandar un comprobante de pago por favor envialo junto con el texto \"Aquí esta mi comprobante de pago\"");
             return;
         }
@@ -598,7 +556,7 @@ export async function handler(m, conn, store) {
                         break;
                     case 'consulta':
                         if (!m.isOwner) return m.reply(`❌ Solo el propietario puede usar este comando.`);
-                        await consultaHandler(m, { conn, text: commandText, command: m.command, usedPrefix: m.prefix, isOwner: m.isOwner });
+                        // Aquí se debería llamar a una función que maneje la consulta
                         break;
                     case 'update':
                     case 'actualizar':
@@ -609,6 +567,10 @@ export async function handler(m, conn, store) {
                     case 'subircomprobante':
                         if (!m.isOwner) return m.reply(`❌ Solo el propietario puede usar este comando.`);
                         await subirComprobanteHandler(m, { conn, text: commandText, command: m.command, usedPrefix: m.prefix, isOwner: m.isOwner });
+                        break;
+                    case 'editarstock':
+                        // No necesitas la verificación de isOwner aquí, ya está en editarstockHandler
+                        await editarstockHandler(m, { conn, text: commandText, command: m.command, usedPrefix: m.prefix, isOwner: m.isOwner });
                         break;
                     default:
                         m.reply('❌ Comando no reconocido. Escribe .ayuda para ver la lista de comandos.');
@@ -651,9 +613,11 @@ export async function handler(m, conn, store) {
                         title: `Catálogo de ${categoryName}`,
                         rows: categoryServices.map(service => {
                             const emoji = serviceEmojis[service.pregunta] || '⭐';
+                            // Añadir stock a la descripción
+                            const stockInfo = service.stock !== undefined ? ` | Stock: ${service.stock}` : '';
                             return {
                                 title: `${emoji} ${service.pregunta}`,
-                                description: `💰 Costo: ${service.precio}`,
+                                description: `💰 Precio: ${service.precio}${stockInfo}`, // Aquí se añadió el stock
                                 rowId: `!getfaq ${service.id}`
                             };
                         })
@@ -885,22 +849,6 @@ export async function handler(m, conn, store) {
                      return;
                 }
 
-                const paises = Object.keys(countryPaymentMethods);
-                const paisEncontrado = paises.find(p => messageTextLower.includes(p));
-
-                if (paisEncontrado) {
-                    const metodoPago = countryPaymentMethods[paisEncontrado];
-                    if (metodoPago && metodoPago.length > 0) {
-                        await m.reply(`¡Claro! Aquí tienes el método de pago para ${paisEncontrado}:` + metodoPago);
-                    } else {
-                        const noMethodMessage = `Lo siento, aún no tenemos un método de pago configurado para ${paisEncontrado}. Un moderador se pondrá en contacto contigo lo antes posible para ayudarte.`;
-                        await m.reply(noMethodMessage);
-                        const ownerNotificationMessage = `El usuario ${m.pushName} (+${m.sender ? m.sender.split('@')[0] : 'N/A'}) ha preguntado por un método de pago en ${paisEncontrado}, pero no está configurado.`;
-                        await notificarOwnerHandler(m, { conn, text: ownerNotificationMessage, command: 'notificarowner', usedPrefix: m.prefix });
-                    }
-                    return;
-                }
-
                 const paymentsData = JSON.parse(fs.readFileSync(paymentsFilePath, 'utf8'));
                 const formattedSender = normalizarNumero(`+${m.sender.split('@')[0]}`);
                 const clientInfo = paymentsData[formattedSender];
@@ -938,6 +886,15 @@ export async function handler(m, conn, store) {
                         return;
                     }
                 }
+
+                const paymentMethodKeywords = ['oxxo', 'transferencia', 'transferir', 'metodo', 'banco'];
+                const isPaymentMethodIntent = paymentMethodKeywords.some(keyword => messageTextLower.includes(keyword));
+                
+                if (isPaymentMethodIntent) {
+                    const paymentMessage = `TRANSFERENCIAS Y DEPÓSITOS OXXO\n\n- NUMERO DE TARJETA: 4741742940228292\n\nBANCO: Banco Regional de Monterrey, S.A (BANREGIO)\nCONCEPTO: PAGO\n\nIMPORTANTE: FAVOR DE MANDAR FOTO DEL COMPROBANTE\nADVERTENCIA: SIEMPRE PREGUNTAR MÉTODOS DE PAGO, NO ME HAGO RESPONSABLE SI MANDAN A OTRA BANCA QUE NO ES.\n\n`;
+                    await m.reply(paymentMessage);
+                    return;
+                }
                 
                 const paymentProofKeywords = ['realizar un pago', 'quiero pagar', 'comprobante', 'pagar', 'pago'];
                 const isPaymentProofIntent = paymentProofKeywords.some(keyword => messageTextLower.includes(keyword));
@@ -966,13 +923,7 @@ export async function handler(m, conn, store) {
                         `Datos previos de la conversación con este usuario: ${JSON.stringify(userChatData)}.` :
                         `No hay datos previos de conversación con este usuario.`;
                     
-                   const paymentMethods = {
-                        'oxxo': `\n\nPara pagar desde oxxo usa:\n\n*NUMERO DE TARJETA*: 4741742940228292\n*NOMBRE*: Gloria Maria\n*BANCO*: Banco Regional de Monterrey\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
-                        'transferencia': `\n\nPara pagar con transferencia usa:\n\n*NUMERO DE TARJETA*: 4741742940228292\n*NOMBRE*: Gloria Maria\n*BANCO*: Banco Regional de Monterrey\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
-                        'tarjeta': `\n\nPara pagar con tarjeta usa:\n\n*NUMERO DE TARJETA*: 4741742940228292\n*NOMBRE*: Gloria Maria\n*BANCO*: Banco Regional de Monterrey\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
-                        'mexico': `\n\nPara pagar desde Mexico usa:\n\n*NUMERO DE TARJETA*: 4741742940228292\n*NOMBRE*: Gloria Maria\n*BANCO*: Banco Regional de Monterrey\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
-                        'méxico': `\n\nPara pagar desde México usa:\n\n*NUMERO DE TARJETA*: 4741742940228292\n*NOMBRE*: Gloria Maria\n*BANCO*: Banco Regional de Monterrey\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
-                    };
+                    const paymentMethods = `TRANSFERENCIAS Y DEPÓSITOS OXXO\n\n- NUMERO DE TARJETA: 4741742940228292\n\nBANCO: Banco Regional de Monterrey, S.A (BANREGIO)\nCONCEPTO: PAGO\n\nIMPORTANTE: FAVOR DE MANDAR FOTO DEL COMPROBANTE\nADVERTENCIA: SIEMPRE PREGUNTAR MÉTODOS DE PAGO, NO ME HAGO RESPONSABLE SI MANDAN A OTRA BANCA QUE NO ES.`;
                         
                     const personaPrompt = `Eres LeoNet AI, un asistente virtual profesional para la atención al cliente de Leonardo. Tu objetivo es ayudar a los clientes con consultas sobre pagos y servicios. No uses frases como "Estoy aquí para ayudarte", "Como tu asistente...", "Como un asistente virtual" o similares. Ve directo al punto y sé conciso.
                     
