@@ -22,7 +22,8 @@ import { handler as despedidaHandler } from './plugins/despedida.js';
 import { handler as derivadosHandler } from './plugins/derivados.js';
 import { handler as ayudaHandler } from './plugins/comandos.js';
 import { handler as getfaqHandler } from './lib/getfaq.js';
-import { handler as faqHandler } from './plugins/faq.js';
+import { handler as faqHandler }
+from './plugins/faq.js';
 import { handler as importarPagosHandler } from './plugins/importarpagos.js';
 import { handler as resetHandler } from './plugins/reset.js';
 import { handler as notificarOwnerHandler } from './plugins/notificarowner.js';
@@ -117,7 +118,7 @@ const handleInactivity = async (m, conn, userId) => {
                 description: 'Pulsa aquí para iniciar una nueva conversación.'
             }]
         }];
-        
+
         const listMessage = {
             text: farewellMessage,
             footer: 'Toca el botón para reactivar la conversación.',
@@ -136,8 +137,9 @@ const handleInactivity = async (m, conn, userId) => {
             });
         });
         delete inactivityTimers[userId];
-        
+
     } catch (e) {
+        console.error(chalk.red(`[ERROR] en handleInactivity: ${e.message}`));
     }
 };
 
@@ -145,6 +147,7 @@ const handleGoodbye = async (m, conn, userId) => {
     try {
         await handleInactivity(m, conn, userId);
     } catch (e) {
+        console.error(chalk.red(`[ERROR] en handleGoodbye: ${e.message}`));
     }
 };
 
@@ -158,7 +161,7 @@ const sendWelcomeMessage = async (m, conn) => {
     if (!userChatData.nombre) {
         welcomeMessage = "¡Hola! Soy LeoNet AI, tu asistente virtual, y estoy aquí para ayudarte. 😊✨ Por favor, indícame tu nombre para poder ofrecerte los servicios disponibles. ¡Estoy listo para atenderte! 🤖💬";
         await m.reply(welcomeMessage);
-        
+
         await new Promise((resolve, reject) => {
             global.db.data.users.update({ id: m.sender }, { $set: { chatState: 'awaitingName' } }, { upsert: true }, (err) => {
                 if (err) {
@@ -167,26 +170,26 @@ const sendWelcomeMessage = async (m, conn) => {
                 resolve();
             });
         });
-        
+
     } else {
         welcomeMessage = `¡Hola ${userChatData.nombre}! ¿En qué puedo ayudarte hoy?`;
-        
+
         const categories = Object.keys(currentConfigData.services);
         const sections = [{
             title: "✨ Servicios Disponibles ✨",
             rows: categories.map(category => {
                 let buttonTitle = category;
                 let buttonDescription = "Haz clic para ver los servicios.";
-                
+
                 switch (category) {
                     case "Perfiles Individuales":
                         buttonTitle = "👤 PERFILES INDIVIDUALES ";
                         buttonDescription = "Perfiles de streaming exclusivos para ti.";
-                    break;
+                        break;
                     case "Cuentas Completas":
                         buttonTitle = "✅ CUENTAS COMPLETAS";
                         buttonDescription = "Cuentas con acceso total para compartir.";
-                    break;
+                        break;
                     case "Streaming Musica":
                         buttonTitle = "🎶 STREAMING MÚSICA";
                         buttonDescription = "Planes premium para tus plataformas de música.";
@@ -200,7 +203,7 @@ const sendWelcomeMessage = async (m, conn) => {
                         buttonDescription = "Otros servicios y suscripciones.";
                         break;
                 }
-                
+
                 return {
                     title: buttonTitle,
                     description: buttonDescription,
@@ -208,7 +211,7 @@ const sendWelcomeMessage = async (m, conn) => {
                 };
             })
         }];
-        
+
         const listMessage = {
             text: welcomeMessage,
             footer: 'Toca el botón para ver nuestros servicios.',
@@ -217,7 +220,7 @@ const sendWelcomeMessage = async (m, conn) => {
             sections
         };
         await conn.sendMessage(m.chat, listMessage, { quoted: m });
-        
+
         await new Promise((resolve, reject) => {
             global.db.data.users.update({ id: m.sender }, { $set: { chatState: 'active' } }, {}, (err) => {
                 if (err) {
@@ -297,10 +300,13 @@ const serviceEmojis = {
 
 export async function handler(m, conn, store) {
     if (!m) return;
-    if (m.key.fromMe) return;
+    if (m.key.fromMe) {
+        console.log(chalk.gray(`[DEBUG] Mensaje saliente ignorado: ${m.text}`));
+        return;
+    }
 
     const isGroup = m.key.remoteJid?.endsWith('@g.us');
-    
+
     const botJid = conn?.user?.id || conn?.user?.jid || '';
     const botRaw = botJid?.split('@')[0] || 'Desconocido';
     const botNumber = botRaw.split(':')[0];
@@ -320,7 +326,7 @@ export async function handler(m, conn, store) {
             chatName = 'Grupo Desconocido';
         }
     }
-    
+
     const groupLine = isGroup ? `Grupo: ${chatName}` : `Chat: Chat Privado`;
 
     const rawText =
@@ -354,7 +360,7 @@ export async function handler(m, conn, store) {
         const ownerJid = `${BOT_OWNER_NUMBER}@s.whatsapp.net`;
         m.isOwner = m.isGroup ? m.key.participant === ownerJid : m.sender === ownerJid;
         m.prefix = '.';
-        
+
         if (!m.isGroup) {
             if (inactivityTimers[m.sender]) {
                 clearTimeout(inactivityTimers[m.sender]);
@@ -369,18 +375,24 @@ export async function handler(m, conn, store) {
 
             if (m.message.buttonsResponseMessage && m.message.buttonsResponseMessage.selectedButtonId) {
                 m.text = m.message.buttonsResponseMessage.selectedButtonId;
+                console.log(chalk.blue(`[DEBUG HANDLER] Botón de respuesta detectado (buttonsResponseMessage): ${m.text}`));
                 buttonReplyHandled = true;
             } else if (m.message.templateButtonReplyMessage && m.message.templateButtonReplyMessage.selectedId) {
                 m.text = m.message.templateButtonReplyMessage.selectedId;
+                console.log(chalk.blue(`[DEBUG HANDLER] Botón de respuesta detectado (templateButtonReplyMessage): ${m.text}`));
                 buttonReplyHandled = true;
             } else if (m.message.listResponseMessage && m.message.listResponseMessage.singleSelectReply) {
                 m.text = m.message.listResponseMessage.singleSelectReply.selectedRowId;
+                console.log(chalk.blue(`[DEBUG HANDLER] Botón de respuesta detectado (listResponseMessage): ${m.text}`));
                 buttonReplyHandled = true;
             }
 
             if (buttonReplyHandled) {
                 try {
+                    console.log(chalk.magenta(`[DEBUG HANDLER] Manejando botón: ${m.text} desde ${m.sender}`));
+
                     if (m.text === '1' || m.text.toLowerCase() === 'he realizado el pago') {
+                        console.log(chalk.magenta(`[DEBUG HANDLER] Botón 'He realizado el pago' o '1' presionado por: ${m.sender}`));
                         await conn.sendMessage(m.chat, {
                             text: `✅ *Si ya ha realizado su pago, por favor enviar foto o documento de su pago con el siguiente texto:*\n\n*"Aquí está mi comprobante de pago"* 📸`
                         });
@@ -388,48 +400,70 @@ export async function handler(m, conn, store) {
                             await new Promise((resolve, reject) => {
                                 global.db.data.users.update({ id: m.sender }, { $set: { chatState: 'awaitingPaymentProof' } }, {}, (err) => {
                                     if (err) {
+                                        console.error(chalk.red(`[ERROR] al actualizar chatState a 'awaitingPaymentProof' para ${m.sender}: ${err}`));
                                         return reject(err);
                                     }
+                                    console.log(chalk.green(`[DEBUG HANDLER] chatState actualizado a 'awaitingPaymentProof' para ${m.sender}`));
                                     resolve();
                                 });
                             });
                         }
-                        return;
+                        return; // Es crucial retornar aquí para evitar que se siga procesando el mensaje
                     }
-                    
+
                     if (m.text === '.reactivate_chat') {
+                        console.log(chalk.magenta(`[DEBUG HANDLER] Botón '.reactivate_chat' presionado por: ${m.sender}`));
                         await sendWelcomeMessage(m, conn);
                         return;
                     }
 
                     if (m.text.startsWith('!getfaq')) {
+                        console.log(chalk.magenta(`[DEBUG HANDLER] Botón '!getfaq' presionado por: ${m.sender}`));
                         if (await handleListButtonResponse(m, conn)) {
                             return;
                         }
                     }
 
-                    if (m.text.startsWith('assign_')) {
-                        if (await handlePaymentProofButton(m, conn) || await manejarRespuestaPago(m, conn)) {
-                            return;
+                    // *** ESTE ES EL BLOQUE CLAVE PARA LOS BOTONES DE ACEPTAR/RECHAZAR ***
+                    if (m.text.startsWith('accept_') || m.text.startsWith('reject_')) {
+                        console.log(chalk.yellow(`[DEBUG HANDLER] Detectado botón de aceptar/rechazar pago por ${m.sender}. Es propietario: ${m.isOwner}`));
+                        if (m.isOwner) { // Asegúrate de que solo el propietario pueda manejar esto
+                            const handledByPaymentProof = await handlePaymentProofButton(m, conn);
+                            if (handledByPaymentProof) {
+                                console.log(chalk.green(`[DEBUG HANDLER] Botón de pago manejado por handlePaymentProofButton. Retornando.`));
+                                return; // Si handlePaymentProofButton lo manejó, sal del handler
+                            }
+                        } else {
+                            console.log(chalk.red(`[DEBUG HANDLER] Botón de aceptar/rechazar pago detectado pero no por el propietario. Ignorando y continuando con el flujo normal.`));
                         }
                     }
 
+                    // Si no fue un botón de pago del propietario, entonces intentar manejar como respuesta de pago general
+                    const handledByManejarRespuestaPago = await manejarRespuestaPago(m, conn);
+                    if (handledByManejarRespuestaPago) {
+                        console.log(chalk.green(`[DEBUG HANDLER] Botón manejado por manejarRespuestaPago. Retornando.`));
+                        return; // Si manejarRespuestaPago lo manejó, sal del handler
+                    }
+
                 } catch (e) {
+                    console.error(chalk.red(`[ERROR] en el manejo de botones en handler.js: ${e.message}`));
                     m.reply('Lo siento, ha ocurrido un error al procesar la acción del botón. Por favor, inténtalo de nuevo.');
-                    return;
+                    return; // Retornar en caso de error para evitar procesamiento adicional.
                 }
             }
         }
-        
+
         if (m.message?.imageMessage && !m.message?.imageMessage?.caption) {
-            await m.reply("Si estas intentando mandar un comprobante de pago por favor envialo junto con el texto \"Aquí esta mi comprobante de pago\"");
+            console.log(chalk.yellow(`[DEBUG HANDLER] Imagen sin caption detectada de ${m.sender}. Respondiendo con instrucción de comprobante.`));
+            await m.reply("Si estas intentando mandar un comprobante de pago por favor envialo junto con el texto \"Aquí está mi comprobante de pago\"");
             return;
         }
 
         const esImagenConComprobante = m.message?.imageMessage?.caption && isPaymentProof(m.message.imageMessage.caption);
         const esDocumentoConComprobante = m.message?.documentMessage?.caption && isPaymentProof(m.message.documentMessage.caption);
-        
+
         if (esImagenConComprobante || esDocumentoConComprobante) {
+            console.log(chalk.yellow(`[DEBUG HANDLER] Comprobante de pago (imagen/documento con caption) detectado de ${m.sender}.`));
             const paymentsFilePath = path.join(__dirname, 'src', 'pagos.json');
             let clientInfo = null;
 
@@ -440,11 +474,12 @@ export async function handler(m, conn, store) {
                     clientInfo = clientsData[formattedNumber];
                 }
             } catch (e) {
-                console.error("Error al leer pagos.json en handler.js:", e);
+                console.error(chalk.red("Error al leer pagos.json en handler.js (comprobante):", e));
             }
-            
+
             const handledMedia = await handleIncomingMedia(m, conn, clientInfo);
             if (handledMedia) {
+                console.log(chalk.green(`[DEBUG HANDLER] Comprobante manejado por handleIncomingMedia. Retornando.`));
                 return;
             }
         }
@@ -452,6 +487,7 @@ export async function handler(m, conn, store) {
         if (m.text && m.text.startsWith(m.prefix)) {
             m.isCmd = true;
             m.command = m.text.slice(m.prefix.length).split(' ')[0].toLowerCase();
+            console.log(chalk.cyan(`[DEBUG HANDLER] Comando detectado: ${m.command}`));
         }
 
         if (m.isCmd) {
@@ -485,7 +521,7 @@ export async function handler(m, conn, store) {
                                 const client = clientsData[num];
                                 const estadoPago = client.pagoRealizado ? '✅ Pagado este mes' : '❌ Pendiente de pago';
                                 const pagoActual = client.pagos && client.pagos[0] ? client.pagos[0] : { monto: 'N/A' };
-                                
+
                                 clientList += `*👤 Nombre:* ${client.nombre}\n*📞 Número:* ${num}\n*🗓️ Día de Pago:* ${client.diaPago}\n*💰 Monto:* ${pagoActual.monto}\n*🌎 Bandera:* ${client.bandera}\n*• Estado de Suspensión:* ${client.suspendido ? '🔴 Suspendido' : '🟢 Activo'}\n*• Estado de Pago:* ${estadoPago}\n----------------------------\n`;
                             }
                             if (Object.keys(clientsData).length === 0) clientList = '❌ No hay clientes registrados.';
@@ -599,6 +635,7 @@ export async function handler(m, conn, store) {
             const user = await new Promise((resolve, reject) => {
                 global.db.data.users.findOne({ id: m.sender }, (err, doc) => {
                     if (err) {
+                        console.error(chalk.red(`[ERROR] al buscar usuario en DB: ${err}`));
                         return resolve(null);
                     }
                     resolve(doc);
@@ -606,15 +643,18 @@ export async function handler(m, conn, store) {
             });
 
             const chatState = user?.chatState || 'initial';
-            
+            console.log(chalk.cyan(`[DEBUG HANDLER] ChatState para ${m.sender}: ${chatState}`));
+
             if (isPaymentProof(messageTextLower) && (m.message?.imageMessage || m.message?.documentMessage)) {
-                return;
+                console.log(chalk.yellow(`[DEBUG HANDLER] Mensaje de comprobante de pago detectado (ya manejado arriba).`));
+                return; // Ya se manejó al principio del handler
             }
 
             const selectedRowId = m.message?.listResponseMessage?.singleSelectReply?.selectedRowId;
             if (selectedRowId && selectedRowId.startsWith('category:')) {
                 const categoryName = selectedRowId.replace('category:', '').trim();
                 const categoryServices = services[categoryName];
+                console.log(chalk.blue(`[DEBUG HANDLER] Botón de categoría seleccionado: ${categoryName}`));
 
                 if (categoryServices && categoryServices.length > 0) {
                     const sections = [{
@@ -624,57 +664,60 @@ export async function handler(m, conn, store) {
                             const stockInfo = service.stock !== undefined ? ` | Stock: ${service.stock}` : '';
                             return {
                                 title: `${emoji} ${service.pregunta}`,
-                                description: `💰 Precio: ${service.precio} | 🔢 Stock: ${stockInfo}`, 
+                                description: `💰 Precio: ${service.precio} | 🔢 Stock: ${stockInfo}`,
                                 rowId: `!getfaq ${service.id}`
                             };
                         })
                     }];
-                    
+
                     const listMessage = {
                         text: `Aquí están todos los servicios en la categoría de *${categoryName}*.`,
                         title: "✨ Nuestros Servicios",
                         buttonText: "Seleccionar Servicio",
                         sections
                     };
-                    
+
                     await conn.sendMessage(m.chat, listMessage, { quoted: m });
                 } else {
                     await m.reply(`❌ No hay servicios disponibles en la categoría de *${categoryName}*.`);
                 }
                 return;
             }
-            
+
             if (chatState === 'initial') {
+                console.log(chalk.cyan(`[DEBUG HANDLER] ChatState 'initial' para ${m.sender}.`));
                 const chatData = loadChatData();
                 const formattedSender = normalizarNumero(`+${m.sender.split('@')[0]}`);
                 const userChatData = chatData[formattedSender] || {};
-                
+
                 if (userChatData.nombre) {
+                    console.log(chalk.green(`[DEBUG HANDLER] Usuario ${m.sender} tiene nombre registrado. Cambiando a 'active' y enviando menú.`));
                     await new Promise((resolve, reject) => {
                         global.db.data.users.update({ id: m.sender }, { $set: { chatState: 'active' } }, { upsert: true }, (err) => {
                             if (err) {
+                                console.error(chalk.red(`[ERROR] al actualizar chatState a 'active' (initial): ${err}`));
                                 return reject(err);
                             }
                             resolve();
                         });
                     });
-                    
+
                     const categories = Object.keys(currentConfigData.services);
                     const sections = [{
                         title: "✨ Servicios Disponibles ✨",
                         rows: categories.map(category => {
                             let buttonTitle = category;
                             let buttonDescription = "Haz clic para ver los servicios.";
-        
+
                             switch (category) {
                                 case "Perfiles Individuales":
                                     buttonTitle = "👤 PERFILES INDIVIDUALES ";
                                     buttonDescription = "Perfiles de streaming exclusivos para ti.";
-                                break;
+                                    break;
                                 case "Cuentas Completas":
                                     buttonTitle = "✅ CUENTAS COMPLETAS";
                                     buttonDescription = "Cuentas con acceso total para compartir.";
-                                break;
+                                    break;
                                 case "Streaming Musica":
                                     buttonTitle = "🎶 STREAMING MÚSICA";
                                     buttonDescription = "Planes premium para tus plataformas de música.";
@@ -688,7 +731,7 @@ export async function handler(m, conn, store) {
                                     buttonDescription = "Otros servicios y suscripciones.";
                                     break;
                             }
-        
+
                             return {
                                 title: buttonTitle,
                                 description: buttonDescription,
@@ -705,13 +748,15 @@ export async function handler(m, conn, store) {
                         sections
                     };
                     await conn.sendMessage(m.chat, listMessage, { quoted: m });
-                    
+
                     return;
                 } else {
+                    console.log(chalk.green(`[DEBUG HANDLER] Usuario ${m.sender} no tiene nombre registrado. Enviando mensaje de bienvenida.`));
                     await sendWelcomeMessage(m, conn);
                     return;
                 }
             } else if (chatState === 'awaitingName') {
+                console.log(chalk.cyan(`[DEBUG HANDLER] ChatState 'awaitingName' para ${m.sender}.`));
                 if (messageTextLower.length > 0) {
                     let name = '';
                     const soyMatch = messageTextLower.match(/^(?:soy|me llamo)\s+(.*?)(?:\s+y|\s+quiero|$)/);
@@ -728,35 +773,37 @@ export async function handler(m, conn, store) {
                     if (name) {
                         const formattedSenderForSave = normalizarNumero(`+${m.sender.split('@')[0]}`);
                         userChatData.nombre = name.charAt(0).toUpperCase() + name.slice(1);
-                        
+
                         chatData[formattedSenderForSave] = userChatData;
                         saveChatData(chatData);
+                        console.log(chalk.green(`[DEBUG HANDLER] Nombre '${userChatData.nombre}' guardado para ${m.sender}.`));
 
                         await new Promise((resolve, reject) => {
                             global.db.data.users.update({ id: m.sender }, { $set: { chatState: 'active', nombre: userChatData.nombre } }, { upsert: true }, (err) => {
                                 if (err) {
+                                    console.error(chalk.red(`[ERROR] al actualizar chatState a 'active' (awaitingName): ${err}`));
                                     return reject(err);
                                 }
                                 resolve();
                             });
                         });
-                        
+
                         const categories = Object.keys(currentConfigData.services);
                         const sections = [{
                             title: "✨ Servicios Disponibles ✨",
                             rows: categories.map(category => {
                                 let buttonTitle = category;
                                 let buttonDescription = "Haz clic para ver los servicios.";
-            
+
                                 switch (category) {
                                     case "Perfiles Individuales":
                                         buttonTitle = "👤 PERFILES INDIVIDUALES ";
                                         buttonDescription = "Perfiles de streaming exclusivos para ti.";
-                                    break;
+                                        break;
                                     case "Cuentas Completas":
                                         buttonTitle = "✅ CUENTAS COMPLETAS";
                                         buttonDescription = "Cuentas con acceso total para compartir.";
-                                    break;
+                                        break;
                                     case "Streaming Musica":
                                         buttonTitle = "🎶 STREAMING MÚSICA";
                                         buttonDescription = "Planes premium para tus plataformas de música.";
@@ -770,7 +817,7 @@ export async function handler(m, conn, store) {
                                         buttonDescription = "Otros servicios y suscripciones.";
                                         break;
                                 }
-            
+
                                 return {
                                     title: buttonTitle,
                                     description: buttonDescription,
@@ -787,29 +834,31 @@ export async function handler(m, conn, store) {
                             sections
                         };
                         await conn.sendMessage(m.chat, listMessage, { quoted: m });
-                        
+
                         return;
                     }
                 }
             } else if (chatState === 'active') {
+                console.log(chalk.cyan(`[DEBUG HANDLER] ChatState 'active' para ${m.sender}.`));
                 const command = m.text ? m.text.toLowerCase().trim() : '';
                 if (command === '!menu' || command === 'ayuda' || command === 'servicios') {
+                    console.log(chalk.magenta(`[DEBUG HANDLER] Comando de menú/ayuda/servicios detectado por ${m.sender}.`));
                     const categories = Object.keys(currentConfigData.services);
                     const sections = [{
                         title: "✨ Servicios Disponibles ✨",
                         rows: categories.map(category => {
                             let buttonTitle = category;
                             let buttonDescription = "Haz clic para ver los servicios.";
-        
+
                             switch (category) {
                                 case "Perfiles Individuales":
                                     buttonTitle = "👤 PERFILES INDIVIDUALES ";
                                     buttonDescription = "Perfiles de streaming exclusivos para ti.";
-                                break;
+                                    break;
                                 case "Cuentas Completas":
                                     buttonTitle = "✅ CUENTAS COMPLETAS";
                                     buttonDescription = "Cuentas con acceso total para compartir.";
-                                break;
+                                    break;
                                 case "Streaming Musica":
                                     buttonTitle = "🎶 STREAMING MÚSICA";
                                     buttonDescription = "Planes premium para tus plataformas de música.";
@@ -823,7 +872,7 @@ export async function handler(m, conn, store) {
                                     buttonDescription = "Otros servicios y suscripciones.";
                                     break;
                             }
-        
+
                             return {
                                 title: buttonTitle,
                                 description: buttonDescription,
@@ -831,14 +880,14 @@ export async function handler(m, conn, store) {
                             };
                         })
                     }];
-                    
+
                     const listMessage = {
                         text: currentConfigData.chatGreeting.replace('{user}', m.pushName || ''),
                         title: "Menú Principal",
                         buttonText: "Ver Catálogo",
                         sections
                     };
-                    
+
                     await conn.sendMessage(m.chat, listMessage, { quoted: m });
                     return;
                 }
@@ -847,19 +896,22 @@ export async function handler(m, conn, store) {
                 const isGoodbye = goodbyeKeywords.some(keyword => messageTextLower.includes(keyword));
 
                 if (isGoodbye) {
+                    console.log(chalk.magenta(`[DEBUG HANDLER] Keyword de despedida detectada por ${m.sender}.`));
                     await handleGoodbye(m, conn, m.sender);
                     return;
                 }
-                
+
                 if (m.text.startsWith('!getfaq')) {
-                     await getfaqHandler(m, { conn, text: m.text.replace('!getfaq ', ''), command: 'getfaq', usedPrefix: m.prefix });
-                     return;
+                    console.log(chalk.magenta(`[DEBUG HANDLER] Mensaje !getfaq detectado por ${m.sender}.`));
+                    await getfaqHandler(m, { conn, text: m.text.replace('!getfaq ', ''), command: 'getfaq', usedPrefix: m.prefix });
+                    return;
                 }
 
                 const paises = Object.keys(countryPaymentMethods);
                 const paisEncontrado = paises.find(p => messageTextLower.includes(p));
 
                 if (paisEncontrado) {
+                    console.log(chalk.magenta(`[DEBUG HANDLER] Palabra clave de país/método de pago detectada por ${m.sender}: ${paisEncontrado}.`));
                     const metodoPago = countryPaymentMethods[paisEncontrado];
                     if (metodoPago && metodoPago.length > 0) {
                         await m.reply(`¡Claro! Aquí tienes el método de pago para ${paisEncontrado}:` + metodoPago);
@@ -875,33 +927,34 @@ export async function handler(m, conn, store) {
                 const paymentsData = JSON.parse(fs.readFileSync(paymentsFilePath, 'utf8'));
                 const formattedSender = normalizarNumero(`+${m.sender.split('@')[0]}`);
                 const clientInfo = paymentsData[formattedSender];
-                
+
                 const paymentInfoKeywords = ['día de pago', 'dia de pago', 'fecha de pago', 'cuando pago', 'cuando me toca pagar', 'monto', 'cuanto debo', 'cuanto pagar', 'pais', 'país'];
                 const isPaymentInfoIntent = paymentInfoKeywords.some(keyword => messageTextLower.includes(keyword));
-                
+
                 if (isPaymentInfoIntent) {
+                    console.log(chalk.magenta(`[DEBUG HANDLER] Keyword de información de pago detectada por ${m.sender}.`));
                     if (clientInfo) {
                         let replyText = `¡Hola, ${clientInfo.nombre}! Aquí está la información que tengo sobre tu cuenta:\n\n`;
-                        
+
                         if (clientInfo.diaPago) {
                             replyText += `🗓️ *Tu día de pago es el día ${clientInfo.diaPago} de cada mes.*\n`;
                         }
-                        
+
                         if (clientInfo.monto) {
                             replyText += `💰 *El monto que te toca pagar es de ${clientInfo.monto}.*\n`;
                         }
-                        
+
                         if (clientInfo.bandera) {
                             replyText += `🌍 *El país que tengo registrado para ti es ${clientInfo.bandera}.*\n`;
                         }
-                        
+
                         if (clientInfo.pagos && clientInfo.pagos.length > 0) {
                             const ultimoPago = clientInfo.pagos[clientInfo.pagos.length - 1];
                             if (ultimoPago.fecha) {
                                 replyText += `✅ *Tu último pago fue el ${ultimoPago.fecha}.*\n`;
                             }
                         }
-                        
+
                         await m.reply(replyText);
                         return;
                     } else {
@@ -909,25 +962,28 @@ export async function handler(m, conn, store) {
                         return;
                     }
                 }
-                
+
                 const paymentProofKeywords = ['realizar un pago', 'quiero pagar', 'comprobante', 'pagar', 'pago'];
                 const isPaymentProofIntent = paymentProofKeywords.some(keyword => messageTextLower.includes(keyword));
-                
+
                 if (isPaymentProofIntent) {
+                    console.log(chalk.magenta(`[DEBUG HANDLER] Keyword de intención de comprobante de pago detectada por ${m.sender}.`));
                     const paymentMessage = `✅ Si ya ha realizado su pago, por favor enviar foto o documento de su pago con el siguiente texto:\n\n"Aquí está mi comprobante de pago" 📸`;
                     await m.reply(paymentMessage);
                     return;
                 }
-                
+
                 const ownerKeywords = ['creador', 'dueño', 'owner', 'administrador', 'admin', 'soporte', 'contactar', 'richetti'];
                 const isOwnerContactIntent = ownerKeywords.some(keyword => messageTextLower.includes(keyword));
 
                 if (isOwnerContactIntent) {
+                    console.log(chalk.magenta(`[DEBUG HANDLER] Keyword de contacto con el propietario detectada por ${m.sender}.`));
                     await notificarOwnerHandler(m, { conn });
                     return;
                 }
-                
+
                 try {
+                    console.log(chalk.cyan(`[DEBUG HANDLER] Mensaje de ${m.sender} no manejado por reglas explícitas, enviando a IA.`));
                     const paymentsData = JSON.parse(fs.readFileSync(paymentsFilePath, 'utf8'));
                     const formattedSender = normalizarNumero(`+${m.sender.split('@')[0]}`);
                     const clientInfoPrompt = !!paymentsData[formattedSender] ?
@@ -936,7 +992,7 @@ export async function handler(m, conn, store) {
                     const historicalChatPrompt = Object.keys(userChatData).length > 0 ?
                         `Datos previos de la conversación con este usuario: ${JSON.stringify(userChatData)}.` :
                         `No hay datos previos de conversación con este usuario.`;
-                    
+
                     const paymentMethods = {
                         'oxxo': `\n\nPara pagar desde oxxo usa:\n\n*NUMERO DE TARJETA*: 4741742940228292\n*NOMBRE*: Gloria Maria\n*BANCO*: Banco Regional de Monterrey\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
                         'transferencia': `\n\nPara pagar con transferencia usa:\n\n*NUMERO DE TARJETA*: 4741742940228292\n*NOMBRE*: Gloria Maria\n*BANCO*: Banco Regional de Monterrey\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
@@ -946,30 +1002,30 @@ export async function handler(m, conn, store) {
                     };
 
                     const personaPrompt = `Eres LeoNet AI, un asistente virtual profesional para la atención al cliente de Leonardo. Tu objetivo es ayudar a los clientes con consultas sobre pagos y servicios. No uses frases como "Estoy aquí para ayudarte", "Como tu asistente...", "Como un asistente virtual" o similares. Ve directo al punto y sé conciso.
-                    
+
                     El nombre del usuario es ${userChatData.nombre || 'el usuario'} y el historial de chat con datos previos es: ${JSON.stringify(userChatData)}.
-                    
+
                     Instrucciones:
                     - Responde de forma concisa, útil y profesional.
                     - Si te preguntan por métodos de pago, proporciona la siguiente información: ${paymentMethods}.
                     - No proporciones información personal ni financiera sensible.
                     - No inventes precios. Si te preguntan por el precio de un servicio, informa que revisen la lista de servicios.
                     - Eres capaz de identificar a los clientes. Aquí hay información del usuario:
-                    
+
                     ${clientInfoPrompt}
-                    
+
                     Has aprendido que tus servicios son:
                     - Perfiles Individuales: Netflix Extra (Privado): $65 MX, Disney Premium: $25 MX, Max Estándar: $10 MX, Max Platino: $25 MX, Prime Video Sin Anuncios: $20 MX, Paramount: $5 MX, Vix 1 Mes: $5 MX, Vix 2 Meses: $10 MX, Crunchyroll: $10 MX, Claro Video con Canales: $35 MX, Viki Rakuten: $20 MX, Duolingo Individual: $18 MX, Pornhub: $18 MX, Plex: $20 MX, Claro video con Paramount: $20 MX, Claro video con Universal: $25 MX
                     - Cuentas Completas: Netflix: $180 MX, Disney Premium: $120 MX, Disney Estándar C/A: $50 MX, Max Estándar: $35 MX, Max Platino: $65 MX, Prime Sin Anuncios: $45 MX, Paramount: $20 MX, Vix 1 Mes: $15 MX, Vix 2 Meses: $20 MX, Crunchyroll: $30 MX, Claro Video con Canales: $75 MX, Viki Rakuten: $45 MX, Duolingo Familiar: $40 MX, Pornhub: $40 MX, Plex: $45 MX
                     - Streaming Musica: Spotify Premium (renovable): 1 mes: $35 MX, 2 meses: $55 MX, 3 meses: $70 MX ; YouTube: Por invitación (1 mes): $15 MX, Por invitación (2 meses): $25 MX, Familiar (1 mes, a tus datos): $40 MX ; Mubi: $20 MX
                     - Cuentas Canva: 1 Mes: $15 MX, 2 Meses: $20 MX, 3 Meses: $25 MX, 6 Meses: $30 MX, 1 Año: $40 MX
                     - Extras: Invitación Office (Un mes): $25 MX, Invitación Gemini: $70 MX, Invitación Tidal: $20 MX, Invitación Deezer: $20 MX, Invitación Chat GTP: $50 MX, Piscard: $35 MX, Scribd: $35 MX, Brazzer: $35 MX`;
-                    
+
                     const encodedContent = encodeURIComponent(personaPrompt);
                     const encodedText = encodeURIComponent(m.text);
                     const url = `https://apis-starlights-team.koyeb.app/starlight/turbo-ai?content=${encodedContent}&text=${encodedText}`;
                     console.log(chalk.yellow('[Consulta] Enviando petición a IA:'));
-                    
+
                     const apiii = await fetch(url);
                     if (!apiii.ok) {
                         console.error(chalk.red(`[❌] La API de IA respondió con un error de estado: ${apiii.status} ${apiii.statusText}`));
@@ -977,7 +1033,7 @@ export async function handler(m, conn, store) {
                         return;
                     }
                     const json = await apiii.json();
-                    
+
                     if (json.content) {
                         console.log(chalk.green(`[✔️] Respuesta de la API de IA recibida correctamente.`));
                         m.reply(json.content);
@@ -992,6 +1048,7 @@ export async function handler(m, conn, store) {
             }
         }
     } catch (e) {
+        console.error(chalk.red(`[ERROR GENERAL] en el handler principal: ${e.message}`));
         m.reply('Lo siento, ha ocurrido un error al procesar tu solicitud.');
     }
 }
