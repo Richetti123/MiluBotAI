@@ -4,7 +4,6 @@ import { format } from 'util';
 import { fileURLToPath } from 'url';
 import path from 'path';
 import fs, { watchFile, unwatchFile } from 'fs';
-import chalk from 'chalk';
 import fetch from 'node-fetch';
 import { handlePaymentProofButton, manejarRespuestaPago } from './lib/respuestapagos.js';
 import { handleIncomingMedia } from './lib/comprobantes.js';
@@ -22,8 +21,7 @@ import { handler as despedidaHandler } from './plugins/despedida.js';
 import { handler as derivadosHandler } from './plugins/derivados.js';
 import { handler as ayudaHandler } from './plugins/comandos.js';
 import { handler as getfaqHandler } from './lib/getfaq.js';
-import { handler as faqHandler }
-from './plugins/faq.js';
+import { handler as faqHandler } from './plugins/faq.js';
 import { handler as importarPagosHandler } from './plugins/importarpagos.js';
 import { handler as resetHandler } from './plugins/reset.js';
 import { handler as notificarOwnerHandler } from './plugins/notificarowner.js';
@@ -139,7 +137,7 @@ const handleInactivity = async (m, conn, userId) => {
         delete inactivityTimers[userId];
 
     } catch (e) {
-        console.error(chalk.red(`[ERROR] en handleInactivity: ${e.message}`));
+        console.error(`[ERROR] en handleInactivity: ${e.message}`);
     }
 };
 
@@ -147,7 +145,7 @@ const handleGoodbye = async (m, conn, userId) => {
     try {
         await handleInactivity(m, conn, userId);
     } catch (e) {
-        console.error(chalk.red(`[ERROR] en handleGoodbye: ${e.message}`));
+        console.error(`[ERROR] en handleGoodbye: ${e.message}`);
     }
 };
 
@@ -301,56 +299,9 @@ const serviceEmojis = {
 export async function handler(m, conn, store) {
     if (!m) return;
     if (m.key.fromMe) {
-        console.log(chalk.gray(`[DEBUG] Mensaje saliente ignorado: ${m.text}`));
         return;
     }
 
-    const isGroup = m.key.remoteJid?.endsWith('@g.us');
-
-    const botJid = conn?.user?.id || conn?.user?.jid || '';
-    const botRaw = botJid?.split('@')[0] || 'Desconocido';
-    const botNumber = botRaw.split(':')[0];
-    const botIdentifier = '+' + botNumber;
-
-    const senderJid = m.key?.fromMe ? botJid : m.key?.participant || m.key?.remoteJid || m.sender || '';
-    const senderRaw = senderJid.split('@')[0] || 'Desconocido';
-    const senderNumber = '+' + senderRaw.split(':')[0];
-
-    const senderName = m.pushName || 'Desconocido';
-
-    let chatName = 'Chat Privado';
-    if (isGroup) {
-        try {
-            chatName = await conn.groupMetadata(m.key.remoteJid).then(res => res.subject);
-        } catch (_) {
-            chatName = 'Grupo Desconocido';
-        }
-    }
-
-    const groupLine = isGroup ? `Grupo: ${chatName}` : `Chat: Chat Privado`;
-
-    const rawText =
-        m.text ||
-        m.message?.conversation ||
-        m.message?.extendedTextMessage?.text ||
-        m.message?.imageMessage?.caption ||
-        '';
-
-    const commandForLog = rawText && m.prefix && rawText.startsWith(m.prefix) ? rawText.split(' ')[0] : null;
-    const actionText = m.fromMe ? 'Mensaje Enviado' : (commandForLog ? `Comando: ${commandForLog}` : 'Mensaje');
-    const messageType = Object.keys(m.message || {})[0] || 'desconocido';
-
-    console.log(
-        chalk.hex('#FF8C00')(`╭━━━━━━━━━━━━━━𖡼`) + '\n' +
-        chalk.white(`┃ ❖ Bot: ${chalk.cyan(botIdentifier)} ~ ${chalk.cyan(conn.user?.name || 'Bot')}`) + '\n' +
-        chalk.white(`┃ ❖ Horario: ${chalk.greenBright(new Date().toLocaleTimeString())}`) + '\n' +
-        chalk.white(`┃ ❖ Acción: ${chalk.yellow(actionText)}`) + '\n' +
-        chalk.white(`┃ ❖ Usuario: ${chalk.blueBright(senderNumber)} ~ ${chalk.blueBright(senderName)}`) + '\n' +
-        chalk.white(`┃ ❖ ${groupLine}`) + '\n' +
-        chalk.white(`┃ ❖ Tipo de mensaje: [${m.fromMe ? 'Enviado' : 'Recibido'}] ${chalk.red(messageType)}`) + '\n' +
-        chalk.hex('#FF8C00')(`╰━━━━━━━━━━━━━━𖡼`) + '\n' +
-        chalk.white(`${rawText.trim() || ' (Sin texto legible) '}`)
-    );
     try {
         if (m.key.id.startsWith('BAE5') && m.key.id.length === 16) return;
         if (m.key.remoteJid === 'status@broadcast') return;
@@ -375,24 +326,18 @@ export async function handler(m, conn, store) {
 
             if (m.message.buttonsResponseMessage && m.message.buttonsResponseMessage.selectedButtonId) {
                 m.text = m.message.buttonsResponseMessage.selectedButtonId;
-                console.log(chalk.blue(`[DEBUG HANDLER] Botón de respuesta detectado (buttonsResponseMessage): ${m.text}`));
                 buttonReplyHandled = true;
             } else if (m.message.templateButtonReplyMessage && m.message.templateButtonReplyMessage.selectedId) {
                 m.text = m.message.templateButtonReplyMessage.selectedId;
-                console.log(chalk.blue(`[DEBUG HANDLER] Botón de respuesta detectado (templateButtonReplyMessage): ${m.text}`));
                 buttonReplyHandled = true;
             } else if (m.message.listResponseMessage && m.message.listResponseMessage.singleSelectReply) {
                 m.text = m.message.listResponseMessage.singleSelectReply.selectedRowId;
-                console.log(chalk.blue(`[DEBUG HANDLER] Botón de respuesta detectado (listResponseMessage): ${m.text}`));
                 buttonReplyHandled = true;
             }
 
             if (buttonReplyHandled) {
                 try {
-                    console.log(chalk.magenta(`[DEBUG HANDLER] Manejando botón: ${m.text} desde ${m.sender}`));
-
                     if (m.text === '1' || m.text.toLowerCase() === 'he realizado el pago') {
-                        console.log(chalk.magenta(`[DEBUG HANDLER] Botón 'He realizado el pago' o '1' presionado por: ${m.sender}`));
                         await conn.sendMessage(m.chat, {
                             text: `✅ *Si ya ha realizado su pago, por favor enviar foto o documento de su pago con el siguiente texto:*\n\n*"Aquí está mi comprobante de pago"* 📸`
                         });
@@ -400,61 +345,49 @@ export async function handler(m, conn, store) {
                             await new Promise((resolve, reject) => {
                                 global.db.data.users.update({ id: m.sender }, { $set: { chatState: 'awaitingPaymentProof' } }, {}, (err) => {
                                     if (err) {
-                                        console.error(chalk.red(`[ERROR] al actualizar chatState a 'awaitingPaymentProof' para ${m.sender}: ${err}`));
                                         return reject(err);
                                     }
-                                    console.log(chalk.green(`[DEBUG HANDLER] chatState actualizado a 'awaitingPaymentProof' para ${m.sender}`));
                                     resolve();
                                 });
                             });
                         }
-                        return; // Es crucial retornar aquí para evitar que se siga procesando el mensaje
+                        return;
                     }
 
                     if (m.text === '.reactivate_chat') {
-                        console.log(chalk.magenta(`[DEBUG HANDLER] Botón '.reactivate_chat' presionado por: ${m.sender}`));
                         await sendWelcomeMessage(m, conn);
                         return;
                     }
 
                     if (m.text.startsWith('!getfaq')) {
-                        console.log(chalk.magenta(`[DEBUG HANDLER] Botón '!getfaq' presionado por: ${m.sender}`));
                         if (await handleListButtonResponse(m, conn)) {
                             return;
                         }
                     }
 
-                    // *** ESTE ES EL BLOQUE CLAVE PARA LOS BOTONES DE ACEPTAR/RECHAZAR ***
                     if (m.text.startsWith('accept_') || m.text.startsWith('reject_')) {
-                        console.log(chalk.yellow(`[DEBUG HANDLER] Detectado botón de aceptar/rechazar pago por ${m.sender}. Es propietario: ${m.isOwner}`));
-                        if (m.isOwner) { // Asegúrate de que solo el propietario pueda manejar esto
+                        if (m.isOwner) {
                             const handledByPaymentProof = await handlePaymentProofButton(m, conn);
                             if (handledByPaymentProof) {
-                                console.log(chalk.green(`[DEBUG HANDLER] Botón de pago manejado por handlePaymentProofButton. Retornando.`));
-                                return; // Si handlePaymentProofButton lo manejó, sal del handler
+                                return;
                             }
-                        } else {
-                            console.log(chalk.red(`[DEBUG HANDLER] Botón de aceptar/rechazar pago detectado pero no por el propietario. Ignorando y continuando con el flujo normal.`));
                         }
                     }
 
-                    // Si no fue un botón de pago del propietario, entonces intentar manejar como respuesta de pago general
                     const handledByManejarRespuestaPago = await manejarRespuestaPago(m, conn);
                     if (handledByManejarRespuestaPago) {
-                        console.log(chalk.green(`[DEBUG HANDLER] Botón manejado por manejarRespuestaPago. Retornando.`));
-                        return; // Si manejarRespuestaPago lo manejó, sal del handler
+                        return;
                     }
 
                 } catch (e) {
-                    console.error(chalk.red(`[ERROR] en el manejo de botones en handler.js: ${e.message}`));
+                    console.error(`[ERROR] en el manejo de botones en handler.js: ${e.message}`);
                     m.reply('Lo siento, ha ocurrido un error al procesar la acción del botón. Por favor, inténtalo de nuevo.');
-                    return; // Retornar en caso de error para evitar procesamiento adicional.
+                    return;
                 }
             }
         }
 
         if (m.message?.imageMessage && !m.message?.imageMessage?.caption) {
-            console.log(chalk.yellow(`[DEBUG HANDLER] Imagen sin caption detectada de ${m.sender}. Respondiendo con instrucción de comprobante.`));
             await m.reply("Si estas intentando mandar un comprobante de pago por favor envialo junto con el texto \"Aquí está mi comprobante de pago\"");
             return;
         }
@@ -463,7 +396,6 @@ export async function handler(m, conn, store) {
         const esDocumentoConComprobante = m.message?.documentMessage?.caption && isPaymentProof(m.message.documentMessage.caption);
 
         if (esImagenConComprobante || esDocumentoConComprobante) {
-            console.log(chalk.yellow(`[DEBUG HANDLER] Comprobante de pago (imagen/documento con caption) detectado de ${m.sender}.`));
             const paymentsFilePath = path.join(__dirname, 'src', 'pagos.json');
             let clientInfo = null;
 
@@ -474,12 +406,11 @@ export async function handler(m, conn, store) {
                     clientInfo = clientsData[formattedNumber];
                 }
             } catch (e) {
-                console.error(chalk.red("Error al leer pagos.json en handler.js (comprobante):", e));
+                console.error("Error al leer pagos.json en handler.js (comprobante):", e);
             }
 
             const handledMedia = await handleIncomingMedia(m, conn, clientInfo);
             if (handledMedia) {
-                console.log(chalk.green(`[DEBUG HANDLER] Comprobante manejado por handleIncomingMedia. Retornando.`));
                 return;
             }
         }
@@ -487,7 +418,6 @@ export async function handler(m, conn, store) {
         if (m.text && m.text.startsWith(m.prefix)) {
             m.isCmd = true;
             m.command = m.text.slice(m.prefix.length).split(' ')[0].toLowerCase();
-            console.log(chalk.cyan(`[DEBUG HANDLER] Comando detectado: ${m.command}`));
         }
 
         if (m.isCmd) {
@@ -599,8 +529,6 @@ export async function handler(m, conn, store) {
                         await comprobantePagoHandler(m, { conn, text: commandText, command: m.command, usedPrefix: m.prefix, isOwner: m.isOwner });
                         break;
                     case 'consulta':
-                        if (!m.isOwner) return m.reply(`❌ Solo el propietario puede usar este comando.`);
-                        // Aquí se debería llamar a una función que maneje la consulta
                         break;
                     case 'update':
                     case 'actualizar':
@@ -613,7 +541,6 @@ export async function handler(m, conn, store) {
                         await subirComprobanteHandler(m, { conn, text: commandText, command: m.command, usedPrefix: m.prefix, isOwner: m.isOwner });
                         break;
                     case 'editarstock':
-                        // No necesitas la verificación de isOwner aquí, ya está en editarstockHandler
                         await editarstockHandler(m, { conn, text: commandText, command: m.command, usedPrefix: m.prefix, isOwner: m.isOwner });
                         break;
                     default:
@@ -635,7 +562,6 @@ export async function handler(m, conn, store) {
             const user = await new Promise((resolve, reject) => {
                 global.db.data.users.findOne({ id: m.sender }, (err, doc) => {
                     if (err) {
-                        console.error(chalk.red(`[ERROR] al buscar usuario en DB: ${err}`));
                         return resolve(null);
                     }
                     resolve(doc);
@@ -643,18 +569,15 @@ export async function handler(m, conn, store) {
             });
 
             const chatState = user?.chatState || 'initial';
-            console.log(chalk.cyan(`[DEBUG HANDLER] ChatState para ${m.sender}: ${chatState}`));
 
             if (isPaymentProof(messageTextLower) && (m.message?.imageMessage || m.message?.documentMessage)) {
-                console.log(chalk.yellow(`[DEBUG HANDLER] Mensaje de comprobante de pago detectado (ya manejado arriba).`));
-                return; // Ya se manejó al principio del handler
+                return;
             }
 
             const selectedRowId = m.message?.listResponseMessage?.singleSelectReply?.selectedRowId;
             if (selectedRowId && selectedRowId.startsWith('category:')) {
                 const categoryName = selectedRowId.replace('category:', '').trim();
                 const categoryServices = services[categoryName];
-                console.log(chalk.blue(`[DEBUG HANDLER] Botón de categoría seleccionado: ${categoryName}`));
 
                 if (categoryServices && categoryServices.length > 0) {
                     const sections = [{
@@ -685,17 +608,14 @@ export async function handler(m, conn, store) {
             }
 
             if (chatState === 'initial') {
-                console.log(chalk.cyan(`[DEBUG HANDLER] ChatState 'initial' para ${m.sender}.`));
                 const chatData = loadChatData();
                 const formattedSender = normalizarNumero(`+${m.sender.split('@')[0]}`);
                 const userChatData = chatData[formattedSender] || {};
 
                 if (userChatData.nombre) {
-                    console.log(chalk.green(`[DEBUG HANDLER] Usuario ${m.sender} tiene nombre registrado. Cambiando a 'active' y enviando menú.`));
                     await new Promise((resolve, reject) => {
                         global.db.data.users.update({ id: m.sender }, { $set: { chatState: 'active' } }, { upsert: true }, (err) => {
                             if (err) {
-                                console.error(chalk.red(`[ERROR] al actualizar chatState a 'active' (initial): ${err}`));
                                 return reject(err);
                             }
                             resolve();
@@ -751,12 +671,10 @@ export async function handler(m, conn, store) {
 
                     return;
                 } else {
-                    console.log(chalk.green(`[DEBUG HANDLER] Usuario ${m.sender} no tiene nombre registrado. Enviando mensaje de bienvenida.`));
                     await sendWelcomeMessage(m, conn);
                     return;
                 }
             } else if (chatState === 'awaitingName') {
-                console.log(chalk.cyan(`[DEBUG HANDLER] ChatState 'awaitingName' para ${m.sender}.`));
                 if (messageTextLower.length > 0) {
                     let name = '';
                     const soyMatch = messageTextLower.match(/^(?:soy|me llamo)\s+(.*?)(?:\s+y|\s+quiero|$)/);
@@ -776,12 +694,10 @@ export async function handler(m, conn, store) {
 
                         chatData[formattedSenderForSave] = userChatData;
                         saveChatData(chatData);
-                        console.log(chalk.green(`[DEBUG HANDLER] Nombre '${userChatData.nombre}' guardado para ${m.sender}.`));
 
                         await new Promise((resolve, reject) => {
                             global.db.data.users.update({ id: m.sender }, { $set: { chatState: 'active', nombre: userChatData.nombre } }, { upsert: true }, (err) => {
                                 if (err) {
-                                    console.error(chalk.red(`[ERROR] al actualizar chatState a 'active' (awaitingName): ${err}`));
                                     return reject(err);
                                 }
                                 resolve();
@@ -839,10 +755,8 @@ export async function handler(m, conn, store) {
                     }
                 }
             } else if (chatState === 'active') {
-                console.log(chalk.cyan(`[DEBUG HANDLER] ChatState 'active' para ${m.sender}.`));
                 const command = m.text ? m.text.toLowerCase().trim() : '';
                 if (command === '!menu' || command === 'ayuda' || command === 'servicios') {
-                    console.log(chalk.magenta(`[DEBUG HANDLER] Comando de menú/ayuda/servicios detectado por ${m.sender}.`));
                     const categories = Object.keys(currentConfigData.services);
                     const sections = [{
                         title: "✨ Servicios Disponibles ✨",
@@ -896,13 +810,11 @@ export async function handler(m, conn, store) {
                 const isGoodbye = goodbyeKeywords.some(keyword => messageTextLower.includes(keyword));
 
                 if (isGoodbye) {
-                    console.log(chalk.magenta(`[DEBUG HANDLER] Keyword de despedida detectada por ${m.sender}.`));
                     await handleGoodbye(m, conn, m.sender);
                     return;
                 }
 
                 if (m.text.startsWith('!getfaq')) {
-                    console.log(chalk.magenta(`[DEBUG HANDLER] Mensaje !getfaq detectado por ${m.sender}.`));
                     await getfaqHandler(m, { conn, text: m.text.replace('!getfaq ', ''), command: 'getfaq', usedPrefix: m.prefix });
                     return;
                 }
@@ -911,7 +823,6 @@ export async function handler(m, conn, store) {
                 const paisEncontrado = paises.find(p => messageTextLower.includes(p));
 
                 if (paisEncontrado) {
-                    console.log(chalk.magenta(`[DEBUG HANDLER] Palabra clave de país/método de pago detectada por ${m.sender}: ${paisEncontrado}.`));
                     const metodoPago = countryPaymentMethods[paisEncontrado];
                     if (metodoPago && metodoPago.length > 0) {
                         await m.reply(`¡Claro! Aquí tienes el método de pago para ${paisEncontrado}:` + metodoPago);
@@ -932,7 +843,6 @@ export async function handler(m, conn, store) {
                 const isPaymentInfoIntent = paymentInfoKeywords.some(keyword => messageTextLower.includes(keyword));
 
                 if (isPaymentInfoIntent) {
-                    console.log(chalk.magenta(`[DEBUG HANDLER] Keyword de información de pago detectada por ${m.sender}.`));
                     if (clientInfo) {
                         let replyText = `¡Hola, ${clientInfo.nombre}! Aquí está la información que tengo sobre tu cuenta:\n\n`;
 
@@ -967,7 +877,6 @@ export async function handler(m, conn, store) {
                 const isPaymentProofIntent = paymentProofKeywords.some(keyword => messageTextLower.includes(keyword));
 
                 if (isPaymentProofIntent) {
-                    console.log(chalk.magenta(`[DEBUG HANDLER] Keyword de intención de comprobante de pago detectada por ${m.sender}.`));
                     const paymentMessage = `✅ Si ya ha realizado su pago, por favor enviar foto o documento de su pago con el siguiente texto:\n\n"Aquí está mi comprobante de pago" 📸`;
                     await m.reply(paymentMessage);
                     return;
@@ -977,13 +886,11 @@ export async function handler(m, conn, store) {
                 const isOwnerContactIntent = ownerKeywords.some(keyword => messageTextLower.includes(keyword));
 
                 if (isOwnerContactIntent) {
-                    console.log(chalk.magenta(`[DEBUG HANDLER] Keyword de contacto con el propietario detectada por ${m.sender}.`));
                     await notificarOwnerHandler(m, { conn });
                     return;
                 }
 
                 try {
-                    console.log(chalk.cyan(`[DEBUG HANDLER] Mensaje de ${m.sender} no manejado por reglas explícitas, enviando a IA.`));
                     const paymentsData = JSON.parse(fs.readFileSync(paymentsFilePath, 'utf8'));
                     const formattedSender = normalizarNumero(`+${m.sender.split('@')[0]}`);
                     const clientInfoPrompt = !!paymentsData[formattedSender] ?
@@ -1024,31 +931,27 @@ export async function handler(m, conn, store) {
                     const encodedContent = encodeURIComponent(personaPrompt);
                     const encodedText = encodeURIComponent(m.text);
                     const url = `https://apis-starlights-team.koyeb.app/starlight/turbo-ai?content=${encodedContent}&text=${encodedText}`;
-                    console.log(chalk.yellow('[Consulta] Enviando petición a IA:'));
 
                     const apiii = await fetch(url);
                     if (!apiii.ok) {
-                        console.error(chalk.red(`[❌] La API de IA respondió con un error de estado: ${apiii.status} ${apiii.statusText}`));
                         m.reply('Lo siento, no pude procesar tu solicitud. Intenta de nuevo más tarde.');
                         return;
                     }
                     const json = await apiii.json();
 
                     if (json.content) {
-                        console.log(chalk.green(`[✔️] Respuesta de la API de IA recibida correctamente.`));
                         m.reply(json.content);
                     } else {
-                        console.error(chalk.red(`[❌] La API de IA no devolvió un campo 'content' válido.`));
                         m.reply('Lo siento, no pude procesar tu solicitud. Intenta de nuevo más tarde.');
                     }
                 } catch (e) {
-                    console.error(chalk.red(`[❗] Error al llamar a la API de IA: ${e.message}`));
+                    console.error(`[❗] Error al llamar a la API de IA: ${e.message}`);
                     m.reply('Lo siento, no pude procesar tu solicitud. Ocurrió un error con el servicio de IA.');
                 }
             }
         }
     } catch (e) {
-        console.error(chalk.red(`[ERROR GENERAL] en el handler principal: ${e.message}`));
+        console.error(`[ERROR GENERAL] en el handler principal: ${e.message}`);
         m.reply('Lo siento, ha ocurrido un error al procesar tu solicitud.');
     }
 }
