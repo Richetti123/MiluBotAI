@@ -73,7 +73,7 @@ const loadConfigBot = () => {
         mensajeBienvenida: "¡Hola {user}! Soy tu bot asistente de pagos. ¿En qué puedo ayudarte hoy?",
         mensajeDespedida: "¡Hasta pronto! Esperamos verte de nuevo.",
         services: {},
-        mensajeDespedidaInactividad: "Hola, parece que la conversación terminó. Soy tu asistente PayBalance. ¿Necesitas algo más? Puedes reactivar la conversación enviando un nuevo mensaje o tocando el botón.",
+        mensajeDespedidaInactividad: "Parece que la conversación terminó. Soy tu asistente LeoNet AI. ¿Necesitas algo más? Puedes reactivar la conversación enviando un nuevo mensaje o tocando el botón.",
         chatGreeting: "¡Hola! Soy LeoNet AI, tu asistente virtual, y estoy aquí para ayudarte. 😊✨ Por favor, indícame tu nombre para poder ofrecerte los servicios disponibles. ¡Estoy listo para atenderte! 🤖💬"
     };
 };
