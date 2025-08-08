@@ -5,6 +5,7 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 import fs, { watchFile, unwatchFile } from 'fs';
 import fetch from 'node-fetch';
+import chalk from 'chalk';
 import { handlePaymentProofButton, manejarRespuestaPago } from './lib/respuestapagos.js';
 import { handleIncomingMedia } from './lib/comprobantes.js';
 import { isPaymentProof } from './lib/keywords.js';
