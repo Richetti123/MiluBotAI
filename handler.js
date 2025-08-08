@@ -302,43 +302,43 @@ export async function handler(m, conn, store) {
     if (!m) return;
     if (m.key.fromMe) return;
 
-     if (!hasResetOnStartup) {
-         const allUsers = await new Promise((resolve, reject) => {
-             global.db.data.users.find({}, (err, docs) => {
+    if (!hasResetOnStartup) {
+        const allUsers = await new Promise((resolve, reject) => {
+            global.db.data.users.find({}, (err, docs) => {
                 if (err) return reject(err);
-                 resolve(docs);
-             });
-         });
-         if (allUsers.length > 0) {
-             await new Promise((resolve, reject) => {
-                 global.db.data.users.update({}, { $set: { chatState: 'initial' } }, { multi: true }, (err, numReplaced) => {
-                     if (err) return reject(err);
-                     resolve();
-                 });
-             });
-         }
-         hasResetOnStartup = true;
-         lastResetTime = Date.now();
-     } else if (Date.now() - lastResetTime > RESET_INTERVAL_MS) {
-         const allUsers = await new Promise((resolve, reject) => {
-             global.db.data.users.find({}, (err, docs) => {
-                 if (err) return reject(err);
-                 resolve(docs);
-             });
-         });
-         if (allUsers.length > 0) {
-             await new Promise((resolve, reject) => {
-                 global.db.data.users.update({}, { $set: { chatState: 'initial' } }, { multi: true }, (err, numReplaced) => {
-                     if (err) return reject(err);
-                     resolve();
-                 });
-             });
-         }
-         lastResetTime = Date.now();
-     }
-    
+                resolve(docs);
+            });
+        });
+        if (allUsers.length > 0) {
+            await new Promise((resolve, reject) => {
+                global.db.data.users.update({}, { $set: { chatState: 'initial' } }, { multi: true }, (err, numReplaced) => {
+                    if (err) return reject(err);
+                    resolve();
+                });
+            });
+        }
+        hasResetOnStartup = true;
+        lastResetTime = Date.now();
+    } else if (Date.now() - lastResetTime > RESET_INTERVAL_MS) {
+        const allUsers = await new Promise((resolve, reject) => {
+            global.db.data.users.find({}, (err, docs) => {
+                if (err) return reject(err);
+                resolve(docs);
+            });
+        });
+        if (allUsers.length > 0) {
+            await new Promise((resolve, reject) => {
+                global.db.data.users.update({}, { $set: { chatState: 'initial' } }, { multi: true }, (err, numReplaced) => {
+                    if (err) return reject(err);
+                    resolve();
+                });
+            });
+        }
+        lastResetTime = Date.now();
+    }
+
     const isGroup = m.key.remoteJid?.endsWith('@g.us');
-    
+
     const botJid = conn?.user?.id || conn?.user?.jid || '';
     const botRaw = botJid?.split('@')[0] || 'Desconocido';
     const botNumber = botRaw.split(':')[0];
@@ -358,7 +358,7 @@ export async function handler(m, conn, store) {
             chatName = 'Grupo Desconocido';
         }
     }
-    
+
     const groupLine = isGroup ? `Grupo: ${chatName}` : `Chat: Chat Privado`;
 
     const rawText =
@@ -477,10 +477,13 @@ export async function handler(m, conn, store) {
         const esDocumentoConComprobante = m.message?.documentMessage?.caption && isPaymentProof(m.message.documentMessage.caption);
 
         if (esImagenConComprobante || esDocumentoConComprobante) {
+            console.log(chalk.yellow('[DEBUG] Se recibió un mensaje con un comprobante de pago.'));
             const paymentsFilePath = path.join(__dirname, 'src', 'pagos.json');
             const chatData = loadChatData();
             const formattedSender = normalizarNumero(`+${m.sender.split('@')[0]}`);
             const userChatData = chatData[formattedSender] || {};
+
+            console.log(chalk.blue(`[DEBUG] Leyendo chat_data para ${formattedSender}: ${JSON.stringify(userChatData)}`));
 
             let clientInfo = null;
 
@@ -492,14 +495,17 @@ export async function handler(m, conn, store) {
             } catch (e) {
                 console.error("Error al leer pagos.json en handler.js (comprobante):", e);
             }
-            
+
             // Verificamos si existe el ID del servicio antes de llamar a la función
+            console.log(chalk.magenta(`[DEBUG] Valor de lastSelectedServiceId en el momento de procesar el comprobante: ${userChatData.lastSelectedServiceId}`));
             if (userChatData.lastSelectedServiceId) {
+                console.log(chalk.green(`[DEBUG] lastSelectedServiceId encontrado. Procediendo a llamar a handleIncomingMedia con el ID: ${userChatData.lastSelectedServiceId}`));
                 const handledMedia = await handleIncomingMedia(m, conn, clientInfo, userChatData.lastSelectedServiceId);
                 if (handledMedia) {
                     return;
                 }
             } else {
+                console.log(chalk.red('[DEBUG] lastSelectedServiceId NO encontrado. Se enviará un mensaje de error al usuario.'));
                 await m.reply('❌ No se encontró el último servicio seleccionado. Por favor, elige un servicio del menú principal antes de enviar tu comprobante de pago.');
                 return;
             }
@@ -648,7 +654,7 @@ export async function handler(m, conn, store) {
         if (m.key.fromMe && m.isOwner) {
             if (m.text && (m.text.startsWith('confirm_sale_') || m.text.startsWith('no_sale_'))) {
                 await handlePaymentProofButton(m, conn);
-                return; 
+                return;
             }
         }
 
@@ -672,7 +678,7 @@ export async function handler(m, conn, store) {
             const chatState = user?.chatState || 'initial';
 
             const selectedRowId = m.message?.listResponseMessage?.singleSelectReply?.selectedRowId;
-            
+
             if (selectedRowId) {
                 if (selectedRowId.startsWith('category:')) {
                     const categoryName = selectedRowId.replace('category:', '').trim();
@@ -706,15 +712,17 @@ export async function handler(m, conn, store) {
                     return;
                 } else if (selectedRowId.startsWith('!getfaq')) {
                     const serviceId = selectedRowId.replace('!getfaq ', '').trim();
+                    console.log(chalk.cyan(`[DEBUG] El usuario seleccionó el servicio con ID: ${serviceId}`));
                     userChatData.lastSelectedServiceId = serviceId;
                     chatData[formattedSender] = userChatData;
                     saveChatData(chatData);
+
+                    console.log(chalk.green(`[DEBUG] ID de servicio guardado en chat_data. Contenido actual para ${formattedSender}: ${JSON.stringify(userChatData)}`));
 
                     await getfaqHandler(m, { conn, text: serviceId, command: 'getfaq', usedPrefix: m.prefix });
                     return;
                 }
             }
-
 
             if (isPaymentProof(messageTextLower) && (m.message?.imageMessage || m.message?.documentMessage)) {
                 return;
@@ -837,14 +845,14 @@ export async function handler(m, conn, store) {
                                         buttonTitle = "🎶 STREAMING MÚSICA";
                                         buttonDescription = "Planes premium para tus plataformas de música.";
                                         break;
-                                case "Cuentas Canva":
-                                    buttonTitle = "🎨 CUENTAS CANVA";
-                                    buttonDescription = "Accede a plantillas y herramientas premium.";
-                                    break;
-                                case "Extras":
-                                    buttonTitle = "👽 EXTRAS";
-                                    buttonDescription = "Otros servicios y suscripciones.";
-                                    break;
+                                    case "Cuentas Canva":
+                                        buttonTitle = "🎨 CUENTAS CANVA";
+                                        buttonDescription = "Accede a plantillas y herramientas premium.";
+                                        break;
+                                    case "Extras":
+                                        buttonTitle = "👽 EXTRAS";
+                                        buttonDescription = "Otros servicios y suscripciones.";
+                                        break;
                                 }
 
                                 return {
