@@ -403,22 +403,26 @@ export async function handler(m, conn, store) {
         }
 
         if (m.message) {
+            // ** CORRECCIÓN: SE HA UNIFICADO LA LÓGICA DE PROCESAMIENTO DE BOTONES Y LISTAS **
             let buttonReplyHandled = false;
+            let selectedRowId = null;
 
             if (m.message.buttonsResponseMessage && m.message.buttonsResponseMessage.selectedButtonId) {
-                m.text = m.message.buttonsResponseMessage.selectedButtonId;
+                selectedRowId = m.message.buttonsResponseMessage.selectedButtonId;
                 buttonReplyHandled = true;
             } else if (m.message.templateButtonReplyMessage && m.message.templateButtonReplyMessage.selectedId) {
-                m.text = m.message.templateButtonReplyMessage.selectedId;
+                selectedRowId = m.message.templateButtonReplyMessage.selectedId;
                 buttonReplyHandled = true;
             } else if (m.message.listResponseMessage && m.message.listResponseMessage.singleSelectReply) {
-                m.text = m.message.listResponseMessage.singleSelectReply.selectedRowId;
+                selectedRowId = m.message.listResponseMessage.singleSelectReply.selectedRowId;
                 buttonReplyHandled = true;
             }
 
             if (buttonReplyHandled) {
+                m.text = selectedRowId; // Asignamos el ID al texto para que el resto del código lo procese
+
                 try {
-                    if (m.text === '1' || m.text.toLowerCase() === 'he realizado el pago') {
+                    if (selectedRowId === '1' || selectedRowId.toLowerCase() === 'he realizado el pago') {
                         await conn.sendMessage(m.chat, {
                             text: `✅ *Si ya ha realizado su pago, por favor enviar foto o documento de su pago con el siguiente texto:*\n\n*"Aquí está mi comprobante de pago"* 📸`
                         });
@@ -435,18 +439,64 @@ export async function handler(m, conn, store) {
                         return;
                     }
 
-                    if (m.text === '.reactivate_chat') {
+                    if (selectedRowId === '.reactivate_chat') {
                         await sendWelcomeMessage(m, conn);
                         return;
                     }
+                    
+                    if (selectedRowId.startsWith('category:')) {
+                        const categoryName = selectedRowId.replace('category:', '').trim();
+                        const currentConfigData = loadConfigBot();
+                        const services = currentConfigData.services || {};
+                        const categoryServices = services[categoryName];
 
-                    if (m.text.startsWith('!getfaq')) {
-                        if (await handleListButtonResponse(m, conn)) {
-                            return;
+                        if (categoryServices && categoryServices.length > 0) {
+                            const sections = [{
+                                title: `Catálogo de ${categoryName}`,
+                                rows: categoryServices.map(service => {
+                                    const emoji = serviceEmojis[service.pregunta] || '⭐';
+                                    const stockInfo = service.stock !== undefined ? ` | Stock: ${service.stock}` : '';
+                                    return {
+                                        title: `${emoji} ${service.pregunta}`,
+                                        description: `💰 Precio: ${service.precio} ${stockInfo}`,
+                                        rowId: `!getfaq ${service.id}`
+                                    };
+                                })
+                            }];
+
+                            const listMessage = {
+                                text: `Aquí están todos los servicios en la categoría de *${categoryName}*.`,
+                                title: "✨ Nuestros Servicios",
+                                buttonText: "Seleccionar Servicio",
+                                sections
+                            };
+
+                            await conn.sendMessage(m.chat, listMessage, { quoted: m });
+                        } else {
+                            await m.reply(`❌ No hay servicios disponibles en la categoría de *${categoryName}*.`);
                         }
+                        return;
+                    }
+                    
+                    if (selectedRowId.startsWith('!getfaq')) {
+                        const serviceId = selectedRowId.replace('!getfaq ', '').trim();
+                        console.log(chalk.cyan(`[DEBUG] El usuario seleccionó el servicio con ID: ${serviceId}`));
+                        const chatData = loadChatData();
+                        const formattedSender = normalizarNumero(`+${m.sender.split('@')[0]}`);
+                        
+                        if (!chatData[formattedSender]) {
+                            chatData[formattedSender] = {};
+                        }
+                        chatData[formattedSender].lastSelectedServiceId = serviceId;
+                        saveChatData(chatData);
+
+                        console.log(chalk.green(`[DEBUG] ID de servicio guardado en chat_data. Contenido actual para ${formattedSender}: ${JSON.stringify(chatData[formattedSender])}`));
+
+                        await getfaqHandler(m, { conn, text: serviceId, command: 'getfaq', usedPrefix: m.prefix });
+                        return;
                     }
 
-                    if (m.text.startsWith('accept_') || m.text.startsWith('reject_')) {
+                    if (selectedRowId.startsWith('accept_') || selectedRowId.startsWith('reject_') || selectedRowId.startsWith('confirm_sale_') || selectedRowId.startsWith('no_sale_')) {
                         if (m.isOwner) {
                             const handledByPaymentProof = await handlePaymentProofButton(m, conn);
                             if (handledByPaymentProof) {
@@ -496,7 +546,6 @@ export async function handler(m, conn, store) {
                 console.error("Error al leer pagos.json en handler.js (comprobante):", e);
             }
 
-            // Verificamos si existe el ID del servicio antes de llamar a la función
             console.log(chalk.magenta(`[DEBUG] Valor de lastSelectedServiceId en el momento de procesar el comprobante: ${userChatData.lastSelectedServiceId}`));
             if (userChatData.lastSelectedServiceId) {
                 console.log(chalk.green(`[DEBUG] lastSelectedServiceId encontrado. Procediendo a llamar a handleIncomingMedia con el ID: ${userChatData.lastSelectedServiceId}`));
@@ -677,53 +726,11 @@ export async function handler(m, conn, store) {
 
             const chatState = user?.chatState || 'initial';
 
-            const selectedRowId = m.message?.listResponseMessage?.singleSelectReply?.selectedRowId;
-
-            if (selectedRowId) {
-                if (selectedRowId.startsWith('category:')) {
-                    const categoryName = selectedRowId.replace('category:', '').trim();
-                    const categoryServices = services[categoryName];
-
-                    if (categoryServices && categoryServices.length > 0) {
-                        const sections = [{
-                            title: `Catálogo de ${categoryName}`,
-                            rows: categoryServices.map(service => {
-                                const emoji = serviceEmojis[service.pregunta] || '⭐';
-                                const stockInfo = service.stock !== undefined ? ` | 📦Stock: ${service.stock}` : '';
-                                return {
-                                    title: `${emoji} ${service.pregunta}`,
-                                    description: `💰 Precio: ${service.precio} ${stockInfo}`,
-                                    rowId: `!getfaq ${service.id}`
-                                };
-                            })
-                        }];
-
-                        const listMessage = {
-                            text: `Aquí están todos los servicios en la categoría de *${categoryName}*.`,
-                            title: "✨ Nuestros Servicios",
-                            buttonText: "Seleccionar Servicio",
-                            sections
-                        };
-
-                        await conn.sendMessage(m.chat, listMessage, { quoted: m });
-                    } else {
-                        await m.reply(`❌ No hay servicios disponibles en la categoría de *${categoryName}*.`);
-                    }
-                    return;
-                } else if (selectedRowId.startsWith('!getfaq')) {
-                    const serviceId = selectedRowId.replace('!getfaq ', '').trim();
-                    console.log(chalk.cyan(`[DEBUG] El usuario seleccionó el servicio con ID: ${serviceId}`));
-                    userChatData.lastSelectedServiceId = serviceId;
-                    chatData[formattedSender] = userChatData;
-                    saveChatData(chatData);
-
-                    console.log(chalk.green(`[DEBUG] ID de servicio guardado en chat_data. Contenido actual para ${formattedSender}: ${JSON.stringify(userChatData)}`));
-
-                    await getfaqHandler(m, { conn, text: serviceId, command: 'getfaq', usedPrefix: m.prefix });
-                    return;
-                }
-            }
-
+            // ** CORRECCIÓN: SE ELIMINÓ LA LÓGICA REPETIDA DE PROCESAMIENTO DE LISTAS **
+            // Esto ya se maneja en el bloque principal de m.message.
+            // Esta lógica era la causante de que no se guardara el servicio.
+            
+            // Re-evaluación del estado del chat
             if (isPaymentProof(messageTextLower) && (m.message?.imageMessage || m.message?.documentMessage)) {
                 return;
             }
@@ -944,6 +951,14 @@ export async function handler(m, conn, store) {
                 const paisEncontrado = paises.find(p => messageTextLower.includes(p));
 
                 if (paisEncontrado) {
+                    const formattedSender = normalizarNumero(`+${m.sender.split('@')[0]}`);
+                    const chatData = loadChatData();
+                    const userChatData = chatData[formattedSender] || {};
+
+                    if (!userChatData.lastSelectedServiceId) {
+                         await m.reply('⚠️ Antes de realizar tu pago, por favor, selecciona el servicio que deseas adquirir desde el menú principal. Luego, vuelve a preguntar por el método de pago.');
+                         return;
+                     }
                     const metodoPago = countryPaymentMethods[paisEncontrado];
                     if (metodoPago && metodoPago.length > 0) {
                         await m.reply(`¡Claro! Aquí tienes el método de pago para ${paisEncontrado}:` + metodoPago);
@@ -998,7 +1013,7 @@ export async function handler(m, conn, store) {
                 const isPaymentProofIntent = paymentProofKeywords.some(keyword => messageTextLower.includes(keyword));
 
                 if (isPaymentProofIntent) {
-                    const paymentMessage = `✅ Si ya ha realizado su pago, por favor enviar foto o documento de su pago con el siguiente texto:\n\n"Aquí está mi comprobante de pago" 📸`;
+                    const paymentMessage = `✅ Si ya ha realizado su pago, por favor envía la foto o documento de su pago con el siguiente texto:\n\n"Aquí está mi comprobante de pago" 📸`;
                     await m.reply(paymentMessage);
                     return;
                 }
