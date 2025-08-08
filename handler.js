@@ -662,8 +662,38 @@ export async function handler(m, conn, store) {
             const chatState = user?.chatState || 'initial';
 
             const selectedRowId = m.message?.listResponseMessage?.singleSelectReply?.selectedRowId;
+            
             if (selectedRowId) {
                 if (selectedRowId.startsWith('category:')) {
+                    const categoryName = selectedRowId.replace('category:', '').trim();
+                    const categoryServices = services[categoryName];
+
+                    if (categoryServices && categoryServices.length > 0) {
+                        const sections = [{
+                            title: `Catálogo de ${categoryName}`,
+                            rows: categoryServices.map(service => {
+                                const emoji = serviceEmojis[service.pregunta] || '⭐';
+                                const stockInfo = service.stock !== undefined ? ` | Stock: ${service.stock}` : '';
+                                return {
+                                    title: `${emoji} ${service.pregunta}`,
+                                    description: `💰 Precio: ${service.precio} ${stockInfo}`,
+                                    rowId: `!getfaq ${service.id}`
+                                };
+                            })
+                        }];
+
+                        const listMessage = {
+                            text: `Aquí están todos los servicios en la categoría de *${categoryName}*.`,
+                            title: "✨ Nuestros Servicios",
+                            buttonText: "Seleccionar Servicio",
+                            sections
+                        };
+
+                        await conn.sendMessage(m.chat, listMessage, { quoted: m });
+                    } else {
+                        await m.reply(`❌ No hay servicios disponibles en la categoría de *${categoryName}*.`);
+                    }
+                    return;
                 } else if (selectedRowId.startsWith('!getfaq')) {
                     const serviceId = selectedRowId.replace('!getfaq ', '').trim();
                     userChatData.lastSelectedServiceId = serviceId;
@@ -675,40 +705,8 @@ export async function handler(m, conn, store) {
                 }
             }
 
+
             if (isPaymentProof(messageTextLower) && (m.message?.imageMessage || m.message?.documentMessage)) {
-                return;
-            }
-
-            const selectedRowId = m.message?.listResponseMessage?.singleSelectReply?.selectedRowId;
-            if (selectedRowId && selectedRowId.startsWith('category:')) {
-                const categoryName = selectedRowId.replace('category:', '').trim();
-                const categoryServices = services[categoryName];
-
-                if (categoryServices && categoryServices.length > 0) {
-                    const sections = [{
-                        title: `Catálogo de ${categoryName}`,
-                        rows: categoryServices.map(service => {
-                            const emoji = serviceEmojis[service.pregunta] || '⭐';
-                            const stockInfo = service.stock !== undefined ? ` | Stock: ${service.stock}` : '';
-                            return {
-                                title: `${emoji} ${service.pregunta}`,
-                                description: `💰 Precio: ${service.precio} | 🔢 Stock: ${stockInfo}`,
-                                rowId: `!getfaq ${service.id}`
-                            };
-                        })
-                    }];
-
-                    const listMessage = {
-                        text: `Aquí están todos los servicios en la categoría de *${categoryName}*.`,
-                        title: "✨ Nuestros Servicios",
-                        buttonText: "Seleccionar Servicio",
-                        sections
-                    };
-
-                    await conn.sendMessage(m.chat, listMessage, { quoted: m });
-                } else {
-                    await m.reply(`❌ No hay servicios disponibles en la categoría de *${categoryName}*.`);
-                }
                 return;
             }
 
