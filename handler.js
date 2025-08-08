@@ -556,6 +556,13 @@ export async function handler(m, conn, store) {
             return;
         }
 
+        if (m.key.fromMe && m.isOwner) {
+            if (m.text && (m.text.startsWith('confirm_sale_') || m.text.startsWith('no_sale_'))) {
+                await handlePaymentProofButton(m, conn);
+                return; 
+            }
+        }
+
         if (!m.isGroup) {
             const currentConfigData = loadConfigBot();
             const services = currentConfigData.services || {};
@@ -574,6 +581,20 @@ export async function handler(m, conn, store) {
             });
 
             const chatState = user?.chatState || 'initial';
+
+            const selectedRowId = m.message?.listResponseMessage?.singleSelectReply?.selectedRowId;
+            if (selectedRowId) {
+                if (selectedRowId.startsWith('category:')) {
+                } else if (selectedRowId.startsWith('!getfaq')) {
+                    const serviceId = selectedRowId.replace('!getfaq ', '').trim();
+                    userChatData.lastSelectedServiceId = serviceId;
+                    chatData[formattedSender] = userChatData;
+                    saveChatData(chatData);
+
+                    await getfaqHandler(m, { conn, text: serviceId, command: 'getfaq', usedPrefix: m.prefix });
+                    return;
+                }
+            }
 
             if (isPaymentProof(messageTextLower) && (m.message?.imageMessage || m.message?.documentMessage)) {
                 return;
@@ -887,7 +908,7 @@ export async function handler(m, conn, store) {
                     return;
                 }
 
-                const ownerKeywords = ['creador', 'dueño', 'owner', 'administrador', 'admin', 'soporte', 'contactar', 'richetti'];
+                const ownerKeywords = ['creador', 'dueño', 'owner', 'administrador', 'admin', 'soporte', 'contactar', 'leonet'];
                 const isOwnerContactIntent = ownerKeywords.some(keyword => messageTextLower.includes(keyword));
 
                 if (isOwnerContactIntent) {
