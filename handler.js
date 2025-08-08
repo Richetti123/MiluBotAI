@@ -403,7 +403,6 @@ export async function handler(m, conn, store) {
         }
 
         if (m.message) {
-            // ** CORRECCIÓN: SE HA UNIFICADO LA LÓGICA DE PROCESAMIENTO DE BOTONES Y LISTAS **
             let buttonReplyHandled = false;
             let selectedRowId = null;
 
@@ -419,7 +418,7 @@ export async function handler(m, conn, store) {
             }
 
             if (buttonReplyHandled) {
-                m.text = selectedRowId; // Asignamos el ID al texto para que el resto del código lo procese
+                m.text = selectedRowId;
 
                 try {
                     if (selectedRowId === '1' || selectedRowId.toLowerCase() === 'he realizado el pago') {
@@ -443,7 +442,7 @@ export async function handler(m, conn, store) {
                         await sendWelcomeMessage(m, conn);
                         return;
                     }
-                    
+
                     if (selectedRowId.startsWith('category:')) {
                         const categoryName = selectedRowId.replace('category:', '').trim();
                         const currentConfigData = loadConfigBot();
@@ -477,13 +476,13 @@ export async function handler(m, conn, store) {
                         }
                         return;
                     }
-                    
+
                     if (selectedRowId.startsWith('!getfaq')) {
                         const serviceId = selectedRowId.replace('!getfaq ', '').trim();
                         console.log(chalk.cyan(`[DEBUG] El usuario seleccionó el servicio con ID: ${serviceId}`));
                         const chatData = loadChatData();
                         const formattedSender = normalizarNumero(`+${m.sender.split('@')[0]}`);
-                        
+
                         if (!chatData[formattedSender]) {
                             chatData[formattedSender] = {};
                         }
@@ -492,7 +491,16 @@ export async function handler(m, conn, store) {
 
                         console.log(chalk.green(`[DEBUG] ID de servicio guardado en chat_data. Contenido actual para ${formattedSender}: ${JSON.stringify(chatData[formattedSender])}`));
 
-                        await getfaqHandler(m, { conn, text: serviceId, command: 'getfaq', usedPrefix: m.prefix });
+                        // *** INICIO DE LA SECCIÓN MODIFICADA ***
+                        console.log(chalk.yellow(`[DEBUG] Intentando llamar a getfaqHandler para el servicio: ${serviceId}`));
+                        try {
+                            await getfaqHandler(m, { conn, text: serviceId, command: 'getfaq', usedPrefix: m.prefix });
+                            console.log(chalk.green(`[DEBUG] getfaqHandler se ejecutó con éxito.`));
+                        } catch (getfaqError) {
+                            console.error(chalk.red(`[ERROR] en getfaqHandler: ${getfaqError.message}`));
+                            await m.reply('❌ Ha ocurrido un error al obtener la información del servicio. Por favor, inténtalo de nuevo más tarde.');
+                        }
+                        // *** FIN DE LA SECCIÓN MODIFICADA ***
                         return;
                     }
 
@@ -726,11 +734,6 @@ export async function handler(m, conn, store) {
 
             const chatState = user?.chatState || 'initial';
 
-            // ** CORRECCIÓN: SE ELIMINÓ LA LÓGICA REPETIDA DE PROCESAMIENTO DE LISTAS **
-            // Esto ya se maneja en el bloque principal de m.message.
-            // Esta lógica era la causante de que no se guardara el servicio.
-            
-            // Re-evaluación del estado del chat
             if (isPaymentProof(messageTextLower) && (m.message?.imageMessage || m.message?.documentMessage)) {
                 return;
             }
@@ -943,7 +946,14 @@ export async function handler(m, conn, store) {
                 }
 
                 if (m.text.startsWith('!getfaq')) {
-                    await getfaqHandler(m, { conn, text: m.text.replace('!getfaq ', ''), command: 'getfaq', usedPrefix: m.prefix });
+                    try {
+                        console.log(chalk.yellow(`[DEBUG] Intentando llamar a getfaqHandler desde el texto para el servicio: ${m.text.replace('!getfaq ', '')}`));
+                        await getfaqHandler(m, { conn, text: m.text.replace('!getfaq ', ''), command: 'getfaq', usedPrefix: m.prefix });
+                        console.log(chalk.green(`[DEBUG] getfaqHandler se ejecutó con éxito.`));
+                    } catch (getfaqError) {
+                        console.error(chalk.red(`[ERROR] en getfaqHandler (desde texto): ${getfaqError.message}`));
+                        await m.reply('❌ Ha ocurrido un error al obtener la información del servicio. Por favor, inténtalo de nuevo más tarde.');
+                    }
                     return;
                 }
 
