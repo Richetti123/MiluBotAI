@@ -5,7 +5,6 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 import fs, { watchFile, unwatchFile } from 'fs';
 import fetch from 'node-fetch';
-import chalk from 'chalk';
 import { handlePaymentProofButton, manejarRespuestaPago } from './lib/respuestapagos.js';
 import { handleIncomingMedia } from './lib/comprobantes.js';
 import { isPaymentProof } from './lib/keywords.js';
@@ -36,6 +35,7 @@ import { handler as subirComprobanteHandler } from './plugins/subircomprobante.j
 import { handleListButtonResponse } from './lib/listbuttons.js';
 import { handler as editarstockHandler } from './plugins/editarstock.js';
 import { handler as editarprecioHandler } from './plugins/editarprecio.js';
+import chalk from 'chalk';
 
 const normalizarNumero = (numero) => {
     if (!numero) return numero;
@@ -478,19 +478,23 @@ export async function handler(m, conn, store) {
 
         if (esImagenConComprobante || esDocumentoConComprobante) {
             const paymentsFilePath = path.join(__dirname, 'src', 'pagos.json');
+            const chatData = loadChatData();
+            const formattedSender = normalizarNumero(`+${m.sender.split('@')[0]}`);
+            const userChatData = chatData[formattedSender] || {};
+
             let clientInfo = null;
 
             try {
                 if (fs.existsSync(paymentsFilePath)) {
                     const clientsData = JSON.parse(fs.readFileSync(paymentsFilePath, 'utf8'));
-                    const formattedNumber = normalizarNumero(`+${m.sender.split('@')[0]}`);
-                    clientInfo = clientsData[formattedNumber];
+                    clientInfo = clientsData[formattedSender];
                 }
             } catch (e) {
                 console.error("Error al leer pagos.json en handler.js (comprobante):", e);
             }
-
-            const handledMedia = await handleIncomingMedia(m, conn, clientInfo);
+            
+            // Pasa el ID del último servicio seleccionado a la función de manejo de medios
+            const handledMedia = await handleIncomingMedia(m, conn, clientInfo, userChatData.lastSelectedServiceId);
             if (handledMedia) {
                 return;
             }
@@ -828,14 +832,14 @@ export async function handler(m, conn, store) {
                                         buttonTitle = "🎶 STREAMING MÚSICA";
                                         buttonDescription = "Planes premium para tus plataformas de música.";
                                         break;
-                                    case "Cuentas Canva":
-                                        buttonTitle = "🎨 CUENTAS CANVA";
-                                        buttonDescription = "Accede a plantillas y herramientas premium.";
-                                        break;
-                                    case "Extras":
-                                        buttonTitle = "👽 EXTRAS";
-                                        buttonDescription = "Otros servicios y suscripciones.";
-                                        break;
+                                case "Cuentas Canva":
+                                    buttonTitle = "🎨 CUENTAS CANVA";
+                                    buttonDescription = "Accede a plantillas y herramientas premium.";
+                                    break;
+                                case "Extras":
+                                    buttonTitle = "👽 EXTRAS";
+                                    buttonDescription = "Otros servicios y suscripciones.";
+                                    break;
                                 }
 
                                 return {
