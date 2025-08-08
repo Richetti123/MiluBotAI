@@ -493,9 +493,14 @@ export async function handler(m, conn, store) {
                 console.error("Error al leer pagos.json en handler.js (comprobante):", e);
             }
             
-            // Pasa el ID del último servicio seleccionado a la función de manejo de medios
-            const handledMedia = await handleIncomingMedia(m, conn, clientInfo, userChatData.lastSelectedServiceId);
-            if (handledMedia) {
+            // Verificamos si existe el ID del servicio antes de llamar a la función
+            if (userChatData.lastSelectedServiceId) {
+                const handledMedia = await handleIncomingMedia(m, conn, clientInfo, userChatData.lastSelectedServiceId);
+                if (handledMedia) {
+                    return;
+                }
+            } else {
+                await m.reply('❌ No se encontró el último servicio seleccionado. Por favor, elige un servicio del menú principal antes de enviar tu comprobante de pago.');
                 return;
             }
         }
