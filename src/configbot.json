@@ -6,112 +6,112 @@
     "👤 PERFILES STREAMING": [
       {
         "id": "netflix_extra",
-        "pregunta": "Netflix Extra (Privado)",
+        "pregunta": "Perfil Netflix Extra",
         "precio": "65 MX",
         "stock": 10,
         "descripcion": "El plan Netflix Extra (Privado) te permite tener un perfil seguro y personal con PIN de bloqueo dentro de una cuenta compartida. Disfruta de la mejor calidad de imagen en 4K UHD y la experiencia de un plan Premium."
       },
       {
         "id": "disney_premium",
-        "pregunta": "Disney Premium",
+        "pregunta": "Perfil Disney Premium",
         "precio": "25 MX",
         "stock": 10,
         "descripcion": "Disney+ Premium ofrece una experiencia de streaming completa con resolución hasta 4K UHD y HDR, además de audio Dolby Atmos. Puedes ver en 4 dispositivos a la vez y descargar contenido en hasta 10 dispositivos."
       },
       {
         "id": "max_estandar",
-        "pregunta": "Max Estándar",
+        "pregunta": "Perfil Max Estándar",
         "precio": "10 MX",
         "stock": 5,
         "descripcion": "El plan Max Estándar te permite ver contenido en resolución Full HD (1080p), con sonido estéreo y en hasta 2 dispositivos simultáneamente. Es una opción perfecta para disfrutar de películas y series con una gran calidad de imagen."
       },
       {
         "id": "max_platino",
-        "pregunta": "Max Platino",
+        "pregunta": "Perfil Max Platino",
         "precio": "25 MX",
         "stock": 10,
         "descripcion": "El plan Max Platino es la experiencia definitiva. Disfruta de la mejor calidad de imagen en 4K UHD, audio Dolby Atmos y visualización en hasta 4 dispositivos al mismo tiempo."
       },
       {
         "id": "prime_video_sin_anuncios",
-        "pregunta": "Prime Video Sin Anuncios",
+        "pregunta": "Perfil Prime Video Sin Anuncios",
         "precio": "20 MX",
         "stock": 10,
         "descripcion": "Prime Video Sin Anuncios te ofrece el catálogo completo de Prime Video sin interrupciones publicitarias. Disfruta de tus películas y series favoritas con una experiencia de visualización fluida y sin comerciales."
       },
       {
         "id": "paramount",
-        "pregunta": "Paramount",
+        "pregunta": "Perfil Paramount",
         "precio": "5 MX",
         "stock": 10,
         "descripcion": "Paramount+ es el hogar de series originales, películas taquilleras y programas de marcas como Showtime, MTV y Comedy Central. Obtienes acceso a un catálogo de miles de episodios y películas."
       },
       {
         "id": "vix_1_mes",
-        "pregunta": "Vix 1 Mes",
+        "pregunta": "Perfil Vix 1 Mes",
         "precio": "5 MX",
         "stock": 10,
         "descripcion": "Vix Premium te ofrece una gran variedad de series, películas, novelas y noticias en español, incluyendo producciones originales y exclusivas. Es la plataforma ideal para los amantes del entretenimiento latino."
       },
       {
         "id": "vix_2_meses",
-        "pregunta": "Vix 2 Meses",
+        "pregunta": "Perfil Vix 2 Meses",
         "precio": "10 MX",
         "stock": 10,
         "descripcion": "Vix Premium por dos meses te ofrece el mismo gran catálogo sin anuncios y acceso a contenido exclusivo. Es una opción para disfrutar del mejor entretenimiento latino por más tiempo."
       },
       {
         "id": "crunchyroll",
-        "pregunta": "Crunchyroll",
+        "pregunta": "Perfil Crunchyroll",
         "precio": "10 MX",
         "stock": 10,
         "descripcion": "Con Crunchyroll Premium, disfruta de tu anime favorito sin anuncios, con nuevos episodios disponibles una hora después de su emisión en Japón. Incluye acceso a la biblioteca de juegos de Crunchyroll y descuentos exclusivos."
       },
       {
         "id": "claro_video_con_canales",
-        "pregunta": "Claro Video con Canales",
+        "pregunta": "Perfil Claro Video con Canales",
         "precio": "35 MX",
         "stock": 10,
         "descripcion": "Claro Video te ofrece un amplio catálogo de películas y series, además de la opción de ver canales en vivo. Es una plataforma con contenido variado para toda la familia."
       },
       {
         "id": "viki_rakuten",
-        "pregunta": "Viki Rakuten",
+        "pregunta": "Perfil Viki Rakuten",
         "precio": "20 MX",
         "stock": 10,
         "descripcion": "Viki es una plataforma de streaming especializada en series y películas de Asia, incluyendo dramas coreanos, chinos, japoneses y taiwaneses. Cuenta con subtítulos en varios idiomas para disfrutar al máximo del entretenimiento asiático."
       },
       {
         "id": "duolingo_individual",
-        "pregunta": "Duolingo Individual",
+        "pregunta": "Perfil Duolingo Individual",
         "precio": "18 MX",
         "stock": 10,
         "descripcion": "Con Súper Duolingo, tendrás una experiencia de aprendizaje sin anuncios y con vidas ilimitadas para que nada detenga tu progreso. Es la opción ideal para aprender nuevos idiomas sin interrupciones."
       },
       {
         "id": "pornhub",
-        "pregunta": "Pornhub",
+        "pregunta": "Perfil Pornhub",
         "precio": "18 MX",
         "stock": 10,
         "descripcion": "Pornhub Premium te ofrece acceso ilimitado a contenido exclusivo, sin anuncios y en alta definición. Es la opción para una experiencia de visualización sin interrupciones."
       },
       {
         "id": "plex",
-        "pregunta": "Plex",
+        "pregunta": "Perfil Plex",
         "precio": "20 MX",
         "stock": 10,
         "descripcion": "Plex Pass te permite organizar y transmitir tu propia biblioteca de películas, series y música en todos tus dispositivos. Incluye funciones avanzadas como la grabación de TV en vivo y la descarga de contenido para verlo sin conexión."
       },
       {
         "id": "claro_video_con_paramount",
-        "pregunta": "Claro video con paramount",
+        "pregunta": "Perfil Claro video con paramount",
         "precio": "20 MX",
         "stock": 10,
         "descripcion": "Disfruta del catálogo de Claro Video junto a todo el contenido exclusivo de Paramount+ en una sola suscripción. Es una combinación perfecta para ver películas, series y eventos deportivos."
       },
       {
         "id": "claro_video_con_universal",
-        "pregunta": "Claro video con universal",
+        "pregunta": "Perfil Claro video con universal",
         "precio": "25 MX",
         "stock": 10,
         "descripcion": "Claro Video + Universal te ofrece el catálogo completo de Claro Video más las producciones de Universal+. Accede a series, películas y programas exclusivos de Universal en una sola suscripción."
@@ -120,105 +120,105 @@
     "✅ CUENTAS COMPLETAS": [
       {
         "id": "netflix",
-        "pregunta": "Netflix",
+        "pregunta": "Cuenta Netflix",
         "precio": "180 MX",
         "stock": 10,
         "descripcion": "Con una cuenta completa de Netflix, obtienes acceso ilimitado a todo el catálogo de la plataforma. Disfruta de una amplia variedad de películas, series y documentales originales en alta definición."
       },
       {
         "id": "disney_premium_completa",
-        "pregunta": "Disney Premium",
+        "pregunta": "Cuenta Disney Premium",
         "precio": "120 MX",
         "stock": 10,
         "descripcion": "Acceso a todo el catálogo de Disney+, Star+ y ESPN en una cuenta completa. Disfruta de la mejor calidad de imagen en 4K UHD y HDR, con audio Dolby Atmos y la posibilidad de ver en hasta 4 dispositivos simultáneamente."
       },
       {
         "id": "disney_estandar",
-        "pregunta": "Disney Estándar C/A",
+        "pregunta": "Cuenta Disney Estándar C/A",
         "precio": "50 MX",
         "stock": 10,
         "descripcion": "Una cuenta completa de Disney+ con anuncios. Disfruta de series y películas en Full HD (1080p) con reproducción en hasta 2 dispositivos a la vez. Es una opción económica para acceder al universo Disney."
       },
       {
         "id": "max_estandar_completo",
-        "pregunta": "Max Estándar",
+        "pregunta": "Cuenta Max Estándar",
         "precio": "35 MX",
         "stock": 10,
         "descripcion": "Una cuenta completa de Max con visualización en 2 dispositivos, resolución Full HD y sonido estéreo. Accede a todo el catálogo de películas y series originales de Max."
       },
       {
         "id": "max_platino_completo",
-        "pregunta": "Max Platino",
+        "pregunta": "Cuenta Max Platino",
         "precio": "65 MX",
         "stock": 10,
         "descripcion": "Una cuenta completa de Max Platino con acceso a 4 dispositivos simultáneos, resolución 4K UHD y audio Dolby Atmos. Disfruta de la mejor experiencia de streaming con la máxima calidad."
       },
       {
         "id": "prime_sin_anuncios",
-        "pregunta": "Prime Sin Anuncios",
+        "pregunta": "Cuenta Prime Sin Anuncios",
         "precio": "45 MX",
         "stock": 10,
         "descripcion": "Una cuenta completa de Prime Video sin anuncios, que te permite disfrutar de todo el catálogo de series y películas sin interrupciones. Disfruta de una experiencia fluida y sin comerciales."
       },
       {
         "id": "paramount_completo",
-        "pregunta": "Paramount",
+        "pregunta": "Cuenta Paramount",
         "precio": "20 MX",
         "stock": 10,
         "descripcion": "Una cuenta completa de Paramount+, con acceso a series originales, películas y deportes en vivo. Disfruta de un extenso catálogo de entretenimiento de diferentes marcas."
       },
       {
         "id": "vix_1_mes_completo",
-        "pregunta": "Vix 1 Mes",
+        "pregunta": "Cuenta Vix 1 Mes",
         "precio": "15 MX",
         "stock": 10,
         "descripcion": "Acceso a una cuenta completa de Vix Premium por un mes. Disfruta de contenido exclusivo, series, películas y eventos deportivos sin anuncios."
       },
       {
         "id": "vix_2_meses_completo",
-        "pregunta": "Vix 2 Meses",
+        "pregunta": "Cuenta Vix 2 Meses",
         "precio": "20 MX",
         "stock": 10,
         "descripcion": "Acceso a una cuenta completa de Vix Premium por dos meses. Disfruta de contenido exclusivo, series, películas y eventos deportivos sin anuncios."
       },
       {
         "id": "crunchyroll_completo",
-        "pregunta": "Crunchyroll",
+        "pregunta": "Cuenta Crunchyroll",
         "precio": "30 MX",
         "stock": 10,
         "descripcion": "Una cuenta completa de Crunchyroll Premium. Disfruta de anime sin anuncios, acceso a nuevos episodios poco después de su estreno en Japón, y otros beneficios exclusivos."
       },
       {
         "id": "claro_video_con_canales_completo",
-        "pregunta": "Claro Video con Canales",
+        "pregunta": "Cuenta Claro Video con Canales",
         "precio": "75 MX",
         "stock": 10,
         "descripcion": "Una cuenta completa de Claro Video con acceso a su catálogo de series, películas y canales en vivo. Ideal para ver contenido para toda la familia."
       },
       {
         "id": "viki_rakuten_completo",
-        "pregunta": "Viki Rakuten",
+        "pregunta": "Cuenta Viki Rakuten",
         "precio": "45 MX",
         "stock": 10,
         "descripcion": "Una cuenta completa de Viki Rakuten. Disfruta de dramas asiáticos en alta calidad y con subtítulos, sin interrupciones comerciales."
       },
       {
         "id": "duolingo_familiar",
-        "pregunta": "Duolingo Familiar",
+        "pregunta": "Cuenta Duolingo Familiar",
         "precio": "40 MX",
         "stock": 10,
         "descripcion": "El plan familiar de Súper Duolingo te permite compartir los beneficios del aprendizaje sin anuncios y con vidas ilimitadas con hasta 5 miembros. Es una excelente opción para que toda la familia aprenda idiomas junta."
       },
       {
         "id": "pornhub_completo",
-        "pregunta": "Pornhub",
+        "pregunta": "Cuenta Pornhub",
         "precio": "40 MX",
         "stock": 10,
         "descripcion": "Una cuenta completa de Pornhub Premium. Acceso ilimitado a todo el contenido exclusivo, sin anuncios y en alta definición. La experiencia completa para una visualización sin interrupciones."
       },
       {
         "id": "plex_completo",
-        "pregunta": "Plex",
+        "pregunta": "Cuenta Plex",
         "precio": "45 MX",
         "stock": 10,
         "descripcion": "Una cuenta completa de Plex Pass que te permite organizar tu propia biblioteca y disfrutar de TV en vivo con DVR, saltar anuncios y descargar contenido en todos tus dispositivos."
@@ -278,35 +278,35 @@
     "🎨 CUENTAS CANVA": [
       {
         "id": "canva_1",
-        "pregunta": "1 Mes",
+        "pregunta": "Canva 1 mes",
         "precio": "15 MX",
         "stock": 10,
         "descripcion": "Canva Pro te permite crear diseños profesionales con herramientas avanzadas como el kit de marca, el redimensionamiento mágico y el eliminador de fondos. Disfruta de millones de plantillas y fotos de stock."
       },
       {
         "id": "canva_2",
-        "pregunta": "2 Meses",
+        "pregunta": "Canva 2 meses",
         "precio": "20 MX",
         "stock": 10,
         "descripcion": "Canva Pro te permite crear diseños profesionales con herramientas avanzadas como el kit de marca, el redimensionamiento mágico y el eliminador de fondos. Disfruta de millones de plantillas y fotos de stock."
       },
       {
         "id": "canva_3",
-        "pregunta": "3 Meses",
+        "pregunta": "Canva 3 meses",
         "precio": "25 MX",
         "stock": 10,
         "descripcion": "Canva Pro te permite crear diseños profesionales con herramientas avanzadas como el kit de marca, el redimensionamiento mágico y el eliminador de fondos. Disfruta de millones de plantillas y fotos de stock."
       },
       {
         "id": "canva_6",
-        "pregunta": "6 Meses",
+        "pregunta": "Canva 6 meses",
         "precio": "30 MX",
         "stock": 10,
         "descripcion": "Canva Pro te permite crear diseños profesionales con herramientas avanzadas como el kit de marca, el redimensionamiento mágico y el eliminador de fondos. Disfruta de millones de plantillas y fotos de stock."
       },
       {
         "id": "canva_12",
-        "pregunta": "1 Año",
+        "pregunta": "Canva 1 Año",
         "precio": "40 MX",
         "stock": 10,
         "descripcion": "Canva Pro te permite crear diseños profesionales con herramientas avanzadas como el kit de marca, el redimensionamiento mágico y el eliminador de fondos. Disfruta de millones de plantillas y fotos de stock."
