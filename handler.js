@@ -911,7 +911,7 @@ export async function handler(m, conn, store) {
                 }
             } else if (chatState === 'active') {
                 const command = m.text ? m.text.toLowerCase().trim() : '';
-                if (command === '!menu' || command === 'ayuda' || command === 'servicios') {
+                if (command === 'menu' || command === 'ayuda' || command === 'servicios') {
                     const categories = Object.keys(currentConfigData.services);
                     const sections = [{
                         title: "✨ Servicios Disponibles ✨",
@@ -951,7 +951,7 @@ export async function handler(m, conn, store) {
                     }];
 
                     const listMessage = {
-                        text: currentConfigData.chatGreeting.replace('{user}', m.pushName || ''),
+                        text: `¡Hola ${userChatData.nombre}! ¿En qué puedo ayudarte hoy?`,
                         title: "Menú Principal",
                         buttonText: "Ver Catálogo",
                         sections
