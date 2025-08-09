@@ -517,7 +517,12 @@ export async function handler(m, conn, store) {
 
                     if (selectedRowId.startsWith('accept_') || selectedRowId.startsWith('reject_') || selectedRowId.startsWith('confirm_sale_') || selectedRowId.startsWith('no_sale_')) {
                         if (m.isOwner) {
-                            const handledByPaymentProof = await handlePaymentProofButton(m, conn);
+                            // Extrae el JID del cliente del botón
+                            const clientJid = selectedId.replace(/^(accept_|reject_)/, '');
+                            const paymentsData = loadPaymentsData();
+                            const lastSelectedServiceId = paymentsData[normalizarNumero(`+${clientJid.split('@')[0]}`)]?.lastSelectedServiceId;
+                            console.log(chalk.magenta(`[DEBUG] lastSelectedServiceId extraído de pagos.json para el botón: ${lastSelectedServiceId}`));
+                            const handledByPaymentProof = await handlePaymentProofButton(m, conn, lastSelectedServiceId);
                             if (handledByPaymentProof) {
                                 return;
                             }
