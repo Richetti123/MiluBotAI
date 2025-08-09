@@ -23,9 +23,10 @@ export async function handler(m, { conn, text, command, usedPrefix }) {
     switch (bandera.trim()) {
         case '🇲🇽':
             paymentDetails = `\n\nPara pagar en México, usa:
-CLABE: 706969168872764411
-Nombre: Gaston Juarez
-Banco: Arcus Fi`;
+NUMERO DE TARJETA: 4741742940228292
+NOMBRE: Gloria Maria
+BANCO: Banco Regional de Monterrey
+`;
             break;
         case '🇵🇪':
             paymentDetails = `\n\nPara pagar en Perú, usa:
