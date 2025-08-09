@@ -9,112 +9,112 @@
         "pregunta": "Netflix Extra (Privado)",
         "precio": "65 MX",
         "stock": 10,
-        "descripcion": "El plan Netflix Extra (Privado) te permite tener un perfil seguro y personal con PIN de bloqueo dentro de una cuenta compartida. Disfruta de la mejor calidad de imagen en 4K UHD y la experiencia de un plan Premium. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "El plan Netflix Extra (Privado) te permite tener un perfil seguro y personal con PIN de bloqueo dentro de una cuenta compartida. Disfruta de la mejor calidad de imagen en 4K UHD y la experiencia de un plan Premium."
       },
       {
         "id": "disney_premium",
         "pregunta": "Disney Premium",
         "precio": "25 MX",
         "stock": 10,
-        "descripcion": "Disney+ Premium ofrece una experiencia de streaming completa con resolución hasta 4K UHD y HDR, además de audio Dolby Atmos. Puedes ver en 4 dispositivos a la vez y descargar contenido en hasta 10 dispositivos. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Disney+ Premium ofrece una experiencia de streaming completa con resolución hasta 4K UHD y HDR, además de audio Dolby Atmos. Puedes ver en 4 dispositivos a la vez y descargar contenido en hasta 10 dispositivos."
       },
       {
         "id": "max_estandar",
         "pregunta": "Max Estándar",
         "precio": "10 MX",
         "stock": 5,
-        "descripcion": "El plan Max Estándar te permite ver contenido en resolución Full HD (1080p), con sonido estéreo y en hasta 2 dispositivos simultáneamente. Es una opción perfecta para disfrutar de películas y series con una gran calidad de imagen. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "El plan Max Estándar te permite ver contenido en resolución Full HD (1080p), con sonido estéreo y en hasta 2 dispositivos simultáneamente. Es una opción perfecta para disfrutar de películas y series con una gran calidad de imagen."
       },
       {
         "id": "max_platino",
         "pregunta": "Max Platino",
         "precio": "25 MX",
         "stock": 10,
-        "descripcion": "El plan Max Platino es la experiencia definitiva. Disfruta de la mejor calidad de imagen en 4K UHD, audio Dolby Atmos y visualización en hasta 4 dispositivos al mismo tiempo. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "El plan Max Platino es la experiencia definitiva. Disfruta de la mejor calidad de imagen en 4K UHD, audio Dolby Atmos y visualización en hasta 4 dispositivos al mismo tiempo."
       },
       {
         "id": "prime_video_sin_anuncios",
         "pregunta": "Prime Video Sin Anuncios",
         "precio": "20 MX",
         "stock": 10,
-        "descripcion": "Prime Video Sin Anuncios te ofrece el catálogo completo de Prime Video sin interrupciones publicitarias. Disfruta de tus películas y series favoritas con una experiencia de visualización fluida y sin comerciales. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Prime Video Sin Anuncios te ofrece el catálogo completo de Prime Video sin interrupciones publicitarias. Disfruta de tus películas y series favoritas con una experiencia de visualización fluida y sin comerciales."
       },
       {
         "id": "paramount",
         "pregunta": "Paramount",
         "precio": "5 MX",
         "stock": 10,
-        "descripcion": "Paramount+ es el hogar de series originales, películas taquilleras y programas de marcas como Showtime, MTV y Comedy Central. Obtienes acceso a un catálogo de miles de episodios y películas. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Paramount+ es el hogar de series originales, películas taquilleras y programas de marcas como Showtime, MTV y Comedy Central. Obtienes acceso a un catálogo de miles de episodios y películas."
       },
       {
         "id": "vix_1_mes",
         "pregunta": "Vix 1 Mes",
         "precio": "5 MX",
         "stock": 10,
-        "descripcion": "Vix Premium te ofrece una gran variedad de series, películas, novelas y noticias en español, incluyendo producciones originales y exclusivas. Es la plataforma ideal para los amantes del entretenimiento latino. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Vix Premium te ofrece una gran variedad de series, películas, novelas y noticias en español, incluyendo producciones originales y exclusivas. Es la plataforma ideal para los amantes del entretenimiento latino."
       },
       {
         "id": "vix_2_meses",
         "pregunta": "Vix 2 Meses",
         "precio": "10 MX",
         "stock": 10,
-        "descripcion": "Vix Premium por dos meses te ofrece el mismo gran catálogo sin anuncios y acceso a contenido exclusivo. Es una opción para disfrutar del mejor entretenimiento latino por más tiempo. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Vix Premium por dos meses te ofrece el mismo gran catálogo sin anuncios y acceso a contenido exclusivo. Es una opción para disfrutar del mejor entretenimiento latino por más tiempo."
       },
       {
         "id": "crunchyroll",
         "pregunta": "Crunchyroll",
         "precio": "10 MX",
         "stock": 10,
-        "descripcion": "Con Crunchyroll Premium, disfruta de tu anime favorito sin anuncios, con nuevos episodios disponibles una hora después de su emisión en Japón. Incluye acceso a la biblioteca de juegos de Crunchyroll y descuentos exclusivos. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Con Crunchyroll Premium, disfruta de tu anime favorito sin anuncios, con nuevos episodios disponibles una hora después de su emisión en Japón. Incluye acceso a la biblioteca de juegos de Crunchyroll y descuentos exclusivos."
       },
       {
         "id": "claro_video_con_canales",
         "pregunta": "Claro Video con Canales",
         "precio": "35 MX",
         "stock": 10,
-        "descripcion": "Claro Video te ofrece un amplio catálogo de películas y series, además de la opción de ver canales en vivo. Es una plataforma con contenido variado para toda la familia. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Claro Video te ofrece un amplio catálogo de películas y series, además de la opción de ver canales en vivo. Es una plataforma con contenido variado para toda la familia."
       },
       {
         "id": "viki_rakuten",
         "pregunta": "Viki Rakuten",
         "precio": "20 MX",
         "stock": 10,
-        "descripcion": "Viki es una plataforma de streaming especializada en series y películas de Asia, incluyendo dramas coreanos, chinos, japoneses y taiwaneses. Cuenta con subtítulos en varios idiomas para disfrutar al máximo del entretenimiento asiático. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Viki es una plataforma de streaming especializada en series y películas de Asia, incluyendo dramas coreanos, chinos, japoneses y taiwaneses. Cuenta con subtítulos en varios idiomas para disfrutar al máximo del entretenimiento asiático."
       },
       {
         "id": "duolingo_individual",
         "pregunta": "Duolingo Individual",
         "precio": "18 MX",
         "stock": 10,
-        "descripcion": "Con Súper Duolingo, tendrás una experiencia de aprendizaje sin anuncios y con vidas ilimitadas para que nada detenga tu progreso. Es la opción ideal para aprender nuevos idiomas sin interrupciones. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Con Súper Duolingo, tendrás una experiencia de aprendizaje sin anuncios y con vidas ilimitadas para que nada detenga tu progreso. Es la opción ideal para aprender nuevos idiomas sin interrupciones."
       },
       {
         "id": "pornhub",
         "pregunta": "Pornhub",
         "precio": "18 MX",
         "stock": 10,
-        "descripcion": "Pornhub Premium te ofrece acceso ilimitado a contenido exclusivo, sin anuncios y en alta definición. Es la opción para una experiencia de visualización sin interrupciones. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Pornhub Premium te ofrece acceso ilimitado a contenido exclusivo, sin anuncios y en alta definición. Es la opción para una experiencia de visualización sin interrupciones."
       },
       {
         "id": "plex",
         "pregunta": "Plex",
         "precio": "20 MX",
         "stock": 10,
-        "descripcion": "Plex Pass te permite organizar y transmitir tu propia biblioteca de películas, series y música en todos tus dispositivos. Incluye funciones avanzadas como la grabación de TV en vivo y la descarga de contenido para verlo sin conexión. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Plex Pass te permite organizar y transmitir tu propia biblioteca de películas, series y música en todos tus dispositivos. Incluye funciones avanzadas como la grabación de TV en vivo y la descarga de contenido para verlo sin conexión."
       },
       {
         "id": "claro_video_con_paramount",
         "pregunta": "Claro video con paramount",
         "precio": "20 MX",
         "stock": 10,
-        "descripcion": "Disfruta del catálogo de Claro Video junto a todo el contenido exclusivo de Paramount+ en una sola suscripción. Es una combinación perfecta para ver películas, series y eventos deportivos. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Disfruta del catálogo de Claro Video junto a todo el contenido exclusivo de Paramount+ en una sola suscripción. Es una combinación perfecta para ver películas, series y eventos deportivos."
       },
       {
         "id": "claro_video_con_universal",
         "pregunta": "Claro video con universal",
         "precio": "25 MX",
         "stock": 10,
-        "descripcion": "Claro Video + Universal te ofrece el catálogo completo de Claro Video más las producciones de Universal+. Accede a series, películas y programas exclusivos de Universal en una sola suscripción. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Claro Video + Universal te ofrece el catálogo completo de Claro Video más las producciones de Universal+. Accede a series, películas y programas exclusivos de Universal en una sola suscripción."
       }
     ],
     "✅ CUENTAS COMPLETAS": [
@@ -123,105 +123,105 @@
         "pregunta": "Netflix",
         "precio": "180 MX",
         "stock": 10,
-        "descripcion": "Con una cuenta completa de Netflix, obtienes acceso ilimitado a todo el catálogo de la plataforma. Disfruta de una amplia variedad de películas, series y documentales originales en alta definición. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Con una cuenta completa de Netflix, obtienes acceso ilimitado a todo el catálogo de la plataforma. Disfruta de una amplia variedad de películas, series y documentales originales en alta definición."
       },
       {
         "id": "disney_premium_completa",
         "pregunta": "Disney Premium",
         "precio": "120 MX",
         "stock": 10,
-        "descripcion": "Acceso a todo el catálogo de Disney+, Star+ y ESPN en una cuenta completa. Disfruta de la mejor calidad de imagen en 4K UHD y HDR, con audio Dolby Atmos y la posibilidad de ver en hasta 4 dispositivos simultáneamente. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Acceso a todo el catálogo de Disney+, Star+ y ESPN en una cuenta completa. Disfruta de la mejor calidad de imagen en 4K UHD y HDR, con audio Dolby Atmos y la posibilidad de ver en hasta 4 dispositivos simultáneamente."
       },
       {
         "id": "disney_estandar",
         "pregunta": "Disney Estándar C/A",
         "precio": "50 MX",
         "stock": 10,
-        "descripcion": "Una cuenta completa de Disney+ con anuncios. Disfruta de series y películas en Full HD (1080p) con reproducción en hasta 2 dispositivos a la vez. Es una opción económica para acceder al universo Disney. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Una cuenta completa de Disney+ con anuncios. Disfruta de series y películas en Full HD (1080p) con reproducción en hasta 2 dispositivos a la vez. Es una opción económica para acceder al universo Disney."
       },
       {
         "id": "max_estandar_completo",
         "pregunta": "Max Estándar",
         "precio": "35 MX",
         "stock": 10,
-        "descripcion": "Una cuenta completa de Max con visualización en 2 dispositivos, resolución Full HD y sonido estéreo. Accede a todo el catálogo de películas y series originales de Max. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Una cuenta completa de Max con visualización en 2 dispositivos, resolución Full HD y sonido estéreo. Accede a todo el catálogo de películas y series originales de Max."
       },
       {
         "id": "max_platino_completo",
         "pregunta": "Max Platino",
         "precio": "65 MX",
         "stock": 10,
-        "descripcion": "Una cuenta completa de Max Platino con acceso a 4 dispositivos simultáneos, resolución 4K UHD y audio Dolby Atmos. Disfruta de la mejor experiencia de streaming con la máxima calidad. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Una cuenta completa de Max Platino con acceso a 4 dispositivos simultáneos, resolución 4K UHD y audio Dolby Atmos. Disfruta de la mejor experiencia de streaming con la máxima calidad."
       },
       {
         "id": "prime_sin_anuncios",
         "pregunta": "Prime Sin Anuncios",
         "precio": "45 MX",
         "stock": 10,
-        "descripcion": "Una cuenta completa de Prime Video sin anuncios, que te permite disfrutar de todo el catálogo de series y películas sin interrupciones. Disfruta de una experiencia fluida y sin comerciales. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Una cuenta completa de Prime Video sin anuncios, que te permite disfrutar de todo el catálogo de series y películas sin interrupciones. Disfruta de una experiencia fluida y sin comerciales."
       },
       {
         "id": "paramount_completo",
         "pregunta": "Paramount",
         "precio": "20 MX",
         "stock": 10,
-        "descripcion": "Una cuenta completa de Paramount+, con acceso a series originales, películas y deportes en vivo. Disfruta de un extenso catálogo de entretenimiento de diferentes marcas. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Una cuenta completa de Paramount+, con acceso a series originales, películas y deportes en vivo. Disfruta de un extenso catálogo de entretenimiento de diferentes marcas."
       },
       {
         "id": "vix_1_mes_completo",
         "pregunta": "Vix 1 Mes",
         "precio": "15 MX",
         "stock": 10,
-        "descripcion": "Acceso a una cuenta completa de Vix Premium por un mes. Disfruta de contenido exclusivo, series, películas y eventos deportivos sin anuncios. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Acceso a una cuenta completa de Vix Premium por un mes. Disfruta de contenido exclusivo, series, películas y eventos deportivos sin anuncios."
       },
       {
         "id": "vix_2_meses_completo",
         "pregunta": "Vix 2 Meses",
         "precio": "20 MX",
         "stock": 10,
-        "descripcion": "Acceso a una cuenta completa de Vix Premium por dos meses. Disfruta de contenido exclusivo, series, películas y eventos deportivos sin anuncios. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Acceso a una cuenta completa de Vix Premium por dos meses. Disfruta de contenido exclusivo, series, películas y eventos deportivos sin anuncios."
       },
       {
         "id": "crunchyroll_completo",
         "pregunta": "Crunchyroll",
         "precio": "30 MX",
         "stock": 10,
-        "descripcion": "Una cuenta completa de Crunchyroll Premium. Disfruta de anime sin anuncios, acceso a nuevos episodios poco después de su estreno en Japón, y otros beneficios exclusivos. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Una cuenta completa de Crunchyroll Premium. Disfruta de anime sin anuncios, acceso a nuevos episodios poco después de su estreno en Japón, y otros beneficios exclusivos."
       },
       {
         "id": "claro_video_con_canales_completo",
         "pregunta": "Claro Video con Canales",
         "precio": "75 MX",
         "stock": 10,
-        "descripcion": "Una cuenta completa de Claro Video con acceso a su catálogo de series, películas y canales en vivo. Ideal para ver contenido para toda la familia. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Una cuenta completa de Claro Video con acceso a su catálogo de series, películas y canales en vivo. Ideal para ver contenido para toda la familia."
       },
       {
         "id": "viki_rakuten_completo",
         "pregunta": "Viki Rakuten",
         "precio": "45 MX",
         "stock": 10,
-        "descripcion": "Una cuenta completa de Viki Rakuten. Disfruta de dramas asiáticos en alta calidad y con subtítulos, sin interrupciones comerciales. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Una cuenta completa de Viki Rakuten. Disfruta de dramas asiáticos en alta calidad y con subtítulos, sin interrupciones comerciales."
       },
       {
         "id": "duolingo_familiar",
         "pregunta": "Duolingo Familiar",
         "precio": "40 MX",
         "stock": 10,
-        "descripcion": "El plan familiar de Súper Duolingo te permite compartir los beneficios del aprendizaje sin anuncios y con vidas ilimitadas con hasta 5 miembros. Es una excelente opción para que toda la familia aprenda idiomas junta. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "El plan familiar de Súper Duolingo te permite compartir los beneficios del aprendizaje sin anuncios y con vidas ilimitadas con hasta 5 miembros. Es una excelente opción para que toda la familia aprenda idiomas junta."
       },
       {
         "id": "pornhub_completo",
         "pregunta": "Pornhub",
         "precio": "40 MX",
         "stock": 10,
-        "descripcion": "Una cuenta completa de Pornhub Premium. Acceso ilimitado a todo el contenido exclusivo, sin anuncios y en alta definición. La experiencia completa para una visualización sin interrupciones. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Una cuenta completa de Pornhub Premium. Acceso ilimitado a todo el contenido exclusivo, sin anuncios y en alta definición. La experiencia completa para una visualización sin interrupciones."
       },
       {
         "id": "plex_completo",
         "pregunta": "Plex",
         "precio": "45 MX",
         "stock": 10,
-        "descripcion": "Una cuenta completa de Plex Pass que te permite organizar tu propia biblioteca y disfrutar de TV en vivo con DVR, saltar anuncios y descargar contenido en todos tus dispositivos. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Una cuenta completa de Plex Pass que te permite organizar tu propia biblioteca y disfrutar de TV en vivo con DVR, saltar anuncios y descargar contenido en todos tus dispositivos."
       }
     ],
     "🎶 STREAMING MÚSICA": [
@@ -230,49 +230,49 @@
         "pregunta": "Spotify Premium 1 Mes (Renovable)",
         "precio": "35 MX",
         "stock": 10,
-        "descripcion": "Con Spotify Premium, disfruta de música sin anuncios, con saltos ilimitados y la posibilidad de escuchar tu música favorita en cualquier lugar, incluso sin conexión. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Con Spotify Premium, disfruta de música sin anuncios, con saltos ilimitados y la posibilidad de escuchar tu música favorita en cualquier lugar, incluso sin conexión."
       },
       {
         "id": "spotify_2",
         "pregunta": "Spotify Premium 2 Meses (Renovable)",
         "precio": "55 MX",
         "stock": 10,
-        "descripcion": "Con Spotify Premium, disfruta de música sin anuncios, con saltos ilimitados y la posibilidad de escuchar tu música favorita en cualquier lugar, incluso sin conexión. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Con Spotify Premium, disfruta de música sin anuncios, con saltos ilimitados y la posibilidad de escuchar tu música favorita en cualquier lugar, incluso sin conexión."
       },
       {
         "id": "spotify_3",
         "pregunta": "Spotify Premium 3 Meses (Renovable)",
         "precio": "70 MX",
         "stock": 10,
-        "descripcion": "Con Spotify Premium, disfruta de música sin anuncios, con saltos ilimitados y la posibilidad de escuchar tu música favorita en cualquier lugar, incluso sin conexión. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Con Spotify Premium, disfruta de música sin anuncios, con saltos ilimitados y la posibilidad de escuchar tu música favorita en cualquier lugar, incluso sin conexión."
       },
       {
         "id": "youtube_1",
         "pregunta": "YouTube por Invitación (Un Mes)",
         "precio": "15 MX",
         "stock": 10,
-        "descripcion": "YouTube Premium te permite ver videos sin anuncios, reproducirlos en segundo plano y descargar contenido para verlo sin conexión. Incluye también acceso a YouTube Music. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "YouTube Premium te permite ver videos sin anuncios, reproducirlos en segundo plano y descargar contenido para verlo sin conexión. Incluye también acceso a YouTube Music."
       },
       {
         "id": "youtube_2",
         "pregunta": "YouTube por Invitación (Dos Meses)",
         "precio": "25 MX",
         "stock": 10,
-        "descripcion": "YouTube Premium te permite ver videos sin anuncios, reproducirlos en segundo plano y descargar contenido para verlo sin conexión. Incluye también acceso a YouTube Music. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "YouTube Premium te permite ver videos sin anuncios, reproducirlos en segundo plano y descargar contenido para verlo sin conexión. Incluye también acceso a YouTube Music."
       },
       {
         "id": "youtube_familiar",
         "pregunta": "YouTube Familiar Un Mes (A Tus Datos)",
         "precio": "40 MX",
         "stock": 10,
-        "descripcion": "El plan familiar de YouTube Premium te permite compartir los beneficios con hasta 5 miembros de tu familia. Todos podrán disfrutar de videos sin anuncios, reproducción en segundo plano y descargas. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "El plan familiar de YouTube Premium te permite compartir los beneficios con hasta 5 miembros de tu familia. Todos podrán disfrutar de videos sin anuncios, reproducción en segundo plano y descargas."
       },
       {
         "id": "mubi",
         "pregunta": "Mubi",
         "precio": "20 MX",
         "stock": 10,
-        "descripcion": "MUBI es un servicio de streaming de cine de autor, clásico y contemporáneo de todo el mundo. Cada día se añade una nueva película y se puede ver sin conexión. Es ideal para amantes del cine de calidad. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "MUBI es un servicio de streaming de cine de autor, clásico y contemporáneo de todo el mundo. Cada día se añade una nueva película y se puede ver sin conexión. Es ideal para amantes del cine de calidad."
       }
     ],
     "🎨 CUENTAS CANVA": [
@@ -281,35 +281,35 @@
         "pregunta": "1 Mes",
         "precio": "15 MX",
         "stock": 10,
-        "descripcion": "Canva Pro te permite crear diseños profesionales con herramientas avanzadas como el kit de marca, el redimensionamiento mágico y el eliminador de fondos. Disfruta de millones de plantillas y fotos de stock. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Canva Pro te permite crear diseños profesionales con herramientas avanzadas como el kit de marca, el redimensionamiento mágico y el eliminador de fondos. Disfruta de millones de plantillas y fotos de stock."
       },
       {
         "id": "canva_2",
         "pregunta": "2 Meses",
         "precio": "20 MX",
         "stock": 10,
-        "descripcion": "Canva Pro te permite crear diseños profesionales con herramientas avanzadas como el kit de marca, el redimensionamiento mágico y el eliminador de fondos. Disfruta de millones de plantillas y fotos de stock. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Canva Pro te permite crear diseños profesionales con herramientas avanzadas como el kit de marca, el redimensionamiento mágico y el eliminador de fondos. Disfruta de millones de plantillas y fotos de stock."
       },
       {
         "id": "canva_3",
         "pregunta": "3 Meses",
         "precio": "25 MX",
         "stock": 10,
-        "descripcion": "Canva Pro te permite crear diseños profesionales con herramientas avanzadas como el kit de marca, el redimensionamiento mágico y el eliminador de fondos. Disfruta de millones de plantillas y fotos de stock. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Canva Pro te permite crear diseños profesionales con herramientas avanzadas como el kit de marca, el redimensionamiento mágico y el eliminador de fondos. Disfruta de millones de plantillas y fotos de stock."
       },
       {
         "id": "canva_6",
         "pregunta": "6 Meses",
         "precio": "30 MX",
         "stock": 10,
-        "descripcion": "Canva Pro te permite crear diseños profesionales con herramientas avanzadas como el kit de marca, el redimensionamiento mágico y el eliminador de fondos. Disfruta de millones de plantillas y fotos de stock. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Canva Pro te permite crear diseños profesionales con herramientas avanzadas como el kit de marca, el redimensionamiento mágico y el eliminador de fondos. Disfruta de millones de plantillas y fotos de stock."
       },
       {
         "id": "canva_12",
         "pregunta": "1 Año",
         "precio": "40 MX",
         "stock": 10,
-        "descripcion": "Canva Pro te permite crear diseños profesionales con herramientas avanzadas como el kit de marca, el redimensionamiento mágico y el eliminador de fondos. Disfruta de millones de plantillas y fotos de stock. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Canva Pro te permite crear diseños profesionales con herramientas avanzadas como el kit de marca, el redimensionamiento mágico y el eliminador de fondos. Disfruta de millones de plantillas y fotos de stock."
       }
     ],
     "👽 EXTRAS": [
@@ -318,56 +318,56 @@
         "pregunta": "Invitación Office (Un mes)",
         "precio": "25 MX",
         "stock": 10,
-        "descripcion": "Una suscripción a Microsoft Office 365 te da acceso a las aplicaciones de Office como Word, Excel y PowerPoint. También incluye 1 TB de almacenamiento en la nube en OneDrive y asistencia técnica. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Una suscripción a Microsoft Office 365 te da acceso a las aplicaciones de Office como Word, Excel y PowerPoint. También incluye 1 TB de almacenamiento en la nube en OneDrive y asistencia técnica."
       },
       {
         "id": "gemini",
         "pregunta": "Invitación Gemini",
         "precio": "70 MX",
         "stock": 10,
-        "descripcion": "Con una suscripción a Google Gemini Advanced (antes Google AI Pro), obtienes acceso a las versiones más potentes de la IA de Google y a funciones exclusivas, como Gemini en Gmail y Docs, así como 2 TB de almacenamiento en Google One. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Con una suscripción a Google Gemini Advanced (antes Google AI Pro), obtienes acceso a las versiones más potentes de la IA de Google y a funciones exclusivas, como Gemini en Gmail y Docs, así como 2 TB de almacenamiento en Google One."
       },
       {
         "id": "tidal",
         "pregunta": "Invitación Tidal",
         "precio": "20 MX",
         "stock": 10,
-        "descripcion": "TIDAL es una plataforma de streaming de música que se enfoca en la alta fidelidad de sonido. Ofrece audio de alta calidad, videos musicales y contenido exclusivo. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "TIDAL es una plataforma de streaming de música que se enfoca en la alta fidelidad de sonido. Ofrece audio de alta calidad, videos musicales y contenido exclusivo."
       },
       {
         "id": "deezer",
         "pregunta": "Invitación Deezer",
         "precio": "20 MX",
         "stock": 10,
-        "descripcion": "Deezer Premium te permite escuchar música sin anuncios, saltar canciones de forma ilimitada y descargar tus canciones y podcasts favoritos para escucharlos sin conexión. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Deezer Premium te permite escuchar música sin anuncios, saltar canciones de forma ilimitada y descargar tus canciones y podcasts favoritos para escucharlos sin conexión."
       },
       {
         "id": "chat_gtp",
         "pregunta": "Invitación Chat GTP",
         "precio": "50 MX",
         "stock": 10,
-        "descripcion": "Una suscripción a ChatGPT Plus te da acceso prioritario a los modelos más avanzados de OpenAI, incluyendo GPT-4o, con límites de uso ampliados y funciones exclusivas para mejorar tu productividad y creatividad. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Una suscripción a ChatGPT Plus te da acceso prioritario a los modelos más avanzados de OpenAI, incluyendo GPT-4o, con límites de uso ampliados y funciones exclusivas para mejorar tu productividad y creatividad."
       },
       {
         "id": "piscard",
         "pregunta": "PicsArt",
         "precio": "35 MX",
         "stock": 10,
-        "descripcion": "PicsArt es una aplicación de edición de fotos y videos. Con la versión premium, obtienes acceso a herramientas avanzadas, plantillas y stickers exclusivos, y la posibilidad de eliminar fondos con un solo clic. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "PicsArt es una aplicación de edición de fotos y videos. Con la versión premium, obtienes acceso a herramientas avanzadas, plantillas y stickers exclusivos, y la posibilidad de eliminar fondos con un solo clic."
       },
       {
         "id": "scribd",
         "pregunta": "Scribd",
         "precio": "35 MX",
         "stock": 10,
-        "descripcion": "Scribd es una biblioteca digital con acceso ilimitado a millones de audiolibros, libros electrónicos, revistas y documentos. Con una suscripción, puedes descargar y leer en tus dispositivos. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Scribd es una biblioteca digital con acceso ilimitado a millones de audiolibros, libros electrónicos, revistas y documentos. Con una suscripción, puedes descargar y leer en tus dispositivos."
       },
       {
         "id": "brazzer",
         "pregunta": "Brazzer",
         "precio": "35 MX",
         "stock": 10,
-        "descripcion": "Brazzers es una plataforma de contenido para adultos que ofrece videos en alta definición y sin anuncios. Con una suscripción, puedes acceder a todo el catálogo de forma ilimitada. Si estás interesado, puedes adquirir este producto. Tenemos métodos de pago de Oxxo y transferencia. ¿Por dónde deseas realizar la compra?"
+        "descripcion": "Brazzers es una plataforma de contenido para adultos que ofrece videos en alta definición y sin anuncios. Con una suscripción, puedes acceder a todo el catálogo de forma ilimitada."
       }
     ]
   },
