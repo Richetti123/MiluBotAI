@@ -518,7 +518,7 @@ export async function handler(m, conn, store) {
                     if (selectedRowId.startsWith('accept_') || selectedRowId.startsWith('reject_') || selectedRowId.startsWith('confirm_sale_') || selectedRowId.startsWith('no_sale_')) {
                         if (m.isOwner) {
                             // Extrae el JID del cliente del botón
-                            const clientJid = selectedId.replace(/^(accept_|reject_)/, '');
+                            const clientJid = selectedRowId.replace(/^(accept_|reject_)/, '');
                             const paymentsData = loadPaymentsData();
                             const lastSelectedServiceId = paymentsData[normalizarNumero(`+${clientJid.split('@')[0]}`)]?.lastSelectedServiceId;
                             console.log(chalk.magenta(`[DEBUG] lastSelectedServiceId extraído de pagos.json para el botón: ${lastSelectedServiceId}`));
@@ -1080,11 +1080,11 @@ export async function handler(m, conn, store) {
 
                     const personaPrompt = `Eres LeoNet AI, un asistente virtual profesional para la atención al cliente de Leonardo. Tu objetivo es ayudar a los clientes con consultas sobre pagos y servicios. No uses frases como "Estoy aquí para ayudarte", "Como tu asistente...", "Como un asistente virtual" o similares. Ve directo al punto y sé conciso.
 
-                    El nombre del usuario es ${userChatData.nombre || 'el usuario'} y el historial de chat con datos previos es: ${JSON.stringify(userChatData)}.
+                    El nombre del usuario es ${userChatData.nombre || 'el usuario'} y el historial de chat con datos previos es: ${JSON.JSON.stringify(userChatData)}.
 
                     Instrucciones:
                     - Responde de forma concisa, útil y profesional.
-                    - Si te preguntan por métodos de pago, proporciona la siguiente información: ${paymentMethods}.
+                    - Si te preguntan por métodos de pago, proporciona la siguiente información: ${JSON.stringify(paymentMethods)}.
                     - No proporciones información personal ni financiera sensible.
                     - No inventes precios. Si te preguntan por el precio de un servicio, informa que revisen la lista de servicios.
                     - Eres capaz de identificar a los clientes. Aquí hay información del usuario:
