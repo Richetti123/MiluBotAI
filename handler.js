@@ -95,6 +95,17 @@ const saveChatData = (data) => {
     fs.writeFileSync(chatDataPath, JSON.stringify(data, null, 2), 'utf8');
 };
 
+const loadPaymentsData = () => {
+    if (fs.existsSync(paymentsFilePath)) {
+        return JSON.parse(fs.readFileSync(paymentsFilePath, 'utf8'));
+    }
+    return {};
+};
+
+const savePaymentsData = (data) => {
+    fs.writeFileSync(paymentsFilePath, JSON.stringify(data, null, 2), 'utf8');
+};
+
 const countryPaymentMethods = {
     'méxico': `\n\nPara pagar desde México usa:\n\n*NUMERO DE TARJETA*: 4741742940228292\n*NOMBRE*: Gloria Maria\n*BANCO*: Banco Regional de Monterrey\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
     'mexico': `\n\nPara pagar desde Mexico usa:\n\n*NUMERO DE TARJETA*: 4741742940228292\n*NOMBRE*: Gloria Maria\n*BANCO*: Banco Regional de Monterrey\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
@@ -427,7 +438,7 @@ export async function handler(m, conn, store) {
                         });
                         if (m.sender) {
                             await new Promise((resolve, reject) => {
-                                global.db.data.users.update({ id: m.sender }, { $set: { chatState: 'awaitingPaymentProof' } }, {}, (err) => {
+                                global.db.data.users.update({ id: m.sender }, { $set: { chatState: 'awaitingPaymentProof' } }, { upsert: true }, (err) => {
                                     if (err) {
                                         return reject(err);
                                     }
@@ -536,7 +547,7 @@ export async function handler(m, conn, store) {
 
         if (esImagenConComprobante || esDocumentoConComprobante) {
             console.log(chalk.yellow('[DEBUG] Se recibió un mensaje con un comprobante de pago.'));
-            const paymentsFilePath = path.join(__dirname, 'src', 'pagos.json');
+            const paymentsData = loadPaymentsData(); // Añadido
             const chatData = loadChatData();
             const formattedSender = normalizarNumero(`+${m.sender.split('@')[0]}`);
             const userChatData = chatData[formattedSender] || {};
@@ -556,6 +567,14 @@ export async function handler(m, conn, store) {
 
             console.log(chalk.magenta(`[DEBUG] Valor de lastSelectedServiceId en el momento de procesar el comprobante: ${userChatData.lastSelectedServiceId}`));
             if (userChatData.lastSelectedServiceId) {
+                // Guarda el lastSelectedServiceId en pagos.json para persistencia
+                if (!paymentsData[formattedSender]) {
+                    paymentsData[formattedSender] = {};
+                }
+                paymentsData[formattedSender].lastSelectedServiceId = userChatData.lastSelectedServiceId;
+                savePaymentsData(paymentsData);
+                console.log(chalk.green(`[DEBUG] lastSelectedServiceId "${userChatData.lastSelectedServiceId}" guardado en pagos.json para el usuario ${formattedSender}.`));
+
                 console.log(chalk.green(`[DEBUG] lastSelectedServiceId encontrado. Procediendo a llamar a handleIncomingMedia con el ID: ${userChatData.lastSelectedServiceId}`));
                 const handledMedia = await handleIncomingMedia(m, conn, clientInfo, userChatData.lastSelectedServiceId);
                 if (handledMedia) {
