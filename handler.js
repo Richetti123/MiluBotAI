@@ -454,7 +454,7 @@ export async function handler(m, conn, store) {
                                 title: `Catálogo de ${categoryName}`,
                                 rows: categoryServices.map(service => {
                                     const emoji = serviceEmojis[service.pregunta] || '⭐';
-                                    const stockInfo = service.stock !== undefined ? ` | Stock: ${service.stock}` : '';
+                                    const stockInfo = service.stock !== undefined ? ` | 📦Stock: ${service.stock}` : '';
                                     return {
                                         title: `${emoji} ${service.pregunta}`,
                                         description: `💰 Precio: ${service.precio} ${stockInfo}`,
