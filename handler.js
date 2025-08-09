@@ -68,7 +68,19 @@ const chatDataPath = path.join(__dirname, 'src', 'chat_data.json');
 
 const loadConfigBot = () => {
     if (fs.existsSync(configBotPath)) {
-        return JSON.parse(fs.readFileSync(configBotPath, 'utf8'));
+        try {
+            return JSON.parse(fs.readFileSync(configBotPath, 'utf8'));
+        } catch (e) {
+            console.error(chalk.red(`[ERROR] Error al parsear configbot.json: ${e.message}`));
+            return {
+                modoPagoActivo: false,
+                mensajeBienvenida: "¡Hola {user}! Soy tu bot asistente de pagos. ¿En qué puedo ayudarte hoy?",
+                mensajeDespedida: "¡Hasta pronto! Esperamos verte de nuevo.",
+                services: {},
+                mensajeDespedidaInactividad: "Parece que la conversación terminó. Soy tu asistente LeoNet AI. ¿Necesitas algo más? Puedes reactivar la conversación enviando un nuevo mensaje o tocando el botón.",
+                chatGreeting: "¡Hola! Soy LeoNet AI, tu asistente virtual, y estoy aquí para ayudarte. 😊✨ Por favor, indícame tu nombre para poder ofrecerte los servicios disponibles. ¡Estoy listo para atenderte! 🤖💬"
+            };
+        }
     }
     return {
         modoPagoActivo: false,
@@ -81,29 +93,51 @@ const loadConfigBot = () => {
 };
 
 const saveConfigBot = (config) => {
-    fs.writeFileSync(configBotPath, JSON.stringify(config, null, 2), 'utf8');
+    if (config !== undefined && config !== null) {
+        fs.writeFileSync(configBotPath, JSON.stringify(config, null, 2), 'utf8');
+    } else {
+        console.error(chalk.red('[ERROR] No se pudo guardar configbot.json: los datos son undefined o null.'));
+    }
 };
 
 const loadChatData = () => {
     if (fs.existsSync(chatDataPath)) {
-        return JSON.parse(fs.readFileSync(chatDataPath, 'utf8'));
+        try {
+            return JSON.parse(fs.readFileSync(chatDataPath, 'utf8'));
+        } catch (e) {
+            console.error(chalk.red(`[ERROR] Error al parsear chat_data.json: ${e.message}`));
+            return {};
+        }
     }
     return {};
 };
 
 const saveChatData = (data) => {
-    fs.writeFileSync(chatDataPath, JSON.stringify(data, null, 2), 'utf8');
+    if (data !== undefined && data !== null) {
+        fs.writeFileSync(chatDataPath, JSON.stringify(data, null, 2), 'utf8');
+    } else {
+        console.error(chalk.red('[ERROR] No se pudo guardar chat_data.json: los datos son undefined o null.'));
+    }
 };
 
 const loadPaymentsData = () => {
     if (fs.existsSync(paymentsFilePath)) {
-        return JSON.parse(fs.readFileSync(paymentsFilePath, 'utf8'));
+        try {
+            return JSON.parse(fs.readFileSync(paymentsFilePath, 'utf8'));
+        } catch (e) {
+            console.error(chalk.red(`[ERROR] Error al parsear pagos.json: ${e.message}`));
+            return {};
+        }
     }
     return {};
 };
 
 const savePaymentsData = (data) => {
-    fs.writeFileSync(paymentsFilePath, JSON.stringify(data, null, 2), 'utf8');
+    if (data !== undefined && data !== null) {
+        fs.writeFileSync(paymentsFilePath, JSON.stringify(data, null, 2), 'utf8');
+    } else {
+        console.error(chalk.red('[ERROR] No se pudo guardar pagos.json: los datos son undefined o null.'));
+    }
 };
 
 const countryPaymentMethods = {
@@ -1005,14 +1039,14 @@ export async function handler(m, conn, store) {
                     return;
                 }
 
-                const paymentsData = JSON.parse(fs.readFileSync(paymentsFilePath, 'utf8'));
-                const formattedSender = normalizarNumero(`+${m.sender.split('@')[0]}`);
-                const clientInfo = paymentsData[formattedSender];
-
                 const paymentInfoKeywords = ['día de pago', 'dia de pago', 'fecha de pago', 'cuando pago', 'cuando me toca pagar', 'monto', 'cuanto debo', 'cuanto pagar', 'pais', 'país'];
                 const isPaymentInfoIntent = paymentInfoKeywords.some(keyword => messageTextLower.includes(keyword));
 
                 if (isPaymentInfoIntent) {
+                    const paymentsData = loadPaymentsData();
+                    const formattedSender = normalizarNumero(`+${m.sender.split('@')[0]}`);
+                    const clientInfo = paymentsData[formattedSender];
+
                     if (clientInfo) {
                         let replyText = `¡Hola, ${clientInfo.nombre}! Aquí está la información que tengo sobre tu cuenta:\n\n`;
 
@@ -1061,7 +1095,7 @@ export async function handler(m, conn, store) {
                 }
 
                 try {
-                    const paymentsData = JSON.parse(fs.readFileSync(paymentsFilePath, 'utf8'));
+                    const paymentsData = loadPaymentsData();
                     const formattedSender = normalizarNumero(`+${m.sender.split('@')[0]}`);
                     const clientInfoPrompt = !!paymentsData[formattedSender] ?
                         `El usuario es un cliente existente con los siguientes detalles: Nombre: ${paymentsData[formattedSender].nombre}, Día de pago: ${paymentsData[formattedSender].diaPago}, Monto: ${paymentsData[formattedSender].monto}, Bandera: ${paymentsData[formattedSender].bandera}. Su estado es ${paymentsData[formattedSender].suspendido ? 'suspendido' : 'activo'}.` :
@@ -1080,7 +1114,7 @@ export async function handler(m, conn, store) {
 
                     const personaPrompt = `Eres LeoNet AI, un asistente virtual profesional para la atención al cliente de Leonardo. Tu objetivo es ayudar a los clientes con consultas sobre pagos y servicios. No uses frases como "Estoy aquí para ayudarte", "Como tu asistente...", "Como un asistente virtual" o similares. Ve directo al punto y sé conciso.
 
-                    El nombre del usuario es ${userChatData.nombre || 'el usuario'} y el historial de chat con datos previos es: ${JSON.JSON.stringify(userChatData)}.
+                    El nombre del usuario es ${userChatData.nombre || 'el usuario'} y el historial de chat con datos previos es: ${JSON.stringify(userChatData)}.
 
                     Instrucciones:
                     - Responde de forma concisa, útil y profesional.
