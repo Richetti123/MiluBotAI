@@ -524,7 +524,6 @@ export async function handler(m, conn, store) {
 
                     if (selectedRowId.startsWith('!getfaq')) {
                         const serviceId = selectedRowId.replace('!getfaq ', '').trim();
-                        console.log(chalk.cyan(`[DEBUG] El usuario seleccionó el servicio con ID: ${serviceId}`));
                         const chatData = loadChatData();
                         const formattedSender = normalizarNumero(`+${m.sender.split('@')[0]}`);
 
@@ -533,29 +532,20 @@ export async function handler(m, conn, store) {
                         }
                         chatData[formattedSender].lastSelectedServiceId = serviceId;
                         saveChatData(chatData);
-
-                        console.log(chalk.green(`[DEBUG] ID de servicio guardado en chat_data. Contenido actual para ${formattedSender}: ${JSON.stringify(chatData[formattedSender])}`));
-
-                        // *** INICIO DE LA SECCIÓN MODIFICADA ***
-                        console.log(chalk.yellow(`[DEBUG] Intentando llamar a getfaqHandler para el servicio: ${serviceId}`));
                         try {
                             await getfaqHandler(m, { conn, text: serviceId, command: 'getfaq', usedPrefix: m.prefix });
-                            console.log(chalk.green(`[DEBUG] getfaqHandler se ejecutó con éxito.`));
                         } catch (getfaqError) {
                             console.error(chalk.red(`[ERROR] en getfaqHandler: ${getfaqError.message}`));
                             await m.reply('❌ Ha ocurrido un error al obtener la información del servicio. Por favor, inténtalo de nuevo más tarde.');
                         }
-                        // *** FIN DE LA SECCIÓN MODIFICADA ***
                         return;
                     }
 
                     if (selectedRowId.startsWith('accept_') || selectedRowId.startsWith('reject_') || selectedRowId.startsWith('confirm_sale_') || selectedRowId.startsWith('no_sale_')) {
                         if (m.isOwner) {
-                            // Extrae el JID del cliente del botón
-                            const clientJid = selectedRowId.replace(/^(accept_payment_|reject_payment_)/, '');
+                            const clientJid = selectedId.replace(/^(accept_payment_|reject_payment_)/, '');
                             const paymentsData = loadPaymentsData();
                             const lastSelectedServiceId = paymentsData[normalizarNumero(`+${clientJid.split('@')[0]}`)]?.lastSelectedServiceId;
-                            console.log(chalk.magenta(`[DEBUG] lastSelectedServiceId extraído de pagos.json para el botón: ${lastSelectedServiceId}`));
                             const handledByPaymentProof = await handlePaymentProofButton(m, conn, lastSelectedServiceId);
                             if (handledByPaymentProof) {
                                 return;
@@ -585,13 +575,10 @@ export async function handler(m, conn, store) {
         const esDocumentoConComprobante = m.message?.documentMessage?.caption && isPaymentProof(m.message.documentMessage.caption);
 
         if (esImagenConComprobante || esDocumentoConComprobante) {
-            console.log(chalk.yellow('[DEBUG] Se recibió un mensaje con un comprobante de pago.'));
-            const paymentsData = loadPaymentsData(); // Añadido
+            const paymentsData = loadPaymentsData();
             const chatData = loadChatData();
             const formattedSender = normalizarNumero(`+${m.sender.split('@')[0]}`);
             const userChatData = chatData[formattedSender] || {};
-
-            console.log(chalk.blue(`[DEBUG] Leyendo chat_data para ${formattedSender}: ${JSON.stringify(userChatData)}`));
 
             let clientInfo = null;
 
@@ -601,26 +588,20 @@ export async function handler(m, conn, store) {
                     clientInfo = clientsData[formattedSender];
                 }
             } catch (e) {
-                console.error("Error al leer pagos.json en handler.js (comprobante):", e);
+                console.error(chalk.red("Error al leer pagos.json en handler.js (comprobante):", e));
             }
 
-            console.log(chalk.magenta(`[DEBUG] Valor de lastSelectedServiceId en el momento de procesar el comprobante: ${userChatData.lastSelectedServiceId}`));
             if (userChatData.lastSelectedServiceId) {
-                // Guarda el lastSelectedServiceId en pagos.json para persistencia
                 if (!paymentsData[formattedSender]) {
                     paymentsData[formattedSender] = {};
                 }
                 paymentsData[formattedSender].lastSelectedServiceId = userChatData.lastSelectedServiceId;
                 savePaymentsData(paymentsData);
-                console.log(chalk.green(`[DEBUG] lastSelectedServiceId "${userChatData.lastSelectedServiceId}" guardado en pagos.json para el usuario ${formattedSender}.`));
-
-                console.log(chalk.green(`[DEBUG] lastSelectedServiceId encontrado. Procediendo a llamar a handleIncomingMedia con el ID: ${userChatData.lastSelectedServiceId}`));
                 const handledMedia = await handleIncomingMedia(m, conn, clientInfo, userChatData.lastSelectedServiceId);
                 if (handledMedia) {
                     return;
                 }
             } else {
-                console.log(chalk.red('[DEBUG] lastSelectedServiceId NO encontrado. Se enviará un mensaje de error al usuario.'));
                 await m.reply('❌ No se encontró el último servicio seleccionado. Por favor, elige un servicio del menú principal antes de enviar tu comprobante de pago.');
                 return;
             }
@@ -759,7 +740,6 @@ export async function handler(m, conn, store) {
                         await editarprecioHandler(m, { conn, text: commandText, command: m.command, usedPrefix: m.prefix, isOwner: m.isOwner });
                         break;
                     default:
-                        console.log(`[❌ COMANDO NO RECONOCIDO] El usuario ${m.pushName || m.sender} usó el comando: ${m.command}`);
                         break;
                 }
             }
@@ -1005,9 +985,7 @@ export async function handler(m, conn, store) {
 
                 if (m.text.startsWith('!getfaq')) {
                     try {
-                        console.log(chalk.yellow(`[DEBUG] Intentando llamar a getfaqHandler desde el texto para el servicio: ${m.text.replace('!getfaq ', '')}`));
                         await getfaqHandler(m, { conn, text: m.text.replace('!getfaq ', ''), command: 'getfaq', usedPrefix: m.prefix });
-                        console.log(chalk.green(`[DEBUG] getfaqHandler se ejecutó con éxito.`));
                     } catch (getfaqError) {
                         console.error(chalk.red(`[ERROR] en getfaqHandler (desde texto): ${getfaqError.message}`));
                         await m.reply('❌ Ha ocurrido un error al obtener la información del servicio. Por favor, inténtalo de nuevo más tarde.');
