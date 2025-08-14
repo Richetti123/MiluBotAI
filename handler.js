@@ -49,7 +49,7 @@ const normalizarNumero = (numero) => {
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const BOT_OWNER_NUMBER = '5217731161701';
+const BOT_OWNER_NUMBER = '5492213165900';
 const INACTIVITY_TIMEOUT_MS = 20 * 60 * 1000;
 const RESET_INTERVAL_MS = 12 * 60 * 60 * 1000;
 
@@ -77,8 +77,8 @@ const loadConfigBot = () => {
                 mensajeBienvenida: "¡Hola {user}! Soy tu bot asistente de pagos. ¿En qué puedo ayudarte hoy?",
                 mensajeDespedida: "¡Hasta pronto! Esperamos verte de nuevo.",
                 services: {},
-                mensajeDespedidaInactividad: "Parece que la conversación terminó. Soy tu asistente LeoNet AI. ¿Necesitas algo más? Puedes reactivar la conversación enviando un nuevo mensaje o tocando el botón.",
-                chatGreeting: "¡Hola! Soy LeoNet AI, tu asistente virtual, y estoy aquí para ayudarte. 😊✨ Por favor, indícame tu nombre para poder ofrecerte los servicios disponibles. ¡Estoy listo para atenderte! 🤖💬"
+                mensajeDespedidaInactividad: "Parece que la conversación terminó. Soy tu asistente MiluAI. ¿Necesitas algo más? Puedes reactivar la conversación enviando un nuevo mensaje o tocando el botón.",
+                chatGreeting: "¡Hola! Soy MiluAI, tu asistente virtual, y estoy aquí para ayudarte. 😊✨ Por favor, indícame tu nombre para poder ofrecerte los servicios disponibles. ¡Estoy listo para atenderte! 🤖💬"
             };
         }
     }
@@ -87,8 +87,8 @@ const loadConfigBot = () => {
         mensajeBienvenida: "¡Hola {user}! Soy tu bot asistente de pagos. ¿En qué puedo ayudarte hoy?",
         mensajeDespedida: "¡Hasta pronto! Esperamos verte de nuevo.",
         services: {},
-        mensajeDespedidaInactividad: "Parece que la conversación terminó. Soy tu asistente LeoNet AI. ¿Necesitas algo más? Puedes reactivar la conversación enviando un nuevo mensaje o tocando el botón.",
-        chatGreeting: "¡Hola! Soy LeoNet AI, tu asistente virtual, y estoy aquí para ayudarte. 😊✨ Por favor, indícame tu nombre para poder ofrecerte los servicios disponibles. ¡Estoy listo para atenderte! 🤖💬"
+        mensajeDespedidaInactividad: "Parece que la conversación terminó. Soy tu asistente MiluAI. ¿Necesitas algo más? Puedes reactivar la conversación enviando un nuevo mensaje o tocando el botón.",
+        chatGreeting: "¡Hola! Soy MiluAI, tu asistente virtual, y estoy aquí para ayudarte. 😊✨ Por favor, indícame tu nombre para poder ofrecerte los servicios disponibles. ¡Estoy listo para atenderte! 🤖💬"
     };
 };
 
@@ -1089,7 +1089,7 @@ export async function handler(m, conn, store) {
                         'méxico': `\n\nPara pagar desde México usa:\n\n*NUMERO DE TARJETA*: 4741742940228292\n*NOMBRE*: Gloria Maria\n*BANCO*: Banco Regional de Monterrey\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
                     };
 
-                    const personaPrompt = `Eres LeoNet AI, un asistente virtual profesional para la atención al cliente de Leonardo. Tu objetivo es ayudar a los clientes con consultas sobre pagos y servicios. No uses frases como "Estoy aquí para ayudarte", "Como tu asistente...", "Como un asistente virtual" o similares. Ve directo al punto y sé conciso.
+                    const personaPrompt = `Eres MiluAI, un asistente virtual profesional para la atención al cliente de Leonardo. Tu objetivo es ayudar a los clientes con consultas sobre pagos y servicios. No uses frases como "Estoy aquí para ayudarte", "Como tu asistente...", "Como un asistente virtual" o similares. Ve directo al punto y sé conciso.
 
                     El nombre del usuario es ${userChatData.nombre || 'el usuario'} y el historial de chat con datos previos es: ${JSON.stringify(userChatData)}.
 
