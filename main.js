@@ -327,7 +327,7 @@ async function startBot() {
         }),
         printQRInTerminal: opcion == '1' ? true : methodCodeQR ? true : false,
         mobile: MethodMobile,
-        browser: opcion == '1' ? ['LeoNetAI', 'Desktop', '3.0'] : methodCodeQR ? ['LeoNetAI', 'Desktop', '3.0'] : ["LeoNetAI", "Chrome", "20.0.04"],
+        browser: opcion == '1' ? ['MiluAI', 'Desktop', '3.0'] : methodCodeQR ? ['MiluAI', 'Desktop', '3.0'] : ["MiluAI", "Chrome", "20.0.04"],
         auth: state,
         generateHighQualityLinkPreview: true,
         msgRetryCounterCache,
