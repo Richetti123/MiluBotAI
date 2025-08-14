@@ -204,7 +204,7 @@ const sendWelcomeMessage = async (m, conn) => {
     let welcomeMessage = '';
 
     if (!userChatData.nombre) {
-        welcomeMessage = "¡Hola! Soy LeoNet AI, tu asistente virtual, y estoy aquí para ayudarte. 😊✨ Por favor, indícame tu nombre para poder ofrecerte los servicios disponibles. ¡Estoy listo para atenderte! 🤖💬";
+        welcomeMessage = "¡Hola! MiluAI, tu asistente virtual, y estoy aquí para ayudarte. 😊✨ Por favor, indícame tu nombre para poder ofrecerte los servicios disponibles. ¡Estoy listo para atenderte! 🤖💬";
         await m.reply(welcomeMessage);
 
         await new Promise((resolve, reject) => {
@@ -227,25 +227,21 @@ const sendWelcomeMessage = async (m, conn) => {
                 let buttonDescription = "Haz clic para ver los servicios.";
 
                 switch (category) {
-                    case "Perfiles Individuales":
-                        buttonTitle = "👤 PERFILES INDIVIDUALES ";
+                    case "Spam":
+                        buttonTitle = "📧Spam";
                         buttonDescription = "Perfiles de streaming exclusivos para ti.";
                         break;
-                    case "Cuentas Completas":
-                        buttonTitle = "✅ CUENTAS COMPLETAS";
+                    case "Combos":
+                        buttonTitle = "📦Combos";
                         buttonDescription = "Cuentas con acceso total para compartir.";
                         break;
-                    case "Streaming Musica":
-                        buttonTitle = "🎶 STREAMING MÚSICA";
+                    case "Bot de etiquetas mensual":
+                        buttonTitle = "🤖Bot de etiquetas mensual";
                         buttonDescription = "Planes premium para tus plataformas de música.";
                         break;
-                    case "Cuentas Canva":
-                        buttonTitle = "🎨 CUENTAS CANVA";
+                    case "Bot de etiquetas permanente":
+                        buttonTitle = "🤖Bot de etiquetas permanente";
                         buttonDescription = "Accede a plantillas y herramientas premium.";
-                        break;
-                    case "Extras":
-                        buttonTitle = "👽 EXTRAS";
-                        buttonDescription = "Otros servicios y suscripciones.";
                         break;
                 }
 
@@ -798,25 +794,21 @@ export async function handler(m, conn, store) {
                             let buttonDescription = "Haz clic para ver los servicios.";
 
                             switch (category) {
-                                case "Perfiles Individuales":
-                                    buttonTitle = "👤 PERFILES INDIVIDUALES ";
+                                case "Spam":
+                                    buttonTitle = "📧Spam";
                                     buttonDescription = "Perfiles de streaming exclusivos para ti.";
                                     break;
-                                case "Cuentas Completas":
-                                    buttonTitle = "✅ CUENTAS COMPLETAS";
+                                case "Combos":
+                                    buttonTitle = "📦Combos";
                                     buttonDescription = "Cuentas con acceso total para compartir.";
                                     break;
-                                case "Streaming Musica":
-                                    buttonTitle = "🎶 STREAMING MÚSICA";
+                                case "Bot de etiquetas mensual":
+                                    buttonTitle = "🤖Bot de etiquetas mensual";
                                     buttonDescription = "Planes premium para tus plataformas de música.";
                                     break;
-                                case "Cuentas Canva":
-                                    buttonTitle = "🎨 CUENTAS CANVA";
+                                case "Bot de etiquetas permanente":
+                                    buttonTitle = "🤖Bot de etiquetas permanente";
                                     buttonDescription = "Accede a plantillas y herramientas premium.";
-                                    break;
-                                case "Extras":
-                                    buttonTitle = "👽 EXTRAS";
-                                    buttonDescription = "Otros servicios y suscripciones.";
                                     break;
                             }
 
@@ -880,25 +872,21 @@ export async function handler(m, conn, store) {
                                 let buttonDescription = "Haz clic para ver los servicios.";
 
                                 switch (category) {
-                                    case "Perfiles Individuales":
-                                        buttonTitle = "👤 PERFILES INDIVIDUALES ";
+                                    case "Spam":
+                                        buttonTitle = "📧Spam";
                                         buttonDescription = "Perfiles de streaming exclusivos para ti.";
                                         break;
-                                    case "Cuentas Completas":
-                                        buttonTitle = "✅ CUENTAS COMPLETAS";
+                                    case "Combos":
+                                        buttonTitle = "📦Combos";
                                         buttonDescription = "Cuentas con acceso total para compartir.";
                                         break;
-                                    case "Streaming Musica":
-                                        buttonTitle = "🎶 STREAMING MÚSICA";
+                                    case "Bot de etiquetas mensual":
+                                        buttonTitle = "🤖Bot de etiquetas mensual";
                                         buttonDescription = "Planes premium para tus plataformas de música.";
                                         break;
-                                    case "Cuentas Canva":
-                                        buttonTitle = "🎨 CUENTAS CANVA";
+                                    case "Bot de etiquetas permanente":
+                                        buttonTitle = "🤖Bot de etiquetas permanente";
                                         buttonDescription = "Accede a plantillas y herramientas premium.";
-                                        break;
-                                    case "Extras":
-                                        buttonTitle = "👽 EXTRAS";
-                                        buttonDescription = "Otros servicios y suscripciones.";
                                         break;
                                 }
 
@@ -933,25 +921,21 @@ export async function handler(m, conn, store) {
                             let buttonDescription = "Haz clic para ver los servicios.";
 
                             switch (category) {
-                                case "Perfiles Individuales":
-                                    buttonTitle = "👤 PERFILES INDIVIDUALES ";
+                                case "Spam":
+                                    buttonTitle = "📧Spam";
                                     buttonDescription = "Perfiles de streaming exclusivos para ti.";
                                     break;
-                                case "Cuentas Completas":
-                                    buttonTitle = "✅ CUENTAS COMPLETAS";
+                                case "Combos":
+                                    buttonTitle = "📦Combos";
                                     buttonDescription = "Cuentas con acceso total para compartir.";
                                     break;
-                                case "Streaming Musica":
-                                    buttonTitle = "🎶 STREAMING MÚSICA";
+                                case "Bot de etiquetas mensual":
+                                    buttonTitle = "🤖Bot de etiquetas mensual";
                                     buttonDescription = "Planes premium para tus plataformas de música.";
                                     break;
-                                case "Cuentas Canva":
-                                    buttonTitle = "🎨 CUENTAS CANVA";
+                                case "Bot de etiquetas permanente":
+                                    buttonTitle = "🤖Bot de etiquetas permanente";
                                     buttonDescription = "Accede a plantillas y herramientas premium.";
-                                    break;
-                                case "Extras":
-                                    buttonTitle = "👽 EXTRAS";
-                                    buttonDescription = "Otros servicios y suscripciones.";
                                     break;
                             }
 
@@ -1089,7 +1073,7 @@ export async function handler(m, conn, store) {
                         'méxico': `\n\nPara pagar desde México usa:\n\n*NUMERO DE TARJETA*: 4741742940228292\n*NOMBRE*: Gloria Maria\n*BANCO*: Banco Regional de Monterrey\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
                     };
 
-                    const personaPrompt = `Eres MiluAI, un asistente virtual profesional para la atención al cliente de Leonardo. Tu objetivo es ayudar a los clientes con consultas sobre pagos y servicios. No uses frases como "Estoy aquí para ayudarte", "Como tu asistente...", "Como un asistente virtual" o similares. Ve directo al punto y sé conciso.
+                    const personaPrompt = `Eres MiluAI, un asistente virtual profesional para la atención al cliente de Milu. Tu objetivo es ayudar a los clientes con consultas sobre pagos y servicios. No uses frases como "Estoy aquí para ayudarte", "Como tu asistente...", "Como un asistente virtual" o similares. Ve directo al punto y sé conciso.
 
                     El nombre del usuario es ${userChatData.nombre || 'el usuario'} y el historial de chat con datos previos es: ${JSON.stringify(userChatData)}.
 
@@ -1103,11 +1087,10 @@ export async function handler(m, conn, store) {
                     ${clientInfoPrompt}
 
                     Has aprendido que tus servicios son:
-                    - Perfiles Individuales: Netflix Extra (Privado): $65 MX, Disney Premium: $25 MX, Max Estándar: $10 MX, Max Platino: $25 MX, Prime Video Sin Anuncios: $20 MX, Paramount: $5 MX, Vix 1 Mes: $5 MX, Vix 2 Meses: $10 MX, Crunchyroll: $10 MX, Claro Video con Canales: $35 MX, Viki Rakuten: $20 MX, Duolingo Individual: $18 MX, Pornhub: $18 MX, Plex: $20 MX, Claro video con Paramount: $20 MX, Claro video con Universal: $25 MX
-                    - Cuentas Completas: Netflix: $180 MX, Disney Premium: $120 MX, Disney Estándar C/A: $50 MX, Max Estándar: $35 MX, Max Platino: $65 MX, Prime Sin Anuncios: $45 MX, Paramount: $20 MX, Vix 1 Mes: $15 MX, Vix 2 Meses: $20 MX, Crunchyroll: $30 MX, Claro Video con Canales: $75 MX, Viki Rakuten: $45 MX, Duolingo Familiar: $40 MX, Pornhub: $40 MX, Plex: $45 MX
-                    - Streaming Musica: Spotify Premium (renovable): 1 mes: $35 MX, 2 meses: $55 MX, 3 meses: $70 MX ; YouTube: Por invitación (1 mes): $15 MX, Por invitación (2 meses): $25 MX, Familiar (1 mes, a tus datos): $40 MX ; Mubi: $20 MX
-                    - Cuentas Canva: 1 Mes: $15 MX, 2 Meses: $20 MX, 3 Meses: $25 MX, 6 Meses: $30 MX, 1 Año: $40 MX
-                    - Extras: Invitación Office (Un mes): $25 MX, Invitación Gemini: $70 MX, Invitación Tidal: $20 MX, Invitación Deezer: $20 MX, Invitación Chat GTP: $50 MX, Piscard: $35 MX, Scribd: $35 MX, Brazzer: $35 MX`;
+                    - 📧Spam: 3 Días: 1200 (ARS/CLP) / 5.00 PEN / 15 BOB / 10200 PYG ; 7 Días: 2200 (ARS/CLP) / 8.50 PEN / 27 BOB / 18700 PYG ; 13 Días: 3000 (ARS/CLP) / 11.30 PEN / 37 BOB / 25500 PYG ; 16 Días: 3700 (ARS/CLP) / 14.20 PEN / 45 BOB / 31450 PYG ; 20 Días: 4500 (ARS/CLP) / 17.20 PEN / 55 BOB / 38250 PYG ; 27 Días: 5200 (ARS/CLP) / 20.00 PEN / 63 BOB / 44500 PYG ; 32 Días: 6000 (ARS/CLP) / 22.00 PEN / 73 BOB / 51000 PYG ; 37 Días: 6700 (ARS/CLP) / 26.00 PEN / 81 BOB / 56950 PYG
+                    - 📦Combos: Combo 1 (Mega Renovación): 17780 ARS / 17880 CLP / 65 PEN / 215 BOB / 855 UYU / 152200 PYG ; Combo 2 (Renovación): 9900 ARS / 10,000 CLP / 37 PEN / 117 BOB / 465 UYU / 81300 PYG ; Combo 3 (Mini Renovación): 6930 ARS / 7000 CLP / 27 PEN / 84 BOB / 335 UYU / 59000 PYG
+                    - 🤖Bot de etiquetas mensual: 1 Grupo: 1200 (ARS/CLP) / 5.00 PEN ; 2 Grupos: 2100 (ARS/CLP) / 8.00 PEN ; 3 Grupos: 3100 (ARS/CLP) / 11.80 PEN ; 4 Grupos: 4100 (ARS/CLP) / 15.80 PEN
+                    - 🤖Bot de etiquetas permanente: 1 Grupo: 2200 (ARS/CLP) / 5.50 PEN ; 2 Grupos: 3300 (ARS/CLP) / 13.00 PEN ; 3 Grupos: 4200 (ARS/CLP) / 16.00 PEN ; 4 Grupos: 5500 (ARS/CLP) / 21.00 PEN`;
 
                     const encodedContent = encodeURIComponent(personaPrompt);
                     const encodedText = encodeURIComponent(m.text);
