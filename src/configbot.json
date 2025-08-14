@@ -3,143 +3,143 @@
   "mensajeBienvenida": "¡Hola {user}! Soy MiluAI, un asistente virtual. ¿En qué puedo ayudarte hoy?",
   "mensajeDespedida": "¡Hasta pronto! Esperamos verte de nuevo.",
   "services": {
-    "📧 Spam": [
+    "📧Spam": [
       {
         "id": "spam_3_dias",
         "pregunta": "3 Días",
-        "precio": "1200🇦🇷🇨🇱/5.00🇵🇪/15🇧🇴/10200🇵🇾",
+        "precio": "1200 (ARS/CLP) / 5.00 PEN / 15 BOB / 10200 PYG",
         "stock": 10,
         "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
       },
       {
         "id": "spam_7_dias",
         "pregunta": "7 Días",
-        "precio": "2200🇦🇷🇨🇱/8.50🇵🇪/27🇧🇴/18700🇵🇾",
+        "precio": "2200 (ARS/CLP) / 8.50 PEN / 27 BOB / 18700 PYG",
         "stock": 10,
         "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
       },
       {
         "id": "spam_13_dias",
         "pregunta": "13 Días",
-        "precio": "3000🇦🇷🇨🇱/11.30🇵🇪/37🇧🇴/25500🇵🇾",
+        "precio": "3000 (ARS/CLP) / 11.30 PEN / 37 BOB / 25500 PYG",
         "stock": 10,
         "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
       },
       {
         "id": "spam_16_dias",
         "pregunta": "16 Días",
-        "precio": "3700🇦🇷🇨🇱/14.20🇵🇪/45🇧🇴/31450🇵🇾",
+        "precio": "3700 (ARS/CLP) / 14.20 PEN / 45 BOB / 31450 PYG",
         "stock": 10,
         "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
       },
       {
         "id": "spam_20_dias",
         "pregunta": "20 Días",
-        "precio": "4500🇦🇷🇨🇱/17.20🇵🇪/55🇧🇴/38250🇵🇾",
+        "precio": "4500 (ARS/CLP) / 17.20 PEN / 55 BOB / 38250 PYG",
         "stock": 10,
         "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
       },
       {
         "id": "spam_27_dias",
         "pregunta": "27 Días",
-        "precio": "5200🇦🇷🇨🇱/20.00🇵🇪/63🇧🇴/44500🇵🇾",
+        "precio": "5200 (ARS/CLP) / 20.00 PEN / 63 BOB / 44500 PYG",
         "stock": 10,
         "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
       },
       {
         "id": "spam_32_dias",
         "pregunta": "32 Días",
-        "precio": "6000🇦🇷🇨🇱/22.00🇵🇪/73🇧🇴/51000🇵🇾",
+        "precio": "6000 (ARS/CLP) / 22.00 PEN / 73 BOB / 51000 PYG",
         "stock": 10,
         "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
       },
       {
         "id": "spam_37_dias",
         "pregunta": "37 Días",
-        "precio": "6700🇦🇷🇨🇱/26.00🇵🇪/81🇧🇴/56950🇵🇾",
+        "precio": "6700 (ARS/CLP) / 26.00 PEN / 81 BOB / 56950 PYG",
         "stock": 10,
         "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
       }
     ],
-    "📦 Combos": [
+    "📦Combos": [
       {
         "id": "combo_1_mega_renovacion",
         "pregunta": "Combo 1 (Mega Renovación)",
-        "precio": "17780🇦🇷/17880🇨🇱/65🇵🇪/215🇧🇴/855🇺🇾/152200🇵🇾",
+        "precio": "17780 ARS / 17880 CLP / 65 PEN / 215 BOB / 855 UYU / 152200 PYG",
         "stock": 10,
         "descripcion": "• Text Logo + Fondo \n• P. Versus 2-0/1\n• P. Resultados \n• P. Jugador Mvp\n• P. Alineación \n• P. Post Exclusivo \n• P. Prueba de Incumplimiento \n• P. Destacadas X7\n• P. Reglas X3\n• P. Reclutamiento (H)\n• P. Bienvenida (H)\n• P. Staff X4 (H)\n• P. Estamos Presentes (H)\n• P. Aviso (H)\n• P. Feliz Cumpleaños (H)\n• P. FotoDuo (H)\n• P. Fotolobby (H)\n• Mosaico"
       },
       {
         "id": "combo_2_renovacion",
         "pregunta": "Combo 2 (Renovación)",
-        "precio": "9900🇦🇷/10,000🇨🇱/37🇵🇪/117🇧🇴/465🇺🇾/81300🇵🇾",
+        "precio": "9900 ARS / 10,000 CLP / 37 PEN / 117 BOB / 465 UYU / 81300 PYG",
         "stock": 10,
         "descripcion": "• Text Logo + Fondo \n• P. Versus 2-0/1\n• P. Resultados \n• P. Jugador Mvp\n• P. Post Exclusivo \n• P. Destacadas X6\n• P. Reglas X2\n• P. Reclutamiento (H)\n• P. Bienvenida (H)\n• P. Staff X4 (H)\n• Mosaico"
       },
       {
         "id": "combo_3_mini_renovacion",
         "pregunta": "Combo 3 (Mini Renovación)",
-        "precio": "6930🇦🇷/7000🇨🇱/27🇵🇪/84🇧🇴/335🇺🇾/59000🇵🇾",
+        "precio": "6930 ARS / 7000 CLP / 27 PEN / 84 BOB / 335 UYU / 59000 PYG",
         "stock": 10,
         "descripcion": "• Text Logo + Fondo \n• P. Versus 2-0/1\n• P. Resultados \n• P. Jugador Mvp\n• P. Destacadas X4\n• P. Reglas X1\n• P. Bienvenida (H)\n• Mosaico"
       }
     ],
-    "🤖 Bot de etiquetas mensual": [
+    "🤖Bot de etiquetas mensual": [
       {
         "id": "bot_mensual_1_grupo",
         "pregunta": "1 Grupo",
-        "precio": "1200🇦🇷🇨🇱/5.00🇵🇪",
+        "precio": "1200 (ARS/CLP) / 5.00 PEN",
         "stock": 10,
         "descripcion": "1. Activo 24/7\n2. Sin Caídas\n3. Contamos con grupo de Clientes \n4. Cuenta con Bienvenida y Despedida\n5. Notifica y Menciona\n6. +300 Comandos \n7. +100 Comandos con Juegos\n8. Se aceptan todas las Monedas"
       },
       {
         "id": "bot_mensual_2_grupos",
         "pregunta": "2 Grupos",
-        "precio": "2100🇦🇷🇨🇱/8.00🇵🇪",
+        "precio": "2100 (ARS/CLP) / 8.00 PEN",
         "stock": 10,
         "descripcion": "1. Activo 24/7\n2. Sin Caídas\n3. Contamos con grupo de Clientes \n4. Cuenta con Bienvenida y Despedida\n5. Notifica y Menciona\n6. +300 Comandos \n7. +100 Comandos con Juegos\n8. Se aceptan todas las Monedas"
       },
       {
         "id": "bot_mensual_3_grupos",
         "pregunta": "3 Grupos",
-        "precio": "3100🇦🇷🇨🇱/11.80🇵🇪",
+        "precio": "3100 (ARS/CLP) / 11.80 PEN",
         "stock": 10,
         "descripcion": "1. Activo 24/7\n2. Sin Caídas\n3. Contamos con grupo de Clientes \n4. Cuenta con Bienvenida y Despedida\n5. Notifica y Menciona\n6. +300 Comandos \n7. +100 Comandos con Juegos\n8. Se aceptan todas las Monedas"
       },
       {
         "id": "bot_mensual_4_grupos",
         "pregunta": "4 Grupos",
-        "precio": "4100🇦🇷🇨🇱/15.80🇵🇪",
+        "precio": "4100 (ARS/CLP) / 15.80 PEN",
         "stock": 10,
         "descripcion": "1. Activo 24/7\n2. Sin Caídas\n3. Contamos con grupo de Clientes \n4. Cuenta con Bienvenida y Despedida\n5. Notifica y Menciona\n6. +300 Comandos \n7. +100 Comandos con Juegos\n8. Se aceptan todas las Monedas"
       }
     ],
-    "🤖 Bot de etiquetas permanente": [
+    "🤖Bot de etiquetas permanente": [
       {
         "id": "bot_permanente_1_grupo",
         "pregunta": "1 Grupo",
-        "precio": "2200🇦🇷🇨🇱/5.50🇵🇪",
+        "precio": "2200 (ARS/CLP) / 5.50 PEN",
         "stock": 10,
         "descripcion": "1. Activo 24/7\n2. Sin Caídas\n3. Contamos con grupo de Clientes \n4. Cuenta con Bienvenida y Despedida\n5. Notifica y Menciona\n6. +300 Comandos \n7. +100 Comandos con Juegos\n8. Se aceptan todas las Monedas"
       },
       {
         "id": "bot_permanente_2_grupos",
         "pregunta": "2 Grupos",
-        "precio": "3300🇦🇷🇨🇱/13.00🇵🇪",
+        "precio": "3300 (ARS/CLP) / 13.00 PEN",
         "stock": 10,
         "descripcion": "1. Activo 24/7\n2. Sin Caídas\n3. Contamos con grupo de Clientes \n4. Cuenta con Bienvenida y Despedida\n5. Notifica y Menciona\n6. +300 Comandos \n7. +100 Comandos con Juegos\n8. Se aceptan todas las Monedas"
       },
       {
         "id": "bot_permanente_3_grupos",
         "pregunta": "3 Grupos",
-        "precio": "4200🇦🇷🇨🇱/16.00🇵🇪",
+        "precio": "4200 (ARS/CLP) / 16.00 PEN",
         "stock": 10,
         "descripcion": "1. Activo 24/7\n2. Sin Caídas\n3. Contamos con grupo de Clientes \n4. Cuenta con Bienvenida y Despedida\n5. Notifica y Menciona\n6. +300 Comandos \n7. +100 Comandos con Juegos\n8. Se aceptan todas las Monedas"
       },
       {
         "id": "bot_permanente_4_grupos",
         "pregunta": "4 Grupos",
-        "precio": "5500🇦🇷🇨🇱/21.00🇵🇪",
+        "precio": "5500 (ARS/CLP) / 21.00 PEN",
         "stock": 10,
         "descripcion": "1. Activo 24/7\n2. Sin Caídas\n3. Contamos con grupo de Clientes \n4. Cuenta con Bienvenida y Despedida\n5. Notifica y Menciona\n6. +300 Comandos \n7. +100 Comandos con Juegos\n8. Se aceptan todas las Monedas"
       }
