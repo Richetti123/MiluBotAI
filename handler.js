@@ -253,6 +253,10 @@ const sendWelcomeMessage = async (m, conn) => {
                         buttonTitle = "🤖Bot de etiquetas permanente";
                         buttonDescription = "Accede a plantillas y herramientas premium.";
                         break;
+                    case "Numeros virtuales":
+                        buttonTitle = "#️⃣Numeros virtuales";
+                        buttonDescription = "Numeros virtuales antidoxeo";
+                        break;
                 }
 
                 return {
