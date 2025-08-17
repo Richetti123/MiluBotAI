@@ -806,19 +806,23 @@ export async function handler(m, conn, store) {
                             switch (category) {
                                 case "Spam":
                                     buttonTitle = "📧Spam";
-                                    buttonDescription = "Perfiles de streaming exclusivos para ti.";
+                                    buttonDescription = "Servicios de spam";
                                     break;
                                 case "Combos":
                                     buttonTitle = "📦Combos";
-                                    buttonDescription = "Cuentas con acceso total para compartir.";
+                                    buttonDescription = "Combos de renovacion";
                                     break;
                                 case "Bot de etiquetas mensual":
                                     buttonTitle = "🤖Bot de etiquetas mensual";
-                                    buttonDescription = "Planes premium para tus plataformas de música.";
+                                    buttonDescription = "Bot para tus grupos de pago mensual";
                                     break;
                                 case "Bot de etiquetas permanente":
                                     buttonTitle = "🤖Bot de etiquetas permanente";
-                                    buttonDescription = "Accede a plantillas y herramientas premium.";
+                                    buttonDescription = "Bot para tus grupos unico pago";
+                                    break;
+                                case "Numeros virtuales":
+                                    buttonTitle = "#️⃣Numeros virtuales";
+                                    buttonDescription = "Numeros virtuales antidoxeo";
                                     break;
                             }
 
@@ -884,19 +888,23 @@ export async function handler(m, conn, store) {
                                 switch (category) {
                                     case "Spam":
                                         buttonTitle = "📧Spam";
-                                        buttonDescription = "Perfiles de streaming exclusivos para ti.";
+                                        buttonDescription = "Servicios de spam";
                                         break;
                                     case "Combos":
                                         buttonTitle = "📦Combos";
-                                        buttonDescription = "Cuentas con acceso total para compartir.";
+                                        buttonDescription = "Combos de renovacion";
                                         break;
                                     case "Bot de etiquetas mensual":
                                         buttonTitle = "🤖Bot de etiquetas mensual";
-                                        buttonDescription = "Planes premium para tus plataformas de música.";
+                                        buttonDescription = "Bot para tus grupos de pago mensual";
                                         break;
                                     case "Bot de etiquetas permanente":
                                         buttonTitle = "🤖Bot de etiquetas permanente";
-                                        buttonDescription = "Accede a plantillas y herramientas premium.";
+                                        buttonDescription = "Bot para tus grupos unico pago";
+                                        break;
+                                    case "Numeros virtuales":
+                                        buttonTitle = "#️⃣Numeros virtuales";
+                                        buttonDescription = "Numeros virtuales antidoxeo";
                                         break;
                                 }
 
@@ -933,19 +941,23 @@ export async function handler(m, conn, store) {
                             switch (category) {
                                 case "Spam":
                                     buttonTitle = "📧Spam";
-                                    buttonDescription = "Perfiles de streaming exclusivos para ti.";
+                                    buttonDescription = "Servicios de spam";
                                     break;
                                 case "Combos":
                                     buttonTitle = "📦Combos";
-                                    buttonDescription = "Cuentas con acceso total para compartir.";
+                                    buttonDescription = "Combos de renovacion";
                                     break;
                                 case "Bot de etiquetas mensual":
                                     buttonTitle = "🤖Bot de etiquetas mensual";
-                                    buttonDescription = "Planes premium para tus plataformas de música.";
+                                    buttonDescription = "Bot para tus grupos de pago mensual";
                                     break;
                                 case "Bot de etiquetas permanente":
                                     buttonTitle = "🤖Bot de etiquetas permanente";
-                                    buttonDescription = "Accede a plantillas y herramientas premium.";
+                                    buttonDescription = "Bot para tus grupos unico pago";
+                                    break;
+                                case "Numeros virtuales":
+                                    buttonTitle = "#️⃣Numeros virtuales";
+                                    buttonDescription = "Numeros virtuales antidoxeo";
                                     break;
                             }
 
