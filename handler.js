@@ -142,7 +142,7 @@ const savePaymentsData = (data) => {
 
 const countryPaymentMethods = {
     'méxico': `\n\nPara pagar en México, usa:\n722969020694617538\nMercado Pago Wallet\nSarai Ortega Góngora\nConcepto: préstamo/escuela\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
-    'perú': `\n\nPara pagar en Perú, usa:\nNombre: Marcelo Gonzales R.\nYape: 967699188\nPlin: 955095498\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
+    'perú': `\n\nPara pagar en Perú, usa:\nNombre: Nicole A.\nYape: 904521589\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
     'mexico': `\n\nPara pagar en México, usa:\n722969020694617538\nMercado Pago Wallet\nSarai Ortega Góngora\nConcepto: préstamo/escuela\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
     'peru': `\n\nPara pagar en Perú, usa:\nNombre: Nicole A.\nYape: 904521589\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
     'chile': `\n\nPara pagar en Chile, usa:\nNombre: BARINIA VALESKA ZENTENO MERINO\nRUT: 17053067-5\nBANCO ELEGIR: TEMPO\nTipo de cuenta: Cuenta Vista\nNumero de cuenta: 111117053067\nCorreo: estraxer2002@gmail.com\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
@@ -150,8 +150,8 @@ const countryPaymentMethods = {
     'bolivia': ``,
     'españa': ``,
     'brasil': ``,
-    'paypal': `\n\nPara pagar desde cualquier parte del mundo, usa paypal:\nNombre: Marcelo Gonzales R.\nCorreo: jairg6218@gmail.com\nEnlace: https://paypal.me/richetti123\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
-    'estados unidos': `\n\nPara pagar en Estados Unidos, usa:\nNombre: Marcelo Gonzales R.\nCorreo: jairg6218@gmail.com\nEnlace: https://paypal.me/richetti123\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
+    'paypal': ``,
+    'estados unidos': ``,
     'puerto rico': ``,
     'uruguay': `\n\nPara pagar en Uruguay, usa:\n1691414\nGaston Juarez\nPREX\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
     'paraguay': `\n\nPara pagar en paraguay, usa:\nMaría Isabel Cogorno Rojas\nC.I N.  4.627.087\nTelefono 0984-854-037\nUeno Bank. 619345391\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
@@ -1076,11 +1076,21 @@ export async function handler(m, conn, store) {
                         `No hay datos previos de conversación con este usuario.`;
 
                     const paymentMethods = {
-                        'oxxo': `\n\nPara pagar desde oxxo usa:\n\n*NUMERO DE TARJETA*: 4741742940228292\n*NOMBRE*: Gloria Maria\n*BANCO*: Banco Regional de Monterrey\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
-                        'transferencia': `\n\nPara pagar con transferencia usa:\n\n*NUMERO DE TARJETA*: 4741742940228292\n*NOMBRE*: Gloria Maria\n*BANCO*: Banco Regional de Monterrey\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
-                        'tarjeta': `\n\nPara pagar con tarjeta usa:\n\n*NUMERO DE TARJETA*: 4741742940228292\n*NOMBRE*: Gloria Maria\n*BANCO*: Banco Regional de Monterrey\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
-                        'mexico': `\n\nPara pagar desde Mexico usa:\n\n*NUMERO DE TARJETA*: 4741742940228292\n*NOMBRE*: Gloria Maria\n*BANCO*: Banco Regional de Monterrey\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
-                        'méxico': `\n\nPara pagar desde México usa:\n\n*NUMERO DE TARJETA*: 4741742940228292\n*NOMBRE*: Gloria Maria\n*BANCO*: Banco Regional de Monterrey\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
+                        'méxico': `\n\nPara pagar en México, usa:\n722969020694617538\nMercado Pago Wallet\nSarai Ortega Góngora\nConcepto: préstamo/escuela\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
+                        'perú': `\n\nPara pagar en Perú, usa:\nNombre: Nicole A.\nYape: 904521589\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
+                        'mexico': `\n\nPara pagar en México, usa:\n722969020694617538\nMercado Pago Wallet\nSarai Ortega Góngora\nConcepto: préstamo/escuela\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
+                        'peru': `\n\nPara pagar en Perú, usa:\nNombre: Nicole A.\nYape: 904521589\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
+                        'chile': `\n\nPara pagar en Chile, usa:\nNombre: BARINIA VALESKA ZENTENO MERINO\nRUT: 17053067-5\nBANCO ELEGIR: TEMPO\nTipo de cuenta: Cuenta Vista\nNumero de cuenta: 111117053067\nCorreo: estraxer2002@gmail.com\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
+                        'argentina': `\n\nPara pagar en Argentina, usa:\nNombre: Milagros Flores\nCBU: 4530000800016108966889\nALIAS: miluu.912\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
+                        'bolivia': ``,
+                        'españa': ``,
+                        'brasil': ``,
+                        'paypal': ``,
+                        'estados unidos': ``,
+                        'puerto rico': ``,
+                        'uruguay': `\n\nPara pagar en Uruguay, usa:\n1691414\nGaston Juarez\nPREX\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
+                        'paraguay': `\n\nPara pagar en paraguay, usa:\nMaría Isabel Cogorno Rojas\nC.I N.  4.627.087\nTelefono 0984-854-037\nUeno Bank. 619345391\n\nSi quieres realizar el pago dime algo como "Ahora realizo el pago"`,
+                        'colombia': ``
                     };
 
                     const personaPrompt = `Eres MiluAI, un asistente virtual profesional para la atención al cliente de Milu. Tu objetivo es ayudar a los clientes con consultas sobre pagos y servicios. No uses frases como "Estoy aquí para ayudarte", "Como tu asistente...", "Como un asistente virtual" o similares. Ve directo al punto y sé conciso.
