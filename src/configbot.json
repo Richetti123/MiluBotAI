@@ -1,66 +1,66 @@
 {
-  "modoPagoActivo": false,
-  "mensajeBienvenida": "¡Hola {user}! Soy MiluAI, un asistente virtual. ¿En qué puedo ayudarte hoy?",
-  "mensajeDespedida": "¡Hasta pronto! Esperamos verte de nuevo.",
-  "services": {
-    "📧 Spam": [
-      {
-        "id": "spam_3_dias",
-        "pregunta": "3 Días",
-        "precio": "1200🇦🇷🇨🇱/5.00🇵🇪/15🇧🇴/10200🇵🇾",
-        "stock": 10,
-        "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
-      },
-      {
-        "id": "spam_7_dias",
-        "pregunta": "7 Días",
-        "precio": "2200🇦🇷🇨🇱/8.50🇵🇪/27🇧🇴/18700🇵🇾",
-        "stock": 10,
-        "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
-      },
-      {
-        "id": "spam_13_dias",
-        "pregunta": "13 Días",
-        "precio": "3000🇦🇷🇨🇱/11.30🇵🇪/37🇧🇴/25500🇵🇾",
-        "stock": 10,
-        "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
-      },
-      {
-        "id": "spam_16_dias",
-        "pregunta": "16 Días",
-        "precio": "3700🇦🇷🇨🇱/14.20🇵🇪/45🇧🇴/31450🇵🇾",
-        "stock": 10,
-        "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
-      },
-      {
-        "id": "spam_20_dias",
-        "pregunta": "20 Días",
-        "precio": "4500🇦🇷🇨🇱/17.20🇵🇪/55🇧🇴/38250🇵🇾",
-        "stock": 10,
-        "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
-      },
-      {
-        "id": "spam_27_dias",
-        "pregunta": "27 Días",
-        "precio": "5200🇦🇷🇨🇱/20.00🇵🇪/63🇧🇴/44500🇵🇾",
-        "stock": 10,
-        "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
-      },
-      {
-        "id": "spam_32_dias",
-        "pregunta": "32 Días",
-        "precio": "6000🇦🇷🇨🇱/22.00🇵🇪/73🇧🇴/51000🇵🇾",
-        "stock": 10,
-        "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
-      },
-      {
-        "id": "spam_37_dias",
-        "pregunta": "37 Días",
-        "precio": "6700🇦🇷🇨🇱/26.00🇵🇪/81🇧🇴/56950🇵🇾",
-        "stock": 10,
-        "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
-      }
-    ],
+"modoPagoActivo": false,
+"mensajeBienvenida": "¡Hola {user}! Soy MiluAI, un asistente virtual. ¿En qué puedo ayudarte hoy?",
+"mensajeDespedida": "¡Hasta pronto! Esperamos verte de nuevo.",
+"services": {
+  "📧 Spam": [
+    {
+      "id": "spam_3_dias",
+      "pregunta": "3 Días",
+      "precio": "1200🇦🇷🇨🇱/5.00🇵🇪/15🇧🇴/10200🇵🇾",
+      "stock": 10,
+      "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
+    },
+    {
+      "id": "spam_7_dias",
+      "pregunta": "7 Días",
+      "precio": "2200🇦🇷🇨🇱/8.50🇵🇪/27🇧🇴/18700🇵🇾",
+      "stock": 10,
+      "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
+    },
+    {
+      "id": "spam_13_dias",
+      "pregunta": "13 Días",
+      "precio": "3000🇦🇷🇨🇱/11.30🇵🇪/37🇧🇴/25500🇵🇾",
+      "stock": 10,
+      "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
+    },
+    {
+      "id": "spam_16_dias",
+      "pregunta": "16 Días",
+      "precio": "3700🇦🇷🇨🇱/14.20🇵🇪/45🇧🇴/31450🇵🇾",
+      "stock": 10,
+      "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
+    },
+    {
+      "id": "spam_20_dias",
+      "pregunta": "20 Días",
+      "precio": "4500🇦🇷🇨🇱/17.20🇵🇪/55🇧🇴/38250🇵🇾",
+      "stock": 10,
+      "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
+    },
+    {
+      "id": "spam_27_dias",
+      "pregunta": "27 Días",
+      "precio": "5200🇦🇷🇨🇱/20.00🇵🇪/63🇧🇴/44500🇵🇾",
+      "stock": 10,
+      "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
+    },
+    {
+      "id": "spam_32_dias",
+      "pregunta": "32 Días",
+      "precio": "6000🇦🇷🇨🇱/22.00🇵🇪/73🇧🇴/51000🇵🇾",
+      "stock": 10,
+      "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
+    },
+    {
+      "id": "spam_37_dias",
+      "pregunta": "37 Días",
+      "precio": "6700🇦🇷🇨🇱/26.00🇵🇪/81🇧🇴/56950🇵🇾",
+      "stock": 10,
+      "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
+    }
+  ],
     "📦 Combos": [
       {
         "id": "combo_1_mega_renovacion",
