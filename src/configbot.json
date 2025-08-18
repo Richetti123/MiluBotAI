@@ -1,6 +1,6 @@
 {
   "modoPagoActivo": false,
-  "mensajeBienvenida": "¡Hola {user}! Soy MiluAI, un asistente virtual. ¿En qué puedo ayudarte hoy?",
+  "mensajeBienvenida": "¡Hola Soy MiluAI, un asistente virtual. ¿En qué puedo ayudarte hoy?",
   "mensajeDespedida": "¡Hasta pronto! Esperamos verte de nuevo.",
   "services": {
     "📧 Spam": [
