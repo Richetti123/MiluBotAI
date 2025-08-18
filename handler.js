@@ -78,7 +78,7 @@ const loadConfigBot = () => {
                 mensajeDespedida: "¡Hasta pronto! Esperamos verte de nuevo.",
                 services: {},
                 mensajeDespedidaInactividad: "Parece que la conversación terminó. Soy tu asistente MiluAI. ¿Necesitas algo más? Puedes reactivar la conversación enviando un nuevo mensaje o tocando el botón.",
-                chatGreeting: "¡Hola! Soy MiluAI, tu asistente virtual, y estoy aquí para ayudarte. 😊✨ Por favor, indícame tu nombre para poder ofrecerte los servicios disponibles. ¡Estoy listo para atenderte! 🤖💬"
+                chatGreeting: "¡Hola! {user} Soy MiluAI, tu asistente virtual, y estoy aquí para ayudarte. 😊✨ Por favor, indícame tu nombre para poder ofrecerte los servicios disponibles. ¡Estoy listo para atenderte! 🤖💬"
             };
         }
     }
@@ -88,7 +88,7 @@ const loadConfigBot = () => {
         mensajeDespedida: "¡Hasta pronto! Esperamos verte de nuevo.",
         services: {},
         mensajeDespedidaInactividad: "Parece que la conversación terminó. Soy tu asistente MiluAI. ¿Necesitas algo más? Puedes reactivar la conversación enviando un nuevo mensaje o tocando el botón.",
-        chatGreeting: "¡Hola! Soy MiluAI, tu asistente virtual, y estoy aquí para ayudarte. 😊✨ Por favor, indícame tu nombre para poder ofrecerte los servicios disponibles. ¡Estoy listo para atenderte! 🤖💬"
+        chatGreeting: "¡Hola! {user} soy MiluAI, tu asistente virtual, y estoy aquí para ayudarte. 😊✨ Por favor, indícame tu nombre para poder ofrecerte los servicios disponibles. ¡Estoy listo para atenderte! 🤖💬"
     };
 };
 
@@ -214,7 +214,7 @@ const sendWelcomeMessage = async (m, conn) => {
     let welcomeMessage = '';
 
     if (!userChatData.nombre) {
-        welcomeMessage = "¡Hola! MiluAI, tu asistente virtual, y estoy aquí para ayudarte. 😊✨ Por favor, indícame tu nombre para poder ofrecerte los servicios disponibles. ¡Estoy listo para atenderte! 🤖💬";
+        welcomeMessage = "¡Hola! {user} soy MiluAI, tu asistente virtual, y estoy aquí para ayudarte. 😊✨ Por favor, indícame tu nombre para poder ofrecerte los servicios disponibles. ¡Estoy listo para atenderte! 🤖💬";
         await m.reply(welcomeMessage);
 
         await new Promise((resolve, reject) => {
