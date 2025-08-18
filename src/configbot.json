@@ -144,7 +144,7 @@
         "descripcion": "1. Activo 24/7\n2. Sin Caídas\n3. Contamos con grupo de Clientes \n4. Cuenta con Bienvenida y Despedida\n5. Notifica y Menciona\n6. +300 Comandos \n7. +100 Comandos con Juegos\n8. Se aceptan todas las Monedas"
       }
     ],
-    "#️⃣ Numeros Virtuales": [
+    "#️⃣ Numeros Virtuales": [
       {
         "id": "virtual_number_62_indonesia",
         "pregunta": "+62🇮🇩",
@@ -209,7 +209,7 @@
         "descripcion": "ACLARACIONES:\n1. Preguntar precios por otros números\n2. todos los números son antidoxeo\n3. ningún número está registrado a tu nombre\n4. +54 único número con chip\n5. códigos ilimitados las veces que necesites\n6. los primeros ocho números no son números con chip\n7. los números sin chip es códigos una sola vez"
       }
     ]
-  }
+  },
   "mensajeDespedidaInactividad": "Parece que la conversación terminó. Soy tu asistente MiluAI. Si necesitas algo más, puedes reactivar la conversación enviando un nuevo mensaje o tocando el botón.",
   "chatGreeting": "Hola {user} soy MiluAI, tu asistente virtual, y estoy aquí para ayudarte. 😊✨ Por favor, indícame tu nombre para poder ofrecerte los servicios disponibles. ¡Estoy listo para atenderte! 🤖💬"
 }
