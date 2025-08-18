@@ -1,376 +1,202 @@
 {
   "modoPagoActivo": false,
-  "mensajeBienvenida": "¡Hola {user}! Soy LeoNet AI, un asistente virtual. ¿En qué puedo ayudarte hoy?",
+  "mensajeBienvenida": "¡Hola {user}! Soy MiluAI, un asistente virtual. ¿En qué puedo ayudarte hoy?",
   "mensajeDespedida": "¡Hasta pronto! Esperamos verte de nuevo.",
   "services": {
-    "👤 PERFILES STREAMING": [
+    "📧 Spam": [
       {
-        "id": "netflix_extra",
-        "pregunta": "Perfil Netflix Extra",
-        "precio": "65 MX",
+        "id": "spam_3_dias",
+        "pregunta": "3 Días",
+        "precio": "1200🇦🇷/1200🇨🇱/5.00🇵🇪/15🇧🇴/10200🇵🇾",
         "stock": 10,
-        "descripcion": "El plan Netflix Extra (Privado) te permite tener un perfil seguro y personal con PIN de bloqueo dentro de una cuenta compartida. Disfruta de la mejor calidad de imagen en 4K UHD y la experiencia de un plan Premium."
+        "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
       },
       {
-        "id": "disney_premium",
-        "pregunta": "Perfil Disney Premium",
-        "precio": "25 MX",
+        "id": "spam_7_dias",
+        "pregunta": "7 Días",
+        "precio": "2200🇦🇷/2200🇨🇱/8.50🇵🇪/27🇧🇴/18700🇵🇾",
         "stock": 10,
-        "descripcion": "Disney+ Premium ofrece una experiencia de streaming completa con resolución hasta 4K UHD y HDR, además de audio Dolby Atmos. Puedes ver en 4 dispositivos a la vez y descargar contenido en hasta 10 dispositivos."
+        "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
       },
       {
-        "id": "max_estandar",
-        "pregunta": "Perfil Max Estándar",
-        "precio": "10 MX",
-        "stock": 5,
-        "descripcion": "El plan Max Estándar te permite ver contenido en resolución Full HD (1080p), con sonido estéreo y en hasta 2 dispositivos simultáneamente. Es una opción perfecta para disfrutar de películas y series con una gran calidad de imagen."
+        "id": "spam_13_dias",
+        "pregunta": "13 Días",
+        "precio": "3000🇦🇷/3000🇨🇱/11.30🇵🇪/37🇧🇴/25500🇵🇾",
+        "stock": 10,
+        "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
       },
       {
-        "id": "max_platino",
-        "pregunta": "Perfil Max Platino",
-        "precio": "25 MX",
+        "id": "spam_16_dias",
+        "pregunta": "16 Días",
+        "precio": "3700🇦🇷/3700🇨🇱/14.20🇵🇪/45🇧🇴/31450🇵🇾",
         "stock": 10,
-        "descripcion": "El plan Max Platino es la experiencia definitiva. Disfruta de la mejor calidad de imagen en 4K UHD, audio Dolby Atmos y visualización en hasta 4 dispositivos al mismo tiempo."
+        "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
       },
       {
-        "id": "prime_video_sin_anuncios",
-        "pregunta": "Perfil Prime Video Sin Anuncios",
-        "precio": "20 MX",
+        "id": "spam_20_dias",
+        "pregunta": "20 Días",
+        "precio": "4500🇦🇷/4500🇨🇱/17.20🇵🇪/55🇧🇴/38250🇵🇾",
         "stock": 10,
-        "descripcion": "Prime Video Sin Anuncios te ofrece el catálogo completo de Prime Video sin interrupciones publicitarias. Disfruta de tus películas y series favoritas con una experiencia de visualización fluida y sin comerciales."
+        "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
       },
       {
-        "id": "paramount",
-        "pregunta": "Perfil Paramount",
-        "precio": "5 MX",
+        "id": "spam_27_dias",
+        "pregunta": "27 Días",
+        "precio": "5200🇦🇷/5200🇨🇱/20.00🇵🇪/63🇧🇴/44500🇵🇾",
         "stock": 10,
-        "descripcion": "Paramount+ es el hogar de series originales, películas taquilleras y programas de marcas como Showtime, MTV y Comedy Central. Obtienes acceso a un catálogo de miles de episodios y películas."
+        "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
       },
       {
-        "id": "vix_1_mes",
-        "pregunta": "Perfil Vix 1 Mes",
-        "precio": "5 MX",
+        "id": "spam_32_dias",
+        "pregunta": "32 Días",
+        "precio": "6000🇦🇷/6000🇨🇱/22.00🇵🇪/73🇧🇴/51000🇵🇾",
         "stock": 10,
-        "descripcion": "Vix Premium te ofrece una gran variedad de series, películas, novelas y noticias en español, incluyendo producciones originales y exclusivas. Es la plataforma ideal para los amantes del entretenimiento latino."
+        "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
       },
       {
-        "id": "vix_2_meses",
-        "pregunta": "Perfil Vix 2 Meses",
-        "precio": "10 MX",
+        "id": "spam_37_dias",
+        "pregunta": "37 Días",
+        "precio": "6700🇦🇷/6700🇨🇱/26.00🇵🇪/81🇧🇴/56950🇵🇾",
         "stock": 10,
-        "descripcion": "Vix Premium por dos meses te ofrece el mismo gran catálogo sin anuncios y acceso a contenido exclusivo. Es una opción para disfrutar del mejor entretenimiento latino por más tiempo."
-      },
-      {
-        "id": "crunchyroll",
-        "pregunta": "Perfil Crunchyroll",
-        "precio": "10 MX",
-        "stock": 10,
-        "descripcion": "Con Crunchyroll Premium, disfruta de tu anime favorito sin anuncios, con nuevos episodios disponibles una hora después de su emisión en Japón. Incluye acceso a la biblioteca de juegos de Crunchyroll y descuentos exclusivos."
-      },
-      {
-        "id": "claro_video_con_canales",
-        "pregunta": "Perfil Claro Video con Canales",
-        "precio": "35 MX",
-        "stock": 10,
-        "descripcion": "Claro Video te ofrece un amplio catálogo de películas y series, además de la opción de ver canales en vivo. Es una plataforma con contenido variado para toda la familia."
-      },
-      {
-        "id": "viki_rakuten",
-        "pregunta": "Perfil Viki Rakuten",
-        "precio": "20 MX",
-        "stock": 10,
-        "descripcion": "Viki es una plataforma de streaming especializada en series y películas de Asia, incluyendo dramas coreanos, chinos, japoneses y taiwaneses. Cuenta con subtítulos en varios idiomas para disfrutar al máximo del entretenimiento asiático."
-      },
-      {
-        "id": "duolingo_individual",
-        "pregunta": "Perfil Duolingo Individual",
-        "precio": "18 MX",
-        "stock": 10,
-        "descripcion": "Con Súper Duolingo, tendrás una experiencia de aprendizaje sin anuncios y con vidas ilimitadas para que nada detenga tu progreso. Es la opción ideal para aprender nuevos idiomas sin interrupciones."
-      },
-      {
-        "id": "pornhub",
-        "pregunta": "Perfil Pornhub",
-        "precio": "18 MX",
-        "stock": 10,
-        "descripcion": "Pornhub Premium te ofrece acceso ilimitado a contenido exclusivo, sin anuncios y en alta definición. Es la opción para una experiencia de visualización sin interrupciones."
-      },
-      {
-        "id": "plex",
-        "pregunta": "Perfil Plex",
-        "precio": "20 MX",
-        "stock": 10,
-        "descripcion": "Plex Pass te permite organizar y transmitir tu propia biblioteca de películas, series y música en todos tus dispositivos. Incluye funciones avanzadas como la grabación de TV en vivo y la descarga de contenido para verlo sin conexión."
-      },
-      {
-        "id": "claro_video_con_paramount",
-        "pregunta": "Perfil Claro video con paramount",
-        "precio": "20 MX",
-        "stock": 10,
-        "descripcion": "Disfruta del catálogo de Claro Video junto a todo el contenido exclusivo de Paramount+ en una sola suscripción. Es una combinación perfecta para ver películas, series y eventos deportivos."
-      },
-      {
-        "id": "claro_video_con_universal",
-        "pregunta": "Perfil Claro video con universal",
-        "precio": "25 MX",
-        "stock": 10,
-        "descripcion": "Claro Video + Universal te ofrece el catálogo completo de Claro Video más las producciones de Universal+. Accede a series, películas y programas exclusivos de Universal en una sola suscripción."
+        "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
       }
     ],
-    "✅ CUENTAS COMPLETAS": [
+    "📦 Combos": [
       {
-        "id": "netflix",
-        "pregunta": "Cuenta Netflix",
-        "precio": "180 MX",
+        "id": "combo_1_mega_renovacion",
+        "pregunta": "Combo 1 (Mega Renovación)",
+        "precio": "17780🇦🇷/17880🇨🇱/65.00🇵🇪/215🇧🇴/855🇺🇾/152200🇵🇾",
         "stock": 10,
-        "descripcion": "Con una cuenta completa de Netflix, obtienes acceso ilimitado a todo el catálogo de la plataforma. Disfruta de una amplia variedad de películas, series y documentales originales en alta definición."
+        "descripcion": "• Text Logo + Fondo \n• P. Versus 2-0/1\n• P. Resultados \n• P. Jugador Mvp\n• P. Alineación \n• P. Post Exclusivo \n• P. Prueba de Incumplimiento \n• P. Destacadas X7\n• P. Reglas X3\n• P. Reclutamiento (H)\n• P. Bienvenida (H)\n• P. Staff X4 (H)\n• P. Estamos Presentes (H)\n• P. Aviso (H)\n• P. Feliz Cumpleaños (H)\n• P. FotoDuo (H)\n• P. Fotolobby (H)\n• Mosaico"
       },
       {
-        "id": "disney_premium_completa",
-        "pregunta": "Cuenta Disney Premium",
-        "precio": "120 MX",
+        "id": "combo_2_renovacion",
+        "pregunta": "Combo 2 (Renovación)",
+        "precio": "9900🇦🇷/10000🇨🇱/37.00🇵🇪/117🇧🇴/465🇺🇾/81300🇵🇾",
         "stock": 10,
-        "descripcion": "Acceso a todo el catálogo de Disney+, Star+ y ESPN en una cuenta completa. Disfruta de la mejor calidad de imagen en 4K UHD y HDR, con audio Dolby Atmos y la posibilidad de ver en hasta 4 dispositivos simultáneamente."
+        "descripcion": "• Text Logo + Fondo \n• P. Versus 2-0/1\n• P. Resultados \n• P. Jugador Mvp\n• P. Post Exclusivo \n• P. Destacadas X6\n• P. Reglas X2\n• P. Reclutamiento (H)\n• P. Bienvenida (H)\n• P. Staff X4 (H)\n• Mosaico"
       },
       {
-        "id": "disney_estandar",
-        "pregunta": "Cuenta Disney Estándar C/A",
-        "precio": "50 MX",
+        "id": "combo_3_mini_renovacion",
+        "pregunta": "Combo 3 (Mini Renovación)",
+        "precio": "6930🇦🇷/7000🇨🇱/27.00🇵🇪/84🇧🇴/335🇺🇾/59000🇵🇾",
         "stock": 10,
-        "descripcion": "Una cuenta completa de Disney+ con anuncios. Disfruta de series y películas en Full HD (1080p) con reproducción en hasta 2 dispositivos a la vez. Es una opción económica para acceder al universo Disney."
-      },
-      {
-        "id": "max_estandar_completo",
-        "pregunta": "Cuenta Max Estándar",
-        "precio": "35 MX",
-        "stock": 10,
-        "descripcion": "Una cuenta completa de Max con visualización en 2 dispositivos, resolución Full HD y sonido estéreo. Accede a todo el catálogo de películas y series originales de Max."
-      },
-      {
-        "id": "max_platino_completo",
-        "pregunta": "Cuenta Max Platino",
-        "precio": "65 MX",
-        "stock": 10,
-        "descripcion": "Una cuenta completa de Max Platino con acceso a 4 dispositivos simultáneos, resolución 4K UHD y audio Dolby Atmos. Disfruta de la mejor experiencia de streaming con la máxima calidad."
-      },
-      {
-        "id": "prime_sin_anuncios",
-        "pregunta": "Cuenta Prime Sin Anuncios",
-        "precio": "45 MX",
-        "stock": 10,
-        "descripcion": "Una cuenta completa de Prime Video sin anuncios, que te permite disfrutar de todo el catálogo de series y películas sin interrupciones. Disfruta de una experiencia fluida y sin comerciales."
-      },
-      {
-        "id": "paramount_completo",
-        "pregunta": "Cuenta Paramount",
-        "precio": "20 MX",
-        "stock": 10,
-        "descripcion": "Una cuenta completa de Paramount+, con acceso a series originales, películas y deportes en vivo. Disfruta de un extenso catálogo de entretenimiento de diferentes marcas."
-      },
-      {
-        "id": "vix_1_mes_completo",
-        "pregunta": "Cuenta Vix 1 Mes",
-        "precio": "15 MX",
-        "stock": 10,
-        "descripcion": "Acceso a una cuenta completa de Vix Premium por un mes. Disfruta de contenido exclusivo, series, películas y eventos deportivos sin anuncios."
-      },
-      {
-        "id": "vix_2_meses_completo",
-        "pregunta": "Cuenta Vix 2 Meses",
-        "precio": "20 MX",
-        "stock": 10,
-        "descripcion": "Acceso a una cuenta completa de Vix Premium por dos meses. Disfruta de contenido exclusivo, series, películas y eventos deportivos sin anuncios."
-      },
-      {
-        "id": "crunchyroll_completo",
-        "pregunta": "Cuenta Crunchyroll",
-        "precio": "30 MX",
-        "stock": 10,
-        "descripcion": "Una cuenta completa de Crunchyroll Premium. Disfruta de anime sin anuncios, acceso a nuevos episodios poco después de su estreno en Japón, y otros beneficios exclusivos."
-      },
-      {
-        "id": "claro_video_con_canales_completo",
-        "pregunta": "Cuenta Claro Video con Canales",
-        "precio": "75 MX",
-        "stock": 10,
-        "descripcion": "Una cuenta completa de Claro Video con acceso a su catálogo de series, películas y canales en vivo. Ideal para ver contenido para toda la familia."
-      },
-      {
-        "id": "viki_rakuten_completo",
-        "pregunta": "Cuenta Viki Rakuten",
-        "precio": "45 MX",
-        "stock": 10,
-        "descripcion": "Una cuenta completa de Viki Rakuten. Disfruta de dramas asiáticos en alta calidad y con subtítulos, sin interrupciones comerciales."
-      },
-      {
-        "id": "duolingo_familiar",
-        "pregunta": "Cuenta Duolingo Familiar",
-        "precio": "40 MX",
-        "stock": 10,
-        "descripcion": "El plan familiar de Súper Duolingo te permite compartir los beneficios del aprendizaje sin anuncios y con vidas ilimitadas con hasta 5 miembros. Es una excelente opción para que toda la familia aprenda idiomas junta."
-      },
-      {
-        "id": "pornhub_completo",
-        "pregunta": "Cuenta Pornhub",
-        "precio": "40 MX",
-        "stock": 10,
-        "descripcion": "Una cuenta completa de Pornhub Premium. Acceso ilimitado a todo el contenido exclusivo, sin anuncios y en alta definición. La experiencia completa para una visualización sin interrupciones."
-      },
-      {
-        "id": "plex_completo",
-        "pregunta": "Cuenta Plex",
-        "precio": "45 MX",
-        "stock": 10,
-        "descripcion": "Una cuenta completa de Plex Pass que te permite organizar tu propia biblioteca y disfrutar de TV en vivo con DVR, saltar anuncios y descargar contenido en todos tus dispositivos."
+        "descripcion": "• Text Logo + Fondo \n• P. Versus 2-0/1\n• P. Resultados \n• P. Jugador Mvp\n• P. Destacadas X4\n• P. Reglas X1\n• P. Bienvenida (H)\n• Mosaico"
       }
     ],
-    "🎶 STREAMING MÚSICA": [
+    "🤖 Bot de etiquetas mensual": [
       {
-        "id": "spotify_1",
-        "pregunta": "Spotify Premium 1 Mes (Renovable)",
-        "precio": "35 MX",
+        "id": "bot_mensual_1_grupo",
+        "pregunta": "1 Grupo",
+        "precio": "1200🇦🇷/1200🇨🇱/5.00🇵🇪",
         "stock": 10,
-        "descripcion": "Con Spotify Premium, disfruta de música sin anuncios, con saltos ilimitados y la posibilidad de escuchar tu música favorita en cualquier lugar, incluso sin conexión."
+        "descripcion": "1. Activo 24/7\n2. Sin Caídas\n3. Contamos con grupo de Clientes \n4. Cuenta con Bienvenida y Despedida\n5. Notifica y Menciona\n6. +300 Comandos \n7. +100 Comandos con Juegos\n8. Se aceptan todas las Monedas"
       },
       {
-        "id": "spotify_2",
-        "pregunta": "Spotify Premium 2 Meses (Renovable)",
-        "precio": "55 MX",
+        "id": "bot_mensual_2_grupos",
+        "pregunta": "2 Grupos",
+        "precio": "2100🇦🇷/2100🇨🇱/8.00🇵🇪",
         "stock": 10,
-        "descripcion": "Con Spotify Premium, disfruta de música sin anuncios, con saltos ilimitados y la posibilidad de escuchar tu música favorita en cualquier lugar, incluso sin conexión."
+        "descripcion": "1. Activo 24/7\n2. Sin Caídas\n3. Contamos con grupo de Clientes \n4. Cuenta con Bienvenida y Despedida\n5. Notifica y Menciona\n6. +300 Comandos \n7. +100 Comandos con Juegos\n8. Se aceptan todas las Monedas"
       },
       {
-        "id": "spotify_3",
-        "pregunta": "Spotify Premium 3 Meses (Renovable)",
-        "precio": "70 MX",
+        "id": "bot_mensual_3_grupos",
+        "pregunta": "3 Grupos",
+        "precio": "3100🇦🇷/3100🇨🇱/11.80🇵🇪",
         "stock": 10,
-        "descripcion": "Con Spotify Premium, disfruta de música sin anuncios, con saltos ilimitados y la posibilidad de escuchar tu música favorita en cualquier lugar, incluso sin conexión."
+        "descripcion": "1. Activo 24/7\n2. Sin Caídas\n3. Contamos con grupo de Clientes \n4. Cuenta con Bienvenida y Despedida\n5. Notifica y Menciona\n6. +300 Comandos \n7. +100 Comandos con Juegos\n8. Se aceptan todas las Monedas"
       },
       {
-        "id": "youtube_1",
-        "pregunta": "YouTube por Invitación (Un Mes)",
-        "precio": "15 MX",
+        "id": "bot_mensual_4_grupos",
+        "pregunta": "4 Grupos",
+        "precio": "4100🇦🇷/4100🇨🇱/15.80🇵🇪",
         "stock": 10,
-        "descripcion": "YouTube Premium te permite ver videos sin anuncios, reproducirlos en segundo plano y descargar contenido para verlo sin conexión. Incluye también acceso a YouTube Music."
-      },
-      {
-        "id": "youtube_2",
-        "pregunta": "YouTube por Invitación (Dos Meses)",
-        "precio": "25 MX",
-        "stock": 10,
-        "descripcion": "YouTube Premium te permite ver videos sin anuncios, reproducirlos en segundo plano y descargar contenido para verlo sin conexión. Incluye también acceso a YouTube Music."
-      },
-      {
-        "id": "youtube_familiar",
-        "pregunta": "YouTube Familiar Un Mes (A Tus Datos)",
-        "precio": "40 MX",
-        "stock": 10,
-        "descripcion": "El plan familiar de YouTube Premium te permite compartir los beneficios con hasta 5 miembros de tu familia. Todos podrán disfrutar de videos sin anuncios, reproducción en segundo plano y descargas."
-      },
-      {
-        "id": "mubi",
-        "pregunta": "Mubi",
-        "precio": "20 MX",
-        "stock": 10,
-        "descripcion": "MUBI es un servicio de streaming de cine de autor, clásico y contemporáneo de todo el mundo. Cada día se añade una nueva película y se puede ver sin conexión. Es ideal para amantes del cine de calidad."
+        "descripcion": "1. Activo 24/7\n2. Sin Caídas\n3. Contamos con grupo de Clientes \n4. Cuenta con Bienvenida y Despedida\n5. Notifica y Menciona\n6. +300 Comandos \n7. +100 Comandos con Juegos\n8. Se aceptan todas las Monedas"
       }
     ],
-    "🎨 CUENTAS CANVA": [
+    "🤖 Bot de etiquetas permanente": [
       {
-        "id": "canva_1",
-        "pregunta": "Canva 1 mes",
-        "precio": "15 MX",
+        "id": "bot_permanente_1_grupo",
+        "pregunta": "1 Grupo",
+        "precio": "2200🇦🇷/2200🇨🇱/5.50🇵🇪",
         "stock": 10,
-        "descripcion": "Canva Pro te permite crear diseños profesionales con herramientas avanzadas como el kit de marca, el redimensionamiento mágico y el eliminador de fondos. Disfruta de millones de plantillas y fotos de stock."
+        "descripcion": "1. Activo 24/7\n2. Sin Caídas\n3. Contamos con grupo de Clientes \n4. Cuenta con Bienvenida y Despedida\n5. Notifica y Menciona\n6. +300 Comandos \n7. +100 Comandos con Juegos\n8. Se aceptan todas las Monedas"
       },
       {
-        "id": "canva_2",
-        "pregunta": "Canva 2 meses",
-        "precio": "20 MX",
+        "id": "bot_permanente_2_grupos",
+        "pregunta": "2 Grupos",
+        "precio": "3300🇦🇷/3300🇨🇱/13.00🇵🇪",
         "stock": 10,
-        "descripcion": "Canva Pro te permite crear diseños profesionales con herramientas avanzadas como el kit de marca, el redimensionamiento mágico y el eliminador de fondos. Disfruta de millones de plantillas y fotos de stock."
+        "descripcion": "1. Activo 24/7\n2. Sin Caídas\n3. Contamos con grupo de Clientes \n4. Cuenta con Bienvenida y Despedida\n5. Notifica y Menciona\n6. +300 Comandos \n7. +100 Comandos con Juegos\n8. Se aceptan todas las Monedas"
       },
       {
-        "id": "canva_3",
-        "pregunta": "Canva 3 meses",
-        "precio": "25 MX",
+        "id": "bot_permanente_3_grupos",
+        "pregunta": "3 Grupos",
+        "precio": "4200🇦🇷/4200🇨🇱/16.00🇵🇪",
         "stock": 10,
-        "descripcion": "Canva Pro te permite crear diseños profesionales con herramientas avanzadas como el kit de marca, el redimensionamiento mágico y el eliminador de fondos. Disfruta de millones de plantillas y fotos de stock."
+        "descripcion": "1. Activo 24/7\n2. Sin Caídas\n3. Contamos con grupo de Clientes \n4. Cuenta con Bienvenida y Despedida\n5. Notifica y Menciona\n6. +300 Comandos \n7. +100 Comandos con Juegos\n8. Se aceptan todas las Monedas"
       },
       {
-        "id": "canva_6",
-        "pregunta": "Canva 6 meses",
-        "precio": "30 MX",
+        "id": "bot_permanente_4_grupos",
+        "pregunta": "4 Grupos",
+        "precio": "5500🇦🇷/5500🇨🇱/21.00🇵🇪",
         "stock": 10,
-        "descripcion": "Canva Pro te permite crear diseños profesionales con herramientas avanzadas como el kit de marca, el redimensionamiento mágico y el eliminador de fondos. Disfruta de millones de plantillas y fotos de stock."
-      },
-      {
-        "id": "canva_12",
-        "pregunta": "Canva 1 Año",
-        "precio": "40 MX",
-        "stock": 10,
-        "descripcion": "Canva Pro te permite crear diseños profesionales con herramientas avanzadas como el kit de marca, el redimensionamiento mágico y el eliminador de fondos. Disfruta de millones de plantillas y fotos de stock."
+        "descripcion": "1. Activo 24/7\n2. Sin Caídas\n3. Contamos con grupo de Clientes \n4. Cuenta con Bienvenida y Despedida\n5. Notifica y Menciona\n6. +300 Comandos \n7. +100 Comandos con Juegos\n8. Se aceptan todas las Monedas"
       }
     ],
-    "👽 EXTRAS": [
+    "#️⃣ Numeros Virtuales": [
       {
-        "id": "office_1",
-        "pregunta": "Invitación Office (Un mes)",
-        "precio": "25 MX",
+        "id": "virtual_number_62_indonesia",
+        "pregunta": "+62🇮🇩",
+        "precio": "2000🇦🇷/2100🇨🇱/5.00🇵🇪",
         "stock": 10,
-        "descripcion": "Una suscripción a Microsoft Office 365 te da acceso a las aplicaciones de Office como Word, Excel y PowerPoint. También incluye 1 TB de almacenamiento en la nube en OneDrive y asistencia técnica."
+        "descripcion": "ACLARACIONES:\n1. Preguntar precios por otros números\n2. todos los números son antidoxeo\n3. ningún número está registrado a tu nombre\n4. +54 único número con chip\n5. códigos ilimitados las veces que necesites\n6. los primeros ocho números no son números con chip\n7. los números sin chip es códigos una sola vez"
       },
       {
-        "id": "gemini",
-        "pregunta": "Invitación Gemini",
-        "precio": "70 MX",
+        "id": "virtual_number_63_filipinas",
+        "pregunta": "+63🇵🇭",
+        "precio": "2080🇦🇷/2090🇨🇱/8.50🇵🇪",
         "stock": 10,
-        "descripcion": "Con una suscripción a Google Gemini Advanced (antes Google AI Pro), obtienes acceso a las versiones más potentes de la IA de Google y a funciones exclusivas, como Gemini en Gmail y Docs, así como 2 TB de almacenamiento en Google One."
+        "descripcion": "ACLARACIONES:\n1. Preguntar precios por otros números\n2. todos los números son antidoxeo\n3. ningún número está registrado a tu nombre\n4. +54 único número con chip\n5. códigos ilimitados las veces que necesites\n6. los primeros ocho números no son números con chip\n7. los números sin chip es códigos una sola vez"
       },
       {
-        "id": "tidal",
-        "pregunta": "Invitación Tidal",
-        "precio": "20 MX",
+        "id": "virtual_number_55_brasil",
+        "pregunta": "+55🇧🇷",
+        "precio": "3200🇦🇷/3300🇨🇱/11.80🇵🇪",
         "stock": 10,
-        "descripcion": "TIDAL es una plataforma de streaming de música que se enfoca en la alta fidelidad de sonido. Ofrece audio de alta calidad, videos musicales y contenido exclusivo."
+        "descripcion": "ACLARACIONES:\n1. Preguntar precios por otros números\n2. todos los números son antidoxeo\n3. ningún número está registrado a tu nombre\n4. +54 único número con chip\n5. códigos ilimitados las veces que necesites\n6. los primeros ocho números no son números con chip\n7. los números sin chip es códigos una sola vez"
       },
       {
-        "id": "deezer",
-        "pregunta": "Invitación Deezer",
-        "precio": "20 MX",
+        "id": "virtual_number_57_colombia",
+        "pregunta": "+57🇨🇴",
+        "precio": "2500🇦🇷/2600🇨🇱/9.80🇵🇪",
         "stock": 10,
-        "descripcion": "Deezer Premium te permite escuchar música sin anuncios, saltar canciones de forma ilimitada y descargar tus canciones y podcasts favoritos para escucharlos sin conexión."
+        "descripcion": "ACLARACIONES:\n1. Preguntar precios por otros números\n2. todos los números son antidoxeo\n3. ningún número está registrado a tu nombre\n4. +54 único número con chip\n5. códigos ilimitados las veces que necesites\n6. los primeros ocho números no son números con chip\n7. los números sin chip es códigos una sola vez"
       },
       {
-        "id": "chat_gtp",
-        "pregunta": "Invitación Chat GTP",
-        "precio": "50 MX",
+        "id": "virtual_number_88_china",
+        "pregunta": "+88🇨🇳",
+        "precio": "3200🇦🇷/3300🇨🇱/11.80🇵🇪",
         "stock": 10,
-        "descripcion": "Una suscripción a ChatGPT Plus te da acceso prioritario a los modelos más avanzados de OpenAI, incluyendo GPT-4o, con límites de uso ampliados y funciones exclusivas para mejorar tu productividad y creatividad."
+        "descripcion": "ACLARACIONES:\n1. Preguntar precios por otros números\n2. todos los números son antidoxeo\n3. ningún número está registrado a tu nombre\n4. +54 único número con chip\n5. códigos ilimitados las veces que necesites\n6. los primeros ocho números no son números con chip\n7. los números sin chip es códigos una sola vez"
       },
       {
-        "id": "piscard",
-        "pregunta": "PicsArt",
-        "precio": "35 MX",
+        "id": "virtual_number_1_canada",
+        "pregunta": "+1🇨🇦",
+        "precio": "2500🇦🇷/2600🇨🇱/9.80🇵🇪",
         "stock": 10,
-        "descripcion": "PicsArt es una aplicación de edición de fotos y videos. Con la versión premium, obtienes acceso a herramientas avanzadas, plantillas y stickers exclusivos, y la posibilidad de eliminar fondos con un solo clic."
+        "descripcion": "ACLARACIONES:\n1. Preguntar precios por otros números\n2. todos los números son antidoxeo\n3. ningún número está registrado a tu nombre\n4. +54 único número con chip\n5. códigos ilimitados las veces que necesites\n6. los primeros ocho números no son números con chip\n7. los números sin chip es códigos una sola vez"
       },
       {
-        "id": "scribd",
-        "pregunta": "Scribd",
-        "precio": "35 MX",
+        "id": "virtual_number_58_venezuela",
+        "pregunta": "+58🇻🇪",
+        "precio": "3000🇦🇷/3100🇨🇱/11.00🇵🇪",
         "stock": 10,
-        "descripcion": "Scribd es una biblioteca digital con acceso ilimitado a millones de audiolibros, libros electrónicos, revistas y documentos. Con una suscripción, puedes descargar y leer en tus dispositivos."
+        "descripcion": "ACLARACIONES:\n1. Preguntar precios por otros números\n2. todos los números son antidoxeo\n3. ningún número está registrado a tu nombre\n4. +54 único número con chip\n5. códigos ilimitados las veces que necesites\n6. los primeros ocho números no son números con chip\n7. los números sin chip es códigos una sola vez"
       },
       {
-        "id": "brazzer",
-        "pregunta": "Brazzer",
-        "precio": "35 MX",
+        "id": "virtual_number_7_rusia",
+        "pregunta": "+7🇷🇺",
+        "precio": "4300🇦🇷/4400🇨🇱/16.00🇵🇪",
         "stock": 10,
-        "descripcion": "Brazzers es una plataforma de contenido para adultos que ofrece videos en alta definición y sin anuncios. Con una suscripción, puedes acceder a todo el catálogo de forma ilimitada."
-      }
-    ]
-  },
-  "mensajeDespedidaInactividad": "Parece que la conversación terminó. Soy tu asistente LeoNet AI. Si necesitas algo más, puedes reactivar la conversación enviando un nuevo mensaje o tocando el botón.",
-  "chatGreeting": "Hola {user} soy LeoNet AI, tu asistente virtual, y estoy aquí para ayudarte. 😊✨ Por favor, indícame tu nombre para poder ofrecerte los servicios disponibles. ¡Estoy listo para atenderte! 🤖💬"
-}
+        "descripcion": "ACLARACIONES:\n1. Preguntar precios por otros números\n2. todos los números son antidoxeo\n3. ningún número está registrado a tu nombre\n4. +54 único número con chip\n5.
