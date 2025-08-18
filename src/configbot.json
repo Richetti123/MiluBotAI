@@ -3,7 +3,7 @@
 "mensajeBienvenida": "¡Hola {user}! Soy MiluAI, un asistente virtual. ¿En qué puedo ayudarte hoy?",
 "mensajeDespedida": "¡Hasta pronto! Esperamos verte de nuevo.",
 "services": {
- "📧 Spam": [
+ "📧Spam": [
     {
       "id": "spam_3_dias",
       "pregunta": "3 Días",
