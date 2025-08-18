@@ -1,16 +1,16 @@
 {
-  "modoPagoActivo": false,
-  "mensajeBienvenida": "¡Hola Soy MiluAI, un asistente virtual. ¿En qué puedo ayudarte hoy?",
-  "mensajeDespedida": "¡Hasta pronto! Esperamos verte de nuevo.",
-  "services": {
-    "📧 Spam": [
-      {
-        "id": "spam_3_dias",
-        "pregunta": "3 Días",
-        "precio": "1200🇦🇷🇨🇱/5.00🇵🇪/15🇧🇴/10200🇵🇾",
-        "stock": 10,
-        "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
-      },
+ "modoPagoActivo": false,
+ "mensajeBienvenida": "¡Hola Soy MiluAI, un asistente virtual. ¿En qué puedo ayudarte hoy?",
+ "mensajeDespedida": "¡Hasta pronto! Esperamos verte de nuevo.",
+ "services": {
+   "📧 Spam": [
+     {
+       "id": "spam_3_dias",
+       "pregunta": "3 Días",
+       "precio": "1200🇦🇷🇨🇱/5.00🇵🇪/15🇧🇴/10200🇵🇾",
+       "stock": 10,
+       "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
+     },
       {
         "id": "spam_7_dias",
         "pregunta": "7 Días",
