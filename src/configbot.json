@@ -1,66 +1,66 @@
 {
-"modoPagoActivo": false,
-"mensajeBienvenida": "¡Hola {user}! Soy MiluAI, un asistente virtual. ¿En qué puedo ayudarte hoy?",
-"mensajeDespedida": "¡Hasta pronto! Esperamos verte de nuevo.",
-"services": {
- "📧Spam": [
-    {
-      "id": "spam_3_dias",
-      "pregunta": "3 Días",
-      "precio": "1200🇦🇷🇨🇱/5.00🇵🇪/15🇧🇴/10200🇵🇾",
-      "stock": 10,
-      "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
-    },
-    {
-      "id": "spam_7_dias",
-      "pregunta": "7 Días",
-      "precio": "2200🇦🇷🇨🇱/8.50🇵🇪/27🇧🇴/18700🇵🇾",
-      "stock": 10,
-      "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
-    },
-    {
-      "id": "spam_13_dias",
-      "pregunta": "13 Días",
-      "precio": "3000🇦🇷🇨🇱/11.30🇵🇪/37🇧🇴/25500🇵🇾",
-      "stock": 10,
-      "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
-    },
-    {
-      "id": "spam_16_dias",
-      "pregunta": "16 Días",
-      "precio": "3700🇦🇷🇨🇱/14.20🇵🇪/45🇧🇴/31450🇵🇾",
-      "stock": 10,
-      "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
-    },
-    {
-      "id": "spam_20_dias",
-      "pregunta": "20 Días",
-      "precio": "4500🇦🇷🇨🇱/17.20🇵🇪/55🇧🇴/38250🇵🇾",
-      "stock": 10,
-      "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
-    },
-    {
-      "id": "spam_27_dias",
-      "pregunta": "27 Días",
-      "precio": "5200🇦🇷🇨🇱/20.00🇵🇪/63🇧🇴/44500🇵🇾",
-      "stock": 10,
-      "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
-    },
-    {
-      "id": "spam_32_dias",
-      "pregunta": "32 Días",
-      "precio": "6000🇦🇷🇨🇱/22.00🇵🇪/73🇧🇴/51000🇵🇾",
-      "stock": 10,
-      "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
-    },
-    {
-      "id": "spam_37_dias",
-      "pregunta": "37 Días",
-      "precio": "6700🇦🇷🇨🇱/26.00🇵🇪/81🇧🇴/56950🇵🇾",
-      "stock": 10,
-      "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
-    }
-  ],
+  "modoPagoActivo": false,
+  "mensajeBienvenida": "¡Hola {user}! Soy MiluAI, un asistente virtual. ¿En qué puedo ayudarte hoy?",
+  "mensajeDespedida": "¡Hasta pronto! Esperamos verte de nuevo.",
+  "services": {
+    "📧 Spam": [
+      {
+        "id": "spam_3_dias",
+        "pregunta": "3 Días",
+        "precio": "1200🇦🇷🇨🇱/5.00🇵🇪/15🇧🇴/10200🇵🇾",
+        "stock": 10,
+        "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
+      },
+      {
+        "id": "spam_7_dias",
+        "pregunta": "7 Días",
+        "precio": "2200🇦🇷🇨🇱/8.50🇵🇪/27🇧🇴/18700🇵🇾",
+        "stock": 10,
+        "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
+      },
+      {
+        "id": "spam_13_dias",
+        "pregunta": "13 Días",
+        "precio": "3000🇦🇷🇨🇱/11.30🇵🇪/37🇧🇴/25500🇵🇾",
+        "stock": 10,
+        "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
+      },
+      {
+        "id": "spam_16_dias",
+        "pregunta": "16 Días",
+        "precio": "3700🇦🇷🇨🇱/14.20🇵🇪/45🇧🇴/31450🇵🇾",
+        "stock": 10,
+        "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
+      },
+      {
+        "id": "spam_20_dias",
+        "pregunta": "20 Días",
+        "precio": "4500🇦🇷🇨🇱/17.20🇵🇪/55🇧🇴/38250🇵🇾",
+        "stock": 10,
+        "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
+      },
+      {
+        "id": "spam_27_dias",
+        "pregunta": "27 Días",
+        "precio": "5200🇦🇷🇨🇱/20.00🇵🇪/63🇧🇴/44500🇵🇾",
+        "stock": 10,
+        "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
+      },
+      {
+        "id": "spam_32_dias",
+        "pregunta": "32 Días",
+        "precio": "6000🇦🇷🇨🇱/22.00🇵🇪/73🇧🇴/51000🇵🇾",
+        "stock": 10,
+        "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
+      },
+      {
+        "id": "spam_37_dias",
+        "pregunta": "37 Días",
+        "precio": "6700🇦🇷🇨🇱/26.00🇵🇪/81🇧🇴/56950🇵🇾",
+        "stock": 10,
+        "descripcion": "1. Pago Completo para Iniciar el Spam\n2. Spam de Lunes a Sábados\n3. Máximo 2 Cambios\n4. Envío Pruebas\n5. No Hago Devolución\n6. Para más días se hace Precio"
+      }
+    ],
     "📦 Combos": [
       {
         "id": "combo_1_mega_renovacion",
@@ -120,4 +120,96 @@
         "pregunta": "1 Grupo",
         "precio": "2200🇦🇷🇨🇱/5.50🇵🇪",
         "stock": 10,
-        "descripcion": "1. Activo 24/7\
+        "descripcion": "1. Activo 24/7\n2. Sin Caídas\n3. Contamos con grupo de Clientes \n4. Cuenta con Bienvenida y Despedida\n5. Notifica y Menciona\n6. +300 Comandos \n7. +100 Comandos con Juegos\n8. Se aceptan todas las Monedas"
+      },
+      {
+        "id": "bot_permanente_2_grupos",
+        "pregunta": "2 Grupos",
+        "precio": "3300🇦🇷🇨🇱/13.00🇵🇪",
+        "stock": 10,
+        "descripcion": "1. Activo 24/7\n2. Sin Caídas\n3. Contamos con grupo de Clientes \n4. Cuenta con Bienvenida y Despedida\n5. Notifica y Menciona\n6. +300 Comandos \n7. +100 Comandos con Juegos\n8. Se aceptan todas las Monedas"
+      },
+      {
+        "id": "bot_permanente_3_grupos",
+        "pregunta": "3 Grupos",
+        "precio": "4200🇦🇷🇨🇱/16.00🇵🇪",
+        "stock": 10,
+        "descripcion": "1. Activo 24/7\n2. Sin Caídas\n3. Contamos con grupo de Clientes \n4. Cuenta con Bienvenida y Despedida\n5. Notifica y Menciona\n6. +300 Comandos \n7. +100 Comandos con Juegos\n8. Se aceptan todas las Monedas"
+      },
+      {
+        "id": "bot_permanente_4_grupos",
+        "pregunta": "4 Grupos",
+        "precio": "5500🇦🇷🇨🇱/21.00🇵🇪",
+        "stock": 10,
+        "descripcion": "1. Activo 24/7\n2. Sin Caídas\n3. Contamos con grupo de Clientes \n4. Cuenta con Bienvenida y Despedida\n5. Notifica y Menciona\n6. +300 Comandos \n7. +100 Comandos con Juegos\n8. Se aceptan todas las Monedas"
+      }
+    ],
+    "#️⃣ Numeros Virtuales": [
+      {
+        "id": "virtual_number_62_indonesia",
+        "pregunta": "+62🇮🇩",
+        "precio": "2000🇦🇷2100🇨🇱5.0/🇵🇪",
+        "stock": 10,
+        "descripcion": "ACLARACIONES:\n1. Preguntar precios por otros números\n2. todos los números son antidoxeo\n3. ningún número está registrado a tu nombre\n4. +54 único número con chip\n5. códigos ilimitados las veces que necesites\n6. los primeros ocho números no son números con chip\n7. los números sin chip es códigos una sola vez"
+      },
+      {
+        "id": "virtual_number_63_filipinas",
+        "pregunta": "+63🇵🇭",
+        "precio": "2080🇦🇷2090🇨🇱8.50🇵🇪",
+        "stock": 10,
+        "descripcion": "ACLARACIONES:\n1. Preguntar precios por otros números\n2. todos los números son antidoxeo\n3. ningún número está registrado a tu nombre\n4. +54 único número con chip\n5. códigos ilimitados las veces que necesites\n6. los primeros ocho números no son números con chip\n7. los números sin chip es códigos una sola vez"
+      },
+      {
+        "id": "virtual_number_55_brasil",
+        "pregunta": "+55🇧🇷",
+        "precio": "3200🇦🇷3300🇨🇱11.80🇵🇪",
+        "stock": 10,
+        "descripcion": "ACLARACIONES:\n1. Preguntar precios por otros números\n2. todos los números son antidoxeo\n3. ningún número está registrado a tu nombre\n4. +54 único número con chip\n5. códigos ilimitados las veces que necesites\n6. los primeros ocho números no son números con chip\n7. los números sin chip es códigos una sola vez"
+      },
+      {
+        "id": "virtual_number_57_colombia",
+        "pregunta": "+57🇨🇴",
+        "precio": "2500🇦🇷2600🇨🇱9.80🇵🇪",
+        "stock": 10,
+        "descripcion": "ACLARACIONES:\n1. Preguntar precios por otros números\n2. todos los números son antidoxeo\n3. ningún número está registrado a tu nombre\n4. +54 único número con chip\n5. códigos ilimitados las veces que necesites\n6. los primeros ocho números no son números con chip\n7. los números sin chip es códigos una sola vez"
+      },
+      {
+        "id": "virtual_number_88_china",
+        "pregunta": "+88🇨🇳",
+        "precio": "3200🇦🇷3300🇨🇱11.80🇵🇪",
+        "stock": 10,
+        "descripcion": "ACLARACIONES:\n1. Preguntar precios por otros números\n2. todos los números son antidoxeo\n3. ningún número está registrado a tu nombre\n4. +54 único número con chip\n5. códigos ilimitados las veces que necesites\n6. los primeros ocho números no son números con chip\n7. los números sin chip es códigos una sola vez"
+      },
+      {
+        "id": "virtual_number_1_canada",
+        "pregunta": "+1🇨🇦",
+        "precio": "2500🇦🇷2600🇨🇱9.80🇵🇪",
+        "stock": 10,
+        "descripcion": "ACLARACIONES:\n1. Preguntar precios por otros números\n2. todos los números son antidoxeo\n3. ningún número está registrado a tu nombre\n4. +54 único número con chip\n5. códigos ilimitados las veces que necesites\n6. los primeros ocho números no son números con chip\n7. los números sin chip es códigos una sola vez"
+      },
+      {
+        "id": "virtual_number_58_venezuela",
+        "pregunta": "+58🇻🇪",
+        "precio": "3000🇦🇷3100🇨🇱11.00🇵🇪",
+        "stock": 10,
+        "descripcion": "ACLARACIONES:\n1. Preguntar precios por otros números\n2. todos los números son antidoxeo\n3. ningún número está registrado a tu nombre\n4. +54 único número con chip\n5. códigos ilimitados las veces que necesites\n6. los primeros ocho números no son números con chip\n7. los números sin chip es códigos una sola vez"
+      },
+      {
+        "id": "virtual_number_7_rusia",
+        "pregunta": "+7🇷🇺",
+        "precio": "4300🇦🇷4400🇨🇱16.00🇵🇪",
+        "stock": 10,
+        "descripcion": "ACLARACIONES:\n1. Preguntar precios por otros números\n2. todos los números son antidoxeo\n3. ningún número está registrado a tu nombre\n4. +54 único número con chip\n5. códigos ilimitados las veces que necesites\n6. los primeros ocho números no son números con chip\n7. los números sin chip es códigos una sola vez"
+      },
+      {
+        "id": "virtual_number_54_argentina",
+        "pregunta": "+54🇦🇷",
+        "precio": "2000🇦🇷2100🇨🇱8.00🇵🇪",
+        "stock": 10,
+        "descripcion": "ACLARACIONES:\n1. Preguntar precios por otros números\n2. todos los números son antidoxeo\n3. ningún número está registrado a tu nombre\n4. +54 único número con chip\n5. códigos ilimitados las veces que necesites\n6. los primeros ocho números no son números con chip\n7. los números sin chip es códigos una sola vez"
+      }
+    ]
+  },
+  "mensajeDespedidaInactividad": "Parece que la conversación terminó. Soy tu asistente MiluAI. Si necesitas algo más, puedes reactivar la conversación enviando un nuevo mensaje o tocando el botón.",
+  "chatGreeting": "Hola {user} soy MiluAI, tu asistente virtual, y estoy aquí para ayudarte. 😊✨ Por favor, indícame tu nombre para poder ofrecerte los servicios disponibles. ¡Estoy listo para atenderte! 🤖💬"
+}
